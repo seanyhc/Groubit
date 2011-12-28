@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		14E365BB14AB2D7B0064CA5B /* FriendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14E365B914AB2D7B0064CA5B /* FriendsViewController.m */; };
+		14E365BC14AB2D7B0064CA5B /* FriendsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14E365BA14AB2D7B0064CA5B /* FriendsViewController.xib */; };
 		14EA769914AAEC63009FF411 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14EA769814AAEC63009FF411 /* UIKit.framework */; };
 		14EA769B14AAEC63009FF411 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14EA769A14AAEC63009FF411 /* Foundation.framework */; };
 		14EA769D14AAEC63009FF411 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14EA769C14AAEC63009FF411 /* CoreGraphics.framework */; };
@@ -27,6 +29,10 @@
 		14EA76D014AAEC63009FF411 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 14EA76CE14AAEC63009FF411 /* InfoPlist.strings */; };
 		14EA76D214AAEC63009FF411 /* Groubit_iOSTests.h in Resources */ = {isa = PBXBuildFile; fileRef = 14EA76D114AAEC63009FF411 /* Groubit_iOSTests.h */; };
 		14EA76D414AAEC63009FF411 /* Groubit_iOSTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 14EA76D314AAEC63009FF411 /* Groubit_iOSTests.m */; };
+		14EA76F114AB201F009FF411 /* HabitsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14EA76EF14AB201F009FF411 /* HabitsViewController.m */; };
+		14EA76F214AB201F009FF411 /* HabitsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14EA76F014AB201F009FF411 /* HabitsViewController.xib */; };
+		14EA76F614AB20AB009FF411 /* DashBoardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14EA76F414AB20AB009FF411 /* DashBoardViewController.m */; };
+		14EA76F714AB20AB009FF411 /* DashBoardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14EA76F514AB20AB009FF411 /* DashBoardViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +46,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		14E365B814AB2D7B0064CA5B /* FriendsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendsViewController.h; sourceTree = "<group>"; };
+		14E365B914AB2D7B0064CA5B /* FriendsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendsViewController.m; sourceTree = "<group>"; };
+		14E365BA14AB2D7B0064CA5B /* FriendsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FriendsViewController.xib; sourceTree = "<group>"; };
 		14EA769414AAEC63009FF411 /* Groubit_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Groubit_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		14EA769814AAEC63009FF411 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		14EA769A14AAEC63009FF411 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -64,6 +73,12 @@
 		14EA76CF14AAEC63009FF411 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		14EA76D114AAEC63009FF411 /* Groubit_iOSTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Groubit_iOSTests.h; sourceTree = "<group>"; };
 		14EA76D314AAEC63009FF411 /* Groubit_iOSTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Groubit_iOSTests.m; sourceTree = "<group>"; };
+		14EA76EE14AB201F009FF411 /* HabitsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HabitsViewController.h; path = iPhone/HabitsViewController.h; sourceTree = "<group>"; };
+		14EA76EF14AB201F009FF411 /* HabitsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HabitsViewController.m; path = iPhone/HabitsViewController.m; sourceTree = "<group>"; };
+		14EA76F014AB201F009FF411 /* HabitsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HabitsViewController.xib; path = iPhone/HabitsViewController.xib; sourceTree = "<group>"; };
+		14EA76F314AB20AB009FF411 /* DashBoardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DashBoardViewController.h; path = ../DashBoardViewController.h; sourceTree = "<group>"; };
+		14EA76F414AB20AB009FF411 /* DashBoardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DashBoardViewController.m; path = ../DashBoardViewController.m; sourceTree = "<group>"; };
+		14EA76F514AB20AB009FF411 /* DashBoardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DashBoardViewController.xib; path = ../DashBoardViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,6 +166,15 @@
 		14EA76AF14AAEC63009FF411 /* iPhone */ = {
 			isa = PBXGroup;
 			children = (
+				14EA76F314AB20AB009FF411 /* DashBoardViewController.h */,
+				14EA76F414AB20AB009FF411 /* DashBoardViewController.m */,
+				14EA76F514AB20AB009FF411 /* DashBoardViewController.xib */,
+				14EA76EE14AB201F009FF411 /* HabitsViewController.h */,
+				14EA76EF14AB201F009FF411 /* HabitsViewController.m */,
+				14EA76F014AB201F009FF411 /* HabitsViewController.xib */,
+				14E365B814AB2D7B0064CA5B /* FriendsViewController.h */,
+				14E365B914AB2D7B0064CA5B /* FriendsViewController.m */,
+				14E365BA14AB2D7B0064CA5B /* FriendsViewController.xib */,
 				14EA76B014AAEC63009FF411 /* Groubit_iOSAppDelegate_iPhone.h */,
 				14EA76B114AAEC63009FF411 /* Groubit_iOSAppDelegate_iPhone.m */,
 				14EA76B314AAEC63009FF411 /* MainWindow_iPhone.xib */,
@@ -260,6 +284,9 @@
 				14EA76A514AAEC63009FF411 /* InfoPlist.strings in Resources */,
 				14EA76B514AAEC63009FF411 /* MainWindow_iPhone.xib in Resources */,
 				14EA76BC14AAEC63009FF411 /* MainWindow_iPad.xib in Resources */,
+				14EA76F214AB201F009FF411 /* HabitsViewController.xib in Resources */,
+				14EA76F714AB20AB009FF411 /* DashBoardViewController.xib in Resources */,
+				14E365BC14AB2D7B0064CA5B /* FriendsViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -300,6 +327,9 @@
 				14EA76AE14AAEC63009FF411 /* Groubit_iOS.xcdatamodeld in Sources */,
 				14EA76B214AAEC63009FF411 /* Groubit_iOSAppDelegate_iPhone.m in Sources */,
 				14EA76B914AAEC63009FF411 /* Groubit_iOSAppDelegate_iPad.m in Sources */,
+				14EA76F114AB201F009FF411 /* HabitsViewController.m in Sources */,
+				14EA76F614AB20AB009FF411 /* DashBoardViewController.m in Sources */,
+				14E365BB14AB2D7B0064CA5B /* FriendsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -408,7 +438,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Groubit_iOS/Groubit_iOS-Prefix.pch";
 				INFOPLIST_FILE = "Groubit_iOS/Groubit_iOS-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -419,7 +451,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Groubit_iOS/Groubit_iOS-Prefix.pch";
 				INFOPLIST_FILE = "Groubit_iOS/Groubit_iOS-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -477,6 +511,7 @@
 				14EA76D914AAEC63009FF411 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		14EA76DA14AAEC63009FF411 /* Build configuration list for PBXNativeTarget "Groubit_iOSTests" */ = {
 			isa = XCConfigurationList;
@@ -485,6 +520,7 @@
 				14EA76DC14AAEC63009FF411 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
