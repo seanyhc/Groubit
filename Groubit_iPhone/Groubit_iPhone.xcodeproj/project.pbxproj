@@ -24,6 +24,7 @@
 		14A1D39814AAC77C00C6CC5E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 14A1D39614AAC77C00C6CC5E /* InfoPlist.strings */; };
 		14A1D39A14AAC77C00C6CC5E /* Groubit_iPhoneTests.h in Resources */ = {isa = PBXBuildFile; fileRef = 14A1D39914AAC77C00C6CC5E /* Groubit_iPhoneTests.h */; };
 		14A1D39C14AAC77C00C6CC5E /* Groubit_iPhoneTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A1D39B14AAC77C00C6CC5E /* Groubit_iPhoneTests.m */; };
+		2B3D46B014AAD00200614F0A /* TestClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B3D46AF14AAD00200614F0A /* TestClass.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +60,8 @@
 		14A1D39714AAC77C00C6CC5E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		14A1D39914AAC77C00C6CC5E /* Groubit_iPhoneTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Groubit_iPhoneTests.h; sourceTree = "<group>"; };
 		14A1D39B14AAC77C00C6CC5E /* Groubit_iPhoneTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Groubit_iPhoneTests.m; sourceTree = "<group>"; };
+		2B3D46AE14AAD00200614F0A /* TestClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestClass.h; sourceTree = "<group>"; };
+		2B3D46AF14AAD00200614F0A /* TestClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestClass.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +127,8 @@
 				14A1D37814AAC77C00C6CC5E /* iPhone */,
 				14A1D37F14AAC77C00C6CC5E /* iPad */,
 				14A1D36D14AAC77C00C6CC5E /* Supporting Files */,
+				2B3D46AE14AAD00200614F0A /* TestClass.h */,
+				2B3D46AF14AAD00200614F0A /* TestClass.m */,
 			);
 			path = Groubit_iPhone;
 			sourceTree = "<group>";
@@ -290,6 +295,7 @@
 				14A1D37714AAC77C00C6CC5E /* Groubit_iPhoneAppDelegate.m in Sources */,
 				14A1D37B14AAC77C00C6CC5E /* Groubit_iPhoneAppDelegate_iPhone.m in Sources */,
 				14A1D38214AAC77C00C6CC5E /* Groubit_iPhoneAppDelegate_iPad.m in Sources */,
+				2B3D46B014AAD00200614F0A /* TestClass.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -467,6 +473,7 @@
 				14A1D3A114AAC77C00C6CC5E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		14A1D3A214AAC77C00C6CC5E /* Build configuration list for PBXNativeTarget "Groubit_iPhoneTests" */ = {
 			isa = XCConfigurationList;
@@ -475,6 +482,7 @@
 				14A1D3A414AAC77C00C6CC5E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
