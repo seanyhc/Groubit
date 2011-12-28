@@ -27,6 +27,9 @@
 		14EA76D014AAEC63009FF411 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 14EA76CE14AAEC63009FF411 /* InfoPlist.strings */; };
 		14EA76D214AAEC63009FF411 /* Groubit_iOSTests.h in Resources */ = {isa = PBXBuildFile; fileRef = 14EA76D114AAEC63009FF411 /* Groubit_iOSTests.h */; };
 		14EA76D414AAEC63009FF411 /* Groubit_iOSTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 14EA76D314AAEC63009FF411 /* Groubit_iOSTests.m */; };
+		2BD0D85B14AB260D004E1E49 /* HabitDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD0D85614AB260D004E1E49 /* HabitDataModel.m */; };
+		2BD0D85C14AB260D004E1E49 /* HabitTypeObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD0D85814AB260D004E1E49 /* HabitTypeObject.m */; };
+		2BD0D85D14AB260D004E1E49 /* TaskTypeObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD0D85A14AB260D004E1E49 /* TaskTypeObject.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +67,12 @@
 		14EA76CF14AAEC63009FF411 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		14EA76D114AAEC63009FF411 /* Groubit_iOSTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Groubit_iOSTests.h; sourceTree = "<group>"; };
 		14EA76D314AAEC63009FF411 /* Groubit_iOSTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Groubit_iOSTests.m; sourceTree = "<group>"; };
+		2BD0D85514AB260D004E1E49 /* HabitDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HabitDataModel.h; sourceTree = "<group>"; };
+		2BD0D85614AB260D004E1E49 /* HabitDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HabitDataModel.m; sourceTree = "<group>"; };
+		2BD0D85714AB260D004E1E49 /* HabitTypeObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HabitTypeObject.h; sourceTree = "<group>"; };
+		2BD0D85814AB260D004E1E49 /* HabitTypeObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HabitTypeObject.m; sourceTree = "<group>"; };
+		2BD0D85914AB260D004E1E49 /* TaskTypeObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskTypeObject.h; sourceTree = "<group>"; };
+		2BD0D85A14AB260D004E1E49 /* TaskTypeObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskTypeObject.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +136,12 @@
 		14EA76A014AAEC63009FF411 /* Groubit_iOS */ = {
 			isa = PBXGroup;
 			children = (
+				2BD0D85514AB260D004E1E49 /* HabitDataModel.h */,
+				2BD0D85614AB260D004E1E49 /* HabitDataModel.m */,
+				2BD0D85714AB260D004E1E49 /* HabitTypeObject.h */,
+				2BD0D85814AB260D004E1E49 /* HabitTypeObject.m */,
+				2BD0D85914AB260D004E1E49 /* TaskTypeObject.h */,
+				2BD0D85A14AB260D004E1E49 /* TaskTypeObject.m */,
 				14EA76A914AAEC63009FF411 /* Groubit_iOSAppDelegate.h */,
 				14EA76AA14AAEC63009FF411 /* Groubit_iOSAppDelegate.m */,
 				14EA76AC14AAEC63009FF411 /* Groubit_iOS.xcdatamodeld */,
@@ -300,6 +315,9 @@
 				14EA76AE14AAEC63009FF411 /* Groubit_iOS.xcdatamodeld in Sources */,
 				14EA76B214AAEC63009FF411 /* Groubit_iOSAppDelegate_iPhone.m in Sources */,
 				14EA76B914AAEC63009FF411 /* Groubit_iOSAppDelegate_iPad.m in Sources */,
+				2BD0D85B14AB260D004E1E49 /* HabitDataModel.m in Sources */,
+				2BD0D85C14AB260D004E1E49 /* HabitTypeObject.m in Sources */,
+				2BD0D85D14AB260D004E1E49 /* TaskTypeObject.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -477,6 +495,7 @@
 				14EA76D914AAEC63009FF411 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		14EA76DA14AAEC63009FF411 /* Build configuration list for PBXNativeTarget "Groubit_iOSTests" */ = {
 			isa = XCConfigurationList;
@@ -485,6 +504,7 @@
 				14EA76DC14AAEC63009FF411 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
