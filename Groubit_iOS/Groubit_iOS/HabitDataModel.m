@@ -9,7 +9,7 @@
 #import "HabitDataModel.h"
 #import "HabitTypeObject.h"
 #import "TaskTypeObject.h"
-#import "Groubit_alphaAppDelegate.h"
+#import "Groubit_iOSAppDelegate.h"
 
 @implementation HabitDataModel
 
@@ -36,7 +36,7 @@ static HabitDataModel* dataModel = nil;
          withHabitStatus:(NSString*) habitStatus
 {
     
-    Groubit_alphaAppDelegate* appDelegate = [[UIApplication sharedApplication] delegate];
+    Groubit_iOSAppDelegate* appDelegate = [[UIApplication sharedApplication] delegate];
 
 
     NSManagedObjectContext* objectContext = [appDelegate managedObjectContext];
@@ -78,7 +78,7 @@ static HabitDataModel* dataModel = nil;
 - (void) deleteHabitByID:(NSString*)habitID
 {
     
-    Groubit_alphaAppDelegate* appDelegate = [[UIApplication sharedApplication] delegate];
+    Groubit_iOSAppDelegate* appDelegate = [[UIApplication sharedApplication] delegate];
     
     NSManagedObjectContext* objectContext = [appDelegate managedObjectContext];
     NSEntityDescription* desc = [NSEntityDescription entityForName:@"HabitType" inManagedObjectContext:objectContext];
@@ -109,7 +109,7 @@ static HabitDataModel* dataModel = nil;
 - (void) deleteHabitByName:(NSString*)habitName
 {
 
-    Groubit_alphaAppDelegate* appDelegate = [[UIApplication sharedApplication] delegate];
+    Groubit_iOSAppDelegate* appDelegate = [[UIApplication sharedApplication] delegate];
     
     NSManagedObjectContext* objectContext = [appDelegate managedObjectContext];
     NSEntityDescription* desc = [NSEntityDescription entityForName:@"HabitType" inManagedObjectContext:objectContext];
@@ -141,7 +141,7 @@ static HabitDataModel* dataModel = nil;
 - (NSArray*) getHabitsByOwner:(NSString*) habitOwner
 {
 
-    Groubit_alphaAppDelegate* appDelegate = [[UIApplication sharedApplication] delegate];
+    Groubit_iOSAppDelegate* appDelegate = [[UIApplication sharedApplication] delegate];
     
     NSManagedObjectContext* objectContext = [appDelegate managedObjectContext];
     NSEntityDescription* desc = [NSEntityDescription entityForName:@"HabitType" inManagedObjectContext:objectContext];
@@ -179,7 +179,7 @@ static HabitDataModel* dataModel = nil;
     
     
     
-    Groubit_alphaAppDelegate* appDelegate = [[UIApplication sharedApplication] delegate];
+    Groubit_iOSAppDelegate* appDelegate = [[UIApplication sharedApplication] delegate];
     
     
     NSManagedObjectContext* objectContext = [appDelegate managedObjectContext];
@@ -204,7 +204,7 @@ static HabitDataModel* dataModel = nil;
 
 - (void) markTaskCompletedByID:(NSString*) taskID{
 
-    Groubit_alphaAppDelegate* appDelegate = [[UIApplication sharedApplication] delegate];
+    Groubit_iOSAppDelegate* appDelegate = [[UIApplication sharedApplication] delegate];
     
     NSManagedObjectContext* objectContext = [appDelegate managedObjectContext];
     NSEntityDescription* desc = [NSEntityDescription entityForName:@"TaskType" inManagedObjectContext:objectContext];
