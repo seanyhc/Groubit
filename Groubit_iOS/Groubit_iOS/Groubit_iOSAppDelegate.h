@@ -8,9 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface Groubit_iOSAppDelegate : NSObject <UIApplicationDelegate>
+@interface Groubit_iOSAppDelegate : NSObject <UIApplicationDelegate> {
+    UITabBarController *tabController;
+}
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
+@property (nonatomic, retain) IBOutlet UITabBarController *tabController;
 
 @property (nonatomic, retain, readonly) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, retain, readonly) NSManagedObjectModel *managedObjectModel;

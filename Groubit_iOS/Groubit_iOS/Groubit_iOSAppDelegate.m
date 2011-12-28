@@ -11,6 +11,7 @@
 @implementation Groubit_iOSAppDelegate
 
 @synthesize window = _window;
+@synthesize tabController;
 @synthesize managedObjectContext = __managedObjectContext;
 @synthesize managedObjectModel = __managedObjectModel;
 @synthesize persistentStoreCoordinator = __persistentStoreCoordinator;
@@ -18,6 +19,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    [self.window addSubview:tabController.view];
     [self.window makeKeyAndVisible];
     return YES;
 }
