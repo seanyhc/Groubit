@@ -1,0 +1,505 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		14EA769914AAEC63009FF411 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14EA769814AAEC63009FF411 /* UIKit.framework */; };
+		14EA769B14AAEC63009FF411 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14EA769A14AAEC63009FF411 /* Foundation.framework */; };
+		14EA769D14AAEC63009FF411 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14EA769C14AAEC63009FF411 /* CoreGraphics.framework */; };
+		14EA769F14AAEC63009FF411 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14EA769E14AAEC63009FF411 /* CoreData.framework */; };
+		14EA76A514AAEC63009FF411 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 14EA76A314AAEC63009FF411 /* InfoPlist.strings */; };
+		14EA76A714AAEC63009FF411 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 14EA76A614AAEC63009FF411 /* main.m */; };
+		14EA76AB14AAEC63009FF411 /* Groubit_iOSAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 14EA76AA14AAEC63009FF411 /* Groubit_iOSAppDelegate.m */; };
+		14EA76AE14AAEC63009FF411 /* Groubit_iOS.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 14EA76AC14AAEC63009FF411 /* Groubit_iOS.xcdatamodeld */; };
+		14EA76B214AAEC63009FF411 /* Groubit_iOSAppDelegate_iPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = 14EA76B114AAEC63009FF411 /* Groubit_iOSAppDelegate_iPhone.m */; };
+		14EA76B514AAEC63009FF411 /* MainWindow_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14EA76B314AAEC63009FF411 /* MainWindow_iPhone.xib */; };
+		14EA76B914AAEC63009FF411 /* Groubit_iOSAppDelegate_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 14EA76B814AAEC63009FF411 /* Groubit_iOSAppDelegate_iPad.m */; };
+		14EA76BC14AAEC63009FF411 /* MainWindow_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14EA76BA14AAEC63009FF411 /* MainWindow_iPad.xib */; };
+		14EA76C414AAEC63009FF411 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14EA76C314AAEC63009FF411 /* SenTestingKit.framework */; };
+		14EA76C514AAEC63009FF411 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14EA769814AAEC63009FF411 /* UIKit.framework */; };
+		14EA76C614AAEC63009FF411 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14EA769A14AAEC63009FF411 /* Foundation.framework */; };
+		14EA76C714AAEC63009FF411 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14EA769C14AAEC63009FF411 /* CoreGraphics.framework */; };
+		14EA76C814AAEC63009FF411 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14EA769E14AAEC63009FF411 /* CoreData.framework */; };
+		14EA76D014AAEC63009FF411 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 14EA76CE14AAEC63009FF411 /* InfoPlist.strings */; };
+		14EA76D214AAEC63009FF411 /* Groubit_iOSTests.h in Resources */ = {isa = PBXBuildFile; fileRef = 14EA76D114AAEC63009FF411 /* Groubit_iOSTests.h */; };
+		14EA76D414AAEC63009FF411 /* Groubit_iOSTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 14EA76D314AAEC63009FF411 /* Groubit_iOSTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		14EA76C914AAEC63009FF411 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 14EA768B14AAEC63009FF411 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 14EA769314AAEC63009FF411;
+			remoteInfo = Groubit_iOS;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		14EA769414AAEC63009FF411 /* Groubit_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Groubit_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		14EA769814AAEC63009FF411 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		14EA769A14AAEC63009FF411 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		14EA769C14AAEC63009FF411 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		14EA769E14AAEC63009FF411 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		14EA76A214AAEC63009FF411 /* Groubit_iOS-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Groubit_iOS-Info.plist"; sourceTree = "<group>"; };
+		14EA76A414AAEC63009FF411 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		14EA76A614AAEC63009FF411 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		14EA76A814AAEC63009FF411 /* Groubit_iOS-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Groubit_iOS-Prefix.pch"; sourceTree = "<group>"; };
+		14EA76A914AAEC63009FF411 /* Groubit_iOSAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Groubit_iOSAppDelegate.h; sourceTree = "<group>"; };
+		14EA76AA14AAEC63009FF411 /* Groubit_iOSAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Groubit_iOSAppDelegate.m; sourceTree = "<group>"; };
+		14EA76AD14AAEC63009FF411 /* Groubit_iOS.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Groubit_iOS.xcdatamodel; sourceTree = "<group>"; };
+		14EA76B014AAEC63009FF411 /* Groubit_iOSAppDelegate_iPhone.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Groubit_iOSAppDelegate_iPhone.h; path = iPhone/Groubit_iOSAppDelegate_iPhone.h; sourceTree = "<group>"; };
+		14EA76B114AAEC63009FF411 /* Groubit_iOSAppDelegate_iPhone.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = Groubit_iOSAppDelegate_iPhone.m; path = iPhone/Groubit_iOSAppDelegate_iPhone.m; sourceTree = "<group>"; };
+		14EA76B414AAEC63009FF411 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = iPhone/en.lproj/MainWindow_iPhone.xib; sourceTree = "<group>"; };
+		14EA76B714AAEC63009FF411 /* Groubit_iOSAppDelegate_iPad.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Groubit_iOSAppDelegate_iPad.h; path = iPad/Groubit_iOSAppDelegate_iPad.h; sourceTree = "<group>"; };
+		14EA76B814AAEC63009FF411 /* Groubit_iOSAppDelegate_iPad.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = Groubit_iOSAppDelegate_iPad.m; path = iPad/Groubit_iOSAppDelegate_iPad.m; sourceTree = "<group>"; };
+		14EA76BB14AAEC63009FF411 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = iPad/en.lproj/MainWindow_iPad.xib; sourceTree = "<group>"; };
+		14EA76C214AAEC63009FF411 /* Groubit_iOSTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Groubit_iOSTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		14EA76C314AAEC63009FF411 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		14EA76CD14AAEC63009FF411 /* Groubit_iOSTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Groubit_iOSTests-Info.plist"; sourceTree = "<group>"; };
+		14EA76CF14AAEC63009FF411 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		14EA76D114AAEC63009FF411 /* Groubit_iOSTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Groubit_iOSTests.h; sourceTree = "<group>"; };
+		14EA76D314AAEC63009FF411 /* Groubit_iOSTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Groubit_iOSTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		14EA769114AAEC63009FF411 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				14EA769914AAEC63009FF411 /* UIKit.framework in Frameworks */,
+				14EA769B14AAEC63009FF411 /* Foundation.framework in Frameworks */,
+				14EA769D14AAEC63009FF411 /* CoreGraphics.framework in Frameworks */,
+				14EA769F14AAEC63009FF411 /* CoreData.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		14EA76BE14AAEC63009FF411 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				14EA76C414AAEC63009FF411 /* SenTestingKit.framework in Frameworks */,
+				14EA76C514AAEC63009FF411 /* UIKit.framework in Frameworks */,
+				14EA76C614AAEC63009FF411 /* Foundation.framework in Frameworks */,
+				14EA76C714AAEC63009FF411 /* CoreGraphics.framework in Frameworks */,
+				14EA76C814AAEC63009FF411 /* CoreData.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		14EA768914AAEC63009FF411 = {
+			isa = PBXGroup;
+			children = (
+				14EA76A014AAEC63009FF411 /* Groubit_iOS */,
+				14EA76CB14AAEC63009FF411 /* Groubit_iOSTests */,
+				14EA769714AAEC63009FF411 /* Frameworks */,
+				14EA769514AAEC63009FF411 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		14EA769514AAEC63009FF411 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				14EA769414AAEC63009FF411 /* Groubit_iOS.app */,
+				14EA76C214AAEC63009FF411 /* Groubit_iOSTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		14EA769714AAEC63009FF411 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				14EA769814AAEC63009FF411 /* UIKit.framework */,
+				14EA769A14AAEC63009FF411 /* Foundation.framework */,
+				14EA769C14AAEC63009FF411 /* CoreGraphics.framework */,
+				14EA769E14AAEC63009FF411 /* CoreData.framework */,
+				14EA76C314AAEC63009FF411 /* SenTestingKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		14EA76A014AAEC63009FF411 /* Groubit_iOS */ = {
+			isa = PBXGroup;
+			children = (
+				14EA76A914AAEC63009FF411 /* Groubit_iOSAppDelegate.h */,
+				14EA76AA14AAEC63009FF411 /* Groubit_iOSAppDelegate.m */,
+				14EA76AC14AAEC63009FF411 /* Groubit_iOS.xcdatamodeld */,
+				14EA76AF14AAEC63009FF411 /* iPhone */,
+				14EA76B614AAEC63009FF411 /* iPad */,
+				14EA76A114AAEC63009FF411 /* Supporting Files */,
+			);
+			path = Groubit_iOS;
+			sourceTree = "<group>";
+		};
+		14EA76A114AAEC63009FF411 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				14EA76A214AAEC63009FF411 /* Groubit_iOS-Info.plist */,
+				14EA76A314AAEC63009FF411 /* InfoPlist.strings */,
+				14EA76A614AAEC63009FF411 /* main.m */,
+				14EA76A814AAEC63009FF411 /* Groubit_iOS-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		14EA76AF14AAEC63009FF411 /* iPhone */ = {
+			isa = PBXGroup;
+			children = (
+				14EA76B014AAEC63009FF411 /* Groubit_iOSAppDelegate_iPhone.h */,
+				14EA76B114AAEC63009FF411 /* Groubit_iOSAppDelegate_iPhone.m */,
+				14EA76B314AAEC63009FF411 /* MainWindow_iPhone.xib */,
+			);
+			name = iPhone;
+			sourceTree = "<group>";
+		};
+		14EA76B614AAEC63009FF411 /* iPad */ = {
+			isa = PBXGroup;
+			children = (
+				14EA76B714AAEC63009FF411 /* Groubit_iOSAppDelegate_iPad.h */,
+				14EA76B814AAEC63009FF411 /* Groubit_iOSAppDelegate_iPad.m */,
+				14EA76BA14AAEC63009FF411 /* MainWindow_iPad.xib */,
+			);
+			name = iPad;
+			sourceTree = "<group>";
+		};
+		14EA76CB14AAEC63009FF411 /* Groubit_iOSTests */ = {
+			isa = PBXGroup;
+			children = (
+				14EA76D114AAEC63009FF411 /* Groubit_iOSTests.h */,
+				14EA76D314AAEC63009FF411 /* Groubit_iOSTests.m */,
+				14EA76CC14AAEC63009FF411 /* Supporting Files */,
+			);
+			path = Groubit_iOSTests;
+			sourceTree = "<group>";
+		};
+		14EA76CC14AAEC63009FF411 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				14EA76CD14AAEC63009FF411 /* Groubit_iOSTests-Info.plist */,
+				14EA76CE14AAEC63009FF411 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		14EA769314AAEC63009FF411 /* Groubit_iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 14EA76D714AAEC63009FF411 /* Build configuration list for PBXNativeTarget "Groubit_iOS" */;
+			buildPhases = (
+				14EA769014AAEC63009FF411 /* Sources */,
+				14EA769114AAEC63009FF411 /* Frameworks */,
+				14EA769214AAEC63009FF411 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Groubit_iOS;
+			productName = Groubit_iOS;
+			productReference = 14EA769414AAEC63009FF411 /* Groubit_iOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+		14EA76C114AAEC63009FF411 /* Groubit_iOSTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 14EA76DA14AAEC63009FF411 /* Build configuration list for PBXNativeTarget "Groubit_iOSTests" */;
+			buildPhases = (
+				14EA76BD14AAEC63009FF411 /* Sources */,
+				14EA76BE14AAEC63009FF411 /* Frameworks */,
+				14EA76BF14AAEC63009FF411 /* Resources */,
+				14EA76C014AAEC63009FF411 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				14EA76CA14AAEC63009FF411 /* PBXTargetDependency */,
+			);
+			name = Groubit_iOSTests;
+			productName = Groubit_iOSTests;
+			productReference = 14EA76C214AAEC63009FF411 /* Groubit_iOSTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		14EA768B14AAEC63009FF411 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				ORGANIZATIONNAME = "UCB MIMS";
+			};
+			buildConfigurationList = 14EA768E14AAEC63009FF411 /* Build configuration list for PBXProject "Groubit_iOS" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 14EA768914AAEC63009FF411;
+			productRefGroup = 14EA769514AAEC63009FF411 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				14EA769314AAEC63009FF411 /* Groubit_iOS */,
+				14EA76C114AAEC63009FF411 /* Groubit_iOSTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		14EA769214AAEC63009FF411 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				14EA76A514AAEC63009FF411 /* InfoPlist.strings in Resources */,
+				14EA76B514AAEC63009FF411 /* MainWindow_iPhone.xib in Resources */,
+				14EA76BC14AAEC63009FF411 /* MainWindow_iPad.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		14EA76BF14AAEC63009FF411 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				14EA76D014AAEC63009FF411 /* InfoPlist.strings in Resources */,
+				14EA76D214AAEC63009FF411 /* Groubit_iOSTests.h in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		14EA76C014AAEC63009FF411 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		14EA769014AAEC63009FF411 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				14EA76A714AAEC63009FF411 /* main.m in Sources */,
+				14EA76AB14AAEC63009FF411 /* Groubit_iOSAppDelegate.m in Sources */,
+				14EA76AE14AAEC63009FF411 /* Groubit_iOS.xcdatamodeld in Sources */,
+				14EA76B214AAEC63009FF411 /* Groubit_iOSAppDelegate_iPhone.m in Sources */,
+				14EA76B914AAEC63009FF411 /* Groubit_iOSAppDelegate_iPad.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		14EA76BD14AAEC63009FF411 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				14EA76D414AAEC63009FF411 /* Groubit_iOSTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		14EA76CA14AAEC63009FF411 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 14EA769314AAEC63009FF411 /* Groubit_iOS */;
+			targetProxy = 14EA76C914AAEC63009FF411 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		14EA76A314AAEC63009FF411 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				14EA76A414AAEC63009FF411 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		14EA76B314AAEC63009FF411 /* MainWindow_iPhone.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				14EA76B414AAEC63009FF411 /* en */,
+			);
+			name = MainWindow_iPhone.xib;
+			sourceTree = "<group>";
+		};
+		14EA76BA14AAEC63009FF411 /* MainWindow_iPad.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				14EA76BB14AAEC63009FF411 /* en */,
+			);
+			name = MainWindow_iPad.xib;
+			sourceTree = "<group>";
+		};
+		14EA76CE14AAEC63009FF411 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				14EA76CF14AAEC63009FF411 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		14EA76D514AAEC63009FF411 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		14EA76D614AAEC63009FF411 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		14EA76D814AAEC63009FF411 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Groubit_iOS/Groubit_iOS-Prefix.pch";
+				INFOPLIST_FILE = "Groubit_iOS/Groubit_iOS-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		14EA76D914AAEC63009FF411 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Groubit_iOS/Groubit_iOS-Prefix.pch";
+				INFOPLIST_FILE = "Groubit_iOS/Groubit_iOS-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		14EA76DB14AAEC63009FF411 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Groubit_iOS.app/Groubit_iOS";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Groubit_iOS/Groubit_iOS-Prefix.pch";
+				INFOPLIST_FILE = "Groubit_iOSTests/Groubit_iOSTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		14EA76DC14AAEC63009FF411 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Groubit_iOS.app/Groubit_iOS";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Groubit_iOS/Groubit_iOS-Prefix.pch";
+				INFOPLIST_FILE = "Groubit_iOSTests/Groubit_iOSTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		14EA768E14AAEC63009FF411 /* Build configuration list for PBXProject "Groubit_iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				14EA76D514AAEC63009FF411 /* Debug */,
+				14EA76D614AAEC63009FF411 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		14EA76D714AAEC63009FF411 /* Build configuration list for PBXNativeTarget "Groubit_iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				14EA76D814AAEC63009FF411 /* Debug */,
+				14EA76D914AAEC63009FF411 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		14EA76DA14AAEC63009FF411 /* Build configuration list for PBXNativeTarget "Groubit_iOSTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				14EA76DB14AAEC63009FF411 /* Debug */,
+				14EA76DC14AAEC63009FF411 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		14EA76AC14AAEC63009FF411 /* Groubit_iOS.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				14EA76AD14AAEC63009FF411 /* Groubit_iOS.xcdatamodel */,
+			);
+			currentVersion = 14EA76AD14AAEC63009FF411 /* Groubit_iOS.xcdatamodel */;
+			path = Groubit_iOS.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 14EA768B14AAEC63009FF411 /* Project object */;
+}
