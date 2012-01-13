@@ -9,10 +9,26 @@
 #import <Foundation/Foundation.h>
 
 
-@interface HabitTypeObject : NSManagedObject {
- 
-   
+@interface HabitTypeObject : NSManagedObject { 
 }
+
+typedef enum {
+    kHabitStatusInit = 0,
+    kHabitStatusInProgress = 1,
+    kHabitStatusCompleted = 2,
+    kHabitStatusPending = 3,
+    kHabitStatusIllegal = 4
+} HabitStatus;
+
+typedef enum {
+    kDaily = 0,
+    kWeekly = 1,
+    kBiWeekly = 2,
+    kMonthly = 3,
+    kCustom = 4
+} HabitFrequency;
+
+
 
 @property (nonatomic, retain) NSString* HabitID;
 @property (nonatomic, retain) NSString* HabitName;
@@ -22,5 +38,6 @@
 @property (nonatomic, retain) NSNumber*  HabitAttempts;
 @property (nonatomic, retain) NSString* HabitStatus;
 
+- (NSString *) MyDescription;
 
 @end

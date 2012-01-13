@@ -13,9 +13,9 @@
 
 
 @dynamic TaskID;
-@dynamic TaskOwner;
-@dynamic HabitID;
 @dynamic HabitName;
+@dynamic HabitID;
+@dynamic TaskOwner;
 @dynamic TaskTargetDate;
 @dynamic TaskStatus;
 

@@ -1,4 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="Test1.xcdatamodel" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
-    <elements/>
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="562" systemVersion="11C74" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="HabitTypeObject">
+        <attribute name="HabitAttempts" optional="YES" attributeType="Integer 32" defaultValueString="0"/>
+        <attribute name="HabitFrequency" optional="YES" attributeType="String"/>
+        <attribute name="HabitID" optional="YES" attributeType="String"/>
+        <attribute name="HabitName" optional="YES" attributeType="String"/>
+        <attribute name="HabitOwner" optional="YES" attributeType="String"/>
+        <attribute name="HabitStartDate" optional="YES" attributeType="Date"/>
+        <attribute name="HabitStatus" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="TaskTypeObject">
+        <attribute name="HabitID" optional="YES" attributeType="String"/>
+        <attribute name="HabitName" optional="YES" attributeType="String"/>
+        <attribute name="TaskID" optional="YES" attributeType="String"/>
+        <attribute name="TaskOwner" optional="YES" attributeType="String"/>
+        <attribute name="TaskStatus" optional="YES" attributeType="String"/>
+        <attribute name="TaskTargetDate" optional="YES" attributeType="Date"/>
+    </entity>
+    <elements>
+        <element name="HabitTypeObject" positionX="160" positionY="192" width="128" height="60"/>
+        <element name="TaskTypeObject" positionX="160" positionY="192" width="128" height="135"/>
+    </elements>
 </model>

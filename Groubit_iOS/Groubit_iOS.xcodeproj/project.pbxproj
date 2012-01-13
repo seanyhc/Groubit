@@ -181,12 +181,6 @@
 		14EA76A014AAEC63009FF411 /* Groubit_iOS */ = {
 			isa = PBXGroup;
 			children = (
-				2BD0D85514AB260D004E1E49 /* HabitDataModel.h */,
-				2BD0D85614AB260D004E1E49 /* HabitDataModel.m */,
-				2BD0D85714AB260D004E1E49 /* HabitTypeObject.h */,
-				2BD0D85814AB260D004E1E49 /* HabitTypeObject.m */,
-				2BD0D85914AB260D004E1E49 /* TaskTypeObject.h */,
-				2BD0D85A14AB260D004E1E49 /* TaskTypeObject.m */,
 				14EA76A914AAEC63009FF411 /* Groubit_iOSAppDelegate.h */,
 				14EA76AA14AAEC63009FF411 /* Groubit_iOSAppDelegate.m */,
 				14EA76AC14AAEC63009FF411 /* Groubit_iOS.xcdatamodeld */,
@@ -211,6 +205,7 @@
 		14EA76AF14AAEC63009FF411 /* iPhone */ = {
 			isa = PBXGroup;
 			children = (
+				2B926AFE14B93E4F002E03F7 /* DataModel */,
 				14EA76F314AB20AB009FF411 /* DashBoardViewController.h */,
 				14EA76F414AB20AB009FF411 /* DashBoardViewController.m */,
 				14EA76F514AB20AB009FF411 /* DashBoardViewController.xib */,
@@ -254,6 +249,19 @@
 				14EA76CE14AAEC63009FF411 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		2B926AFE14B93E4F002E03F7 /* DataModel */ = {
+			isa = PBXGroup;
+			children = (
+				2BD0D85914AB260D004E1E49 /* TaskTypeObject.h */,
+				2BD0D85A14AB260D004E1E49 /* TaskTypeObject.m */,
+				2BD0D85514AB260D004E1E49 /* HabitDataModel.h */,
+				2BD0D85614AB260D004E1E49 /* HabitDataModel.m */,
+				2BD0D85714AB260D004E1E49 /* HabitTypeObject.h */,
+				2BD0D85814AB260D004E1E49 /* HabitTypeObject.m */,
+			);
+			name = DataModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
