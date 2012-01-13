@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		14E365BC14AB2D7B0064CA5B /* FriendsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14E365BA14AB2D7B0064CA5B /* FriendsViewController.xib */; };
+		14E365BB14AB2D7B0064CA5B /* FriendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14E365B914AB2D7B0064CA5B /* FriendsViewController.m */; };
+		14E365BC14AB2D7B0064CA5B /* FriendsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14E365BA14AB2D7B0064CA5B /* FriendsViewController.xib */; };
 		14EA769914AAEC63009FF411 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14EA769814AAEC63009FF411 /* UIKit.framework */; };
 		14EA769B14AAEC63009FF411 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14EA769A14AAEC63009FF411 /* Foundation.framework */; };
 		14EA769D14AAEC63009FF411 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14EA769C14AAEC63009FF411 /* CoreGraphics.framework */; };
@@ -28,7 +30,9 @@
 		14EA76D014AAEC63009FF411 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 14EA76CE14AAEC63009FF411 /* InfoPlist.strings */; };
 		14EA76D214AAEC63009FF411 /* Groubit_iOSTests.h in Resources */ = {isa = PBXBuildFile; fileRef = 14EA76D114AAEC63009FF411 /* Groubit_iOSTests.h */; };
 		14EA76D414AAEC63009FF411 /* Groubit_iOSTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 14EA76D314AAEC63009FF411 /* Groubit_iOSTests.m */; };
+		14EA76F114AB201F009FF411 /* HabitsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14EA76EF14AB201F009FF411 /* HabitsViewController.m */; };
 		14EA76F214AB201F009FF411 /* HabitsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14EA76F014AB201F009FF411 /* HabitsViewController.xib */; };
+		14EA76F614AB20AB009FF411 /* DashBoardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14EA76F414AB20AB009FF411 /* DashBoardViewController.m */; };
 		14EA76F714AB20AB009FF411 /* DashBoardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14EA76F514AB20AB009FF411 /* DashBoardViewController.xib */; };
 		2BD0D85B14AB260D004E1E49 /* HabitDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD0D85614AB260D004E1E49 /* HabitDataModel.m */; };
 		2BD0D85C14AB260D004E1E49 /* HabitTypeObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD0D85814AB260D004E1E49 /* HabitTypeObject.m */; };
@@ -40,9 +44,6 @@
 		2BD0D88514AB4361004E1E49 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BD0D88414AB4361004E1E49 /* MobileCoreServices.framework */; };
 		2BD0D88814AB4380004E1E49 /* libz.1.1.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BD0D88714AB4380004E1E49 /* libz.1.1.3.dylib */; };
 		2BD0D88A14AB438A004E1E49 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BD0D88914AB438A004E1E49 /* Security.framework */; };
-		2BD0D89314AB52A8004E1E49 /* HabitsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14EA76EF14AB201F009FF411 /* HabitsViewController.m */; };
-		2BD0D89414AB52A8004E1E49 /* FriendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14E365B914AB2D7B0064CA5B /* FriendsViewController.m */; };
-		2BD0D89514AB52A8004E1E49 /* DashBoardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14EA76F414AB20AB009FF411 /* DashBoardViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -211,6 +212,7 @@
 		14EA76AF14AAEC63009FF411 /* iPhone */ = {
 			isa = PBXGroup;
 			children = (
+				2B926AFE14B93E4F002E03F7 /* DataModel */,
 				14EA76F314AB20AB009FF411 /* DashBoardViewController.h */,
 				14EA76F414AB20AB009FF411 /* DashBoardViewController.m */,
 				14EA76F514AB20AB009FF411 /* DashBoardViewController.xib */,
@@ -254,6 +256,19 @@
 				14EA76CE14AAEC63009FF411 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		2B926AFE14B93E4F002E03F7 /* DataModel */ = {
+			isa = PBXGroup;
+			children = (
+				2BD0D85914AB260D004E1E49 /* TaskTypeObject.h */,
+				2BD0D85A14AB260D004E1E49 /* TaskTypeObject.m */,
+				2BD0D85514AB260D004E1E49 /* HabitDataModel.h */,
+				2BD0D85614AB260D004E1E49 /* HabitDataModel.m */,
+				2BD0D85714AB260D004E1E49 /* HabitTypeObject.h */,
+				2BD0D85814AB260D004E1E49 /* HabitTypeObject.m */,
+			);
+			name = DataModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -373,12 +388,12 @@
 				14EA76AE14AAEC63009FF411 /* Groubit_iOS.xcdatamodeld in Sources */,
 				14EA76B214AAEC63009FF411 /* Groubit_iOSAppDelegate_iPhone.m in Sources */,
 				14EA76B914AAEC63009FF411 /* Groubit_iOSAppDelegate_iPad.m in Sources */,
-				2BD0D89314AB52A8004E1E49 /* HabitsViewController.m in Sources */,
-				2BD0D89514AB52A8004E1E49 /* DashBoardViewController.m in Sources */,
-				2BD0D89414AB52A8004E1E49 /* FriendsViewController.m in Sources */,
 				2BD0D85B14AB260D004E1E49 /* HabitDataModel.m in Sources */,
 				2BD0D85C14AB260D004E1E49 /* HabitTypeObject.m in Sources */,
 				2BD0D85D14AB260D004E1E49 /* TaskTypeObject.m in Sources */,
+				14EA76F114AB201F009FF411 /* HabitsViewController.m in Sources */,
+				14EA76F614AB20AB009FF411 /* DashBoardViewController.m in Sources */,
+				14E365BB14AB2D7B0064CA5B /* FriendsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

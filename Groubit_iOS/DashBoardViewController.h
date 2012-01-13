@@ -9,5 +9,23 @@
 #import <UIKit/UIKit.h>
 
 @interface DashBoardViewController : UIViewController
+{
+
+}
+
+- (IBAction)createHabit:(id)sender;
+- (IBAction)getAllHabitsByOwnerName:(id)sender;
+
+/*
+- (IBAction)updateHabit:(id)sender;
+
+
+- (IBAction)createTask:(id)sender;
+- (IBAction)updateTask:(id)sender;
+- (IBAction)getAllTasks:(id)sender;
+
+- (IBAction)createFriend:(id)sender;
+*/
+
 
 @end

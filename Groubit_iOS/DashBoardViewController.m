@@ -7,6 +7,8 @@
 //
 
 #import "DashBoardViewController.h"
+#import "HabitDataModel.h"
+#import "HabitTypeObject.h"
 
 @implementation DashBoardViewController
 
@@ -33,6 +35,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
 }
 
 - (void)viewDidUnload
@@ -42,10 +45,40 @@
     // e.g. self.myOutlet = nil;
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+- (BOOL)shuldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+#pragma mark - GUI Triggered Actions
+
+- (IBAction)createHabit:(id)sender{
+    
+    NSLog(@"enter createHabit");
+    
+    
+    HabitDataModel* dataModel = [HabitDataModel getDataModel];
+    
+    
+    [dataModel createHabit:@"MyHabit" withStartDate:[NSDate date] withFrequency:kWeekly withAttempts:3];
+    
+}
+
+- (IBAction)getAllHabitsByOwnerName:(id)sender{
+    
+    NSLog(@"enter getAllHabitsByOwnerName");
+    
+    
+    HabitDataModel* dataModel = [HabitDataModel getDataModel];
+    
+    NSArray* habits = [dataModel getAllHabitsByOwnerName:@"Bob"];
+    
+    for(int i=0; i < [habits count]; i++){
+        HabitTypeObject* habit = (HabitTypeObject*)[habits objectAtIndex:i];
+        NSLog(@"Retrived Habit Name: %@, HabitID: %@, HabitOwner: %@, HabitStartDate: %@", habit.HabitName, habit.HabitID, habit.HabitOwner,habit.HabitStartDate);
+    }
+    
 }
 
 @end
