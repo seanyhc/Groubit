@@ -27,16 +27,6 @@
       shouldUseLaunchSchemeArgsEnv = "YES"
       buildConfiguration = "Debug">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "14EA76C114AAEC63009FF411"
-               BuildableName = "Groubit_iOSTests.octest"
-               BlueprintName = "Groubit_iOSTests"
-               ReferencedContainer = "container:Groubit_iOS.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
