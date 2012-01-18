@@ -1,24 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="562" systemVersion="11C74" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
-    <entity name="HabitTypeObject">
+    <entity name="GBHabit" representedClassName="GBHabit">
         <attribute name="HabitAttempts" optional="YES" attributeType="Integer 32" defaultValueString="0"/>
+        <attribute name="HabitDescription" optional="YES" attributeType="String"/>
         <attribute name="HabitFrequency" optional="YES" attributeType="String"/>
         <attribute name="HabitID" optional="YES" attributeType="String"/>
         <attribute name="HabitName" optional="YES" attributeType="String"/>
         <attribute name="HabitOwner" optional="YES" attributeType="String"/>
         <attribute name="HabitStartDate" optional="YES" attributeType="Date"/>
         <attribute name="HabitStatus" optional="YES" attributeType="String"/>
+        <relationship name="tasks" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="GBTask" inverseName="belongsToHabit" inverseEntity="GBTask"/>
     </entity>
-    <entity name="TaskTypeObject">
-        <attribute name="HabitID" optional="YES" attributeType="String"/>
-        <attribute name="HabitName" optional="YES" attributeType="String"/>
+    <entity name="GBTask" representedClassName="GBTask">
         <attribute name="TaskID" optional="YES" attributeType="String"/>
-        <attribute name="TaskOwner" optional="YES" attributeType="String"/>
+        <attribute name="TaskName" optional="YES" attributeType="String"/>
         <attribute name="TaskStatus" optional="YES" attributeType="String"/>
         <attribute name="TaskTargetDate" optional="YES" attributeType="Date"/>
+        <relationship name="belongsToHabit" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="GBHabit" inverseName="tasks" inverseEntity="GBHabit"/>
     </entity>
     <elements>
-        <element name="HabitTypeObject" positionX="160" positionY="192" width="128" height="60"/>
-        <element name="TaskTypeObject" positionX="160" positionY="192" width="128" height="135"/>
+        <element name="GBHabit" positionX="-425" positionY="-153" width="128" height="180"/>
+        <element name="GBTask" positionX="-164" positionY="-141" width="128" height="120"/>
     </elements>
 </model>

@@ -7,6 +7,11 @@
 //
 
 #import "DashBoardViewController.h"
+<<<<<<< HEAD
+=======
+#import "HabitDataModel.h"
+#import "HabitTypeObject.h"
+>>>>>>> jeffrey_dev_branch
 
 @implementation DashBoardViewController
 
@@ -36,9 +41,6 @@
 <<<<<<< HEAD
 =======
     
-    PFObject *testObject = [PFObject objectWithClassName:@"TestObject"];
-    [testObject setObject:@"bar" forKey:@"foo"];
-    [testObject save];
 >>>>>>> jeffrey_dev_branch
 }
 
@@ -49,10 +51,47 @@
     // e.g. self.myOutlet = nil;
 }
 
+<<<<<<< HEAD
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+=======
+- (BOOL)shuldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+>>>>>>> jeffrey_dev_branch
 {
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+<<<<<<< HEAD
+=======
+#pragma mark - GUI Triggered Actions
+
+- (IBAction)createHabit:(id)sender{
+    
+    NSLog(@"enter createHabit");
+    
+    
+    HabitDataModel* dataModel = [HabitDataModel getDataModel];
+    
+    
+    [dataModel createHabit:@"MyHabit" withStartDate:[NSDate date] withFrequency:kWeekly withAttempts:3];
+    
+}
+
+- (IBAction)getAllHabitsByOwnerName:(id)sender{
+    
+    NSLog(@"enter getAllHabitsByOwnerName");
+    
+    
+    HabitDataModel* dataModel = [HabitDataModel getDataModel];
+    
+    NSArray* habits = [dataModel getAllHabitsByOwnerName:@"Bob"];
+    
+    for(int i=0; i < [habits count]; i++){
+        HabitTypeObject* habit = (HabitTypeObject*)[habits objectAtIndex:i];
+        NSLog(@"Retrived Habit Name: %@, HabitID: %@, HabitOwner: %@, HabitStartDate: %@", habit.HabitName, habit.HabitID, habit.HabitOwner,habit.HabitStartDate);
+    }
+    
+}
+
+>>>>>>> jeffrey_dev_branch
 @end

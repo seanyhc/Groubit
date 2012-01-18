@@ -7,8 +7,10 @@
 //
 
 #import "DashBoardViewController.h"
-#import "HabitDataModel.h"
-#import "HabitTypeObject.h"
+#import "GBDataModelManager.h"
+#import "GBHabit.h"
+#import "GBTask.h"
+#import "Groubit_iOSAppDelegate.h"
 
 @implementation DashBoardViewController
 
@@ -55,10 +57,10 @@
 
 - (IBAction)createHabit:(id)sender{
     
-    NSLog(@"enter createHabit");
+    NSLog(@"Enter DashboardViewControll::createHabit");
     
     
-    HabitDataModel* dataModel = [HabitDataModel getDataModel];
+    GBDataModelManager* dataModel = [GBDataModelManager getDataModelManager];
     
     
     [dataModel createHabit:@"MyHabit" withStartDate:[NSDate date] withFrequency:kWeekly withAttempts:3];
@@ -67,18 +69,98 @@
 
 - (IBAction)getAllHabitsByOwnerName:(id)sender{
     
-    NSLog(@"enter getAllHabitsByOwnerName");
+    NSLog(@"Enter DashboardViewControll::getAllHabitsByOwnerName");
     
+    GBDataModelManager* dataModel = [GBDataModelManager getDataModelManager];
     
-    HabitDataModel* dataModel = [HabitDataModel getDataModel];
+    NSArray* habits = nil;
     
-    NSArray* habits = [dataModel getAllHabitsByOwnerName:@"Bob"];
+    NSLog(@"Test 1: get all habits by current user");
+    
+    habits = [dataModel getAllHabitsByType:kUserTypeInternal];
     
     for(int i=0; i < [habits count]; i++){
-        HabitTypeObject* habit = (HabitTypeObject*)[habits objectAtIndex:i];
+        GBHabit* habit = (GBHabit*)[habits objectAtIndex:i];
         NSLog(@"Retrived Habit Name: %@, HabitID: %@, HabitOwner: %@, HabitStartDate: %@", habit.HabitName, habit.HabitID, habit.HabitOwner,habit.HabitStartDate);
     }
     
+    NSLog(@"Test 2: get all habits by friends");
+    
+    habits = [dataModel getAllHabitsByType:kUserTypeFriend];
+    
+    for(GBHabit* habit in habits){
+        NSLog(@"Retrived Habit Name: %@, HabitID: %@, HabitOwner: %@, HabitStartDate: %@", habit.HabitName, habit.HabitID, habit.HabitOwner,habit.HabitStartDate);
+    }
+
+    NSLog(@"Test 3: get all habits for both local use and friends");
+    
+    habits = [dataModel getAllHabitsByType:kUserTypeALL];
+    
+    for(GBHabit* habit in habits){
+        NSLog(@"Retrived Habit Name: %@, HabitID: %@, HabitOwner: %@, HabitStartDate: %@, HabitStatus: %@", habit.HabitName, habit.HabitID, habit.HabitOwner,habit.HabitStartDate, habit.HabitStatus);
+    }
+
+    
+    
 }
+
+- (IBAction)getAllTasks:(id)sender{
+    
+    NSLog(@"Enter DashboardViewControll::getAllTasks");
+    
+    GBDataModelManager* dataModel = [GBDataModelManager getDataModelManager];
+    
+    NSArray* tasks = [dataModel getAllTasks:kUserTypeInternal];
+    
+    for(int i=0; i < [tasks count]; i++){
+        GBTask* task = (GBTask*)[tasks objectAtIndex:i];
+        NSLog(@"Retrived TaskID: %@, TargetDate: %@, Status: %@", task.TaskID, task.TaskTargetDate, task.TaskStatus);
+    }
+    
+}
+
+- (IBAction)setHabitCompleted:(id)sender{
+    
+    NSLog(@"Enter DashboardViewControll::setHabitCompleted");
+    
+    GBDataModelManager* dataModel = [GBDataModelManager getDataModelManager];
+    
+    NSLog(@"Test 1: get all habits by current user");
+    
+    NSArray *habits = [dataModel getAllHabitsByType:kUserTypeInternal];
+    
+    for(int i=0; i < [habits count]; i++){
+        GBHabit* habit = (GBHabit*)[habits objectAtIndex:i];
+        NSLog(@"Retrived Habit Name: %@, HabitID: %@, HabitOwner: %@, HabitStartDate: %@", habit.HabitName, habit.HabitID, habit.HabitOwner,habit.HabitStartDate);
+        
+        if (i == 1){
+            [dataModel setHabitStatus:habit.HabitID withStatus:kHabitStatusCompleted];
+        }
+    }
+    
+}
+
+- (IBAction)setTaskCompleted:(id)sender{
+    
+    NSLog(@"Enter DashboardViewControll::setTaskCompleted");
+    
+    GBDataModelManager* dataModel = [GBDataModelManager getDataModelManager];
+    
+    NSLog(@"Test 1: get all habits by current user");
+    
+    
+    NSArray* tasks = [dataModel getAllTasks:kUserTypeInternal];
+    
+    for(int i=0; i < [tasks count]; i++){
+        GBTask* task = (GBTask*)[tasks objectAtIndex:i];
+        NSLog(@"Retrived TaskID: %@, TargetDate: %@, Status: %@", task.TaskID, task.TaskTargetDate, task.TaskStatus);
+        
+        if( i==0){
+            [dataModel setTaskStatus:task.TaskID taskStatus:kTaskStatusCompleted];
+        }
+    }
+    
+}
+
 
 @end

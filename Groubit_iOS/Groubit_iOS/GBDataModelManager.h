@@ -7,19 +7,53 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "HabitTypeObject.h"
+#import "GBHabit.h"
 
-@interface HabitDataModel : NSObject {
-    
+@interface GBDataModelManager : NSObject {
+ 
+    NSManagedObjectContext *obectContext;
+    NSString *localUserName;
 }
+
+@property (nonatomic, retain) NSManagedObjectContext *objectContext;
+@property (nonatomic, retain) NSString *localUserName;
+
+
+typedef enum {
+    kHabitStatusInit = 0,
+    kHabitStatusInProgress = 1,
+    kHabitStatusCompleted = 2,
+    kHabitStatusPending = 3,
+    kHabitStatusIllegal = 4
+} HabitStatus;
+
+typedef enum {
+    kDaily = 0,
+    kWeekly = 1,
+    kBiWeekly = 2,
+    kMonthly = 3,
+    kCustom = 4
+} HabitFrequency;
 
 typedef enum {
     kUserTypeInternal = 0,
     kUserTypeFriend = 1,
     kUserTypeALL = 2
-} UserType;
+} GBUserType;
 
-+ (HabitDataModel*) getDataModel;
+typedef enum{
+    kHabit = 0,
+    kTask  = 1,
+    kUser  = 2
+} GBObjectType;
+
+typedef enum {
+    kTaskStatusInit = 0,
+    kTaskStatusCompleted = 1,
+    kTaskStatusIllegal = 2
+} TaskStatus;
+
++ (GBDataModelManager*) getDataModelManager;
 
 
 /*  
@@ -49,10 +83,10 @@ typedef enum {
  Retrieve all habits that associate with currentUser , baby, or both. 
  
  @param userType        specify whether to retrieve habits that belongs to current user, belong to baby, or both
- @return a list of habits with type "HabitTypeObject"
+ @return a list of habits with type "GBHabit"
  */
 
-- (NSArray *) getAllHabits:(int) userType;
+- (NSArray *) getAllHabitsByType:(GBUserType) userType;
 
 
 /**
@@ -60,11 +94,20 @@ typedef enum {
  Retrieve all habits that associate with a particular user. 
  
  @param ownerName  the name of the user
- @return a list of habits with type "HabitTypeObject"
+ @return a list of habits with type "GBHabit"
  */
 
 - (NSArray *) getAllHabitsByOwnerName:(NSString*) ownerName;
 
+
+/**
+ 
+ Retrieve all habits that associate with a list of users. 
+ 
+ @param ownerName  the name of the users
+ @return a list of habits with type "GBHabit"
+ */
+- (NSArray *) getAllHabitsByOwnerNames:(NSArray*) ownerNames;
 
 /**
  
@@ -127,10 +170,8 @@ typedef enum {
  @param taskTargetDate the date where the task should be completed
  @return success or failure
  */
-- (bool) createTaskForHabit: (NSString*) habitName
-             withHabitID:(NSString*) habitID
-             withTaskOwner:(NSString*) taskOwner
-             withTargetDate:(NSDate*) taskTargetDate;
+- (bool) createTaskForHabit: (GBHabit*) habitName
+                              withTargetDate:(NSDate*) taskTargetDate;
 
 
 /**
@@ -140,7 +181,7 @@ typedef enum {
  @param taskID  ID of the task
  */
 
-- (void) markTaskCompletedByID:(NSString*) taskID;
+- (void) setTaskStatus:(NSString*) taskID taskStatus:(TaskStatus) taskStatus;
 
 /**
  
@@ -150,7 +191,7 @@ typedef enum {
  @return a list of task with type "TaskTypeObject"
  */
 
-- (NSArray *) getAllTasks:(int) userType;
+- (NSArray *) getAllTasks:(GBUserType) userType;
 
 /**
  
@@ -202,15 +243,16 @@ typedef enum {
  
  Retreive all the frineds of current user
  
- @return a list of user object of type "UserTypeObject"
+ @return a list of user names
  */
 - (NSArray *) getFriendList;
+
 
 /**
  
  Retreive a list of user that acting as the Nanny of current user
  
- @return a list of user object of type "UserTypeObject"
+ @return a list of user names
  */
 - (NSArray *) getNannyList;
 
@@ -221,7 +263,7 @@ typedef enum {
  */
 
 - (NSArray *) getTaskSchedule: (NSDate*) startDate withFrequency: (NSString*) frequency withAttempts: (int) attempts;
-
+- (NSArray*)queryManagedObject: (GBObjectType)type withPredicate:(NSPredicate *)predicate;
 + (NSString *)createLocalUUID;
 
 @end

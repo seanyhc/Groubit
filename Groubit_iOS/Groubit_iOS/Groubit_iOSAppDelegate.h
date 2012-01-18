@@ -10,8 +10,11 @@
 
 @interface Groubit_iOSAppDelegate : NSObject <UIApplicationDelegate> {
     UITabBarController *tabController;
+    
+    NSString *localUserName;
 }
 
+@property (nonatomic, retain) NSString *localUserName;
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (nonatomic, retain) IBOutlet UITabBarController *tabController;
 

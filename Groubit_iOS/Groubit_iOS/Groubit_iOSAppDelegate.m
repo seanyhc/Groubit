@@ -15,12 +15,17 @@
 @synthesize managedObjectContext = __managedObjectContext;
 @synthesize managedObjectModel = __managedObjectModel;
 @synthesize persistentStoreCoordinator = __persistentStoreCoordinator;
+@synthesize localUserName;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
     [self.window addSubview:tabController.view];
     [self.window makeKeyAndVisible];
+    
+    // j2do : replace this fixed string with real username
+    self.localUserName = [NSString stringWithString:@"Alice"];
+    
     return YES;
 }
 

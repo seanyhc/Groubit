@@ -15,6 +15,9 @@
 
 - (IBAction)createHabit:(id)sender;
 - (IBAction)getAllHabitsByOwnerName:(id)sender;
+- (IBAction)getAllTasks:(id)sender;
+- (IBAction)setHabitCompleted:(id)sender;
+- (IBAction)setTaskCompleted:(id)sender;
 
 /*
 - (IBAction)updateHabit:(id)sender;
