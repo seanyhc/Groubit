@@ -33,6 +33,10 @@
 		14EA76F214AB201F009FF411 /* HabitsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14EA76F014AB201F009FF411 /* HabitsViewController.xib */; };
 		14EA76F614AB20AB009FF411 /* DashBoardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14EA76F414AB20AB009FF411 /* DashBoardViewController.m */; };
 		14EA76F714AB20AB009FF411 /* DashBoardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14EA76F514AB20AB009FF411 /* DashBoardViewController.xib */; };
+		2B2B1CB414C8E80F0068B36E /* GBUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B2B1CB314C8E80F0068B36E /* GBUser.m */; };
+		2B2B1CB714C8E80F0068B36E /* GBTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B2B1CB614C8E80F0068B36E /* GBTask.m */; };
+		2B2B1CBA14C8E80F0068B36E /* GBHabit.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B2B1CB914C8E80F0068B36E /* GBHabit.m */; };
+		2B2B1CBD14C8E8100068B36E /* GBRelation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B2B1CBC14C8E8100068B36E /* GBRelation.m */; };
 		2BD0D85B14AB260D004E1E49 /* GBDataModelManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD0D85614AB260D004E1E49 /* GBDataModelManager.m */; };
 		2BD0D87C14AB4255004E1E49 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BD0D87B14AB4255004E1E49 /* Parse.framework */; };
 		2BD0D87F14AB4333004E1E49 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BD0D87E14AB4333004E1E49 /* AudioToolbox.framework */; };
@@ -41,8 +45,6 @@
 		2BD0D88514AB4361004E1E49 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BD0D88414AB4361004E1E49 /* MobileCoreServices.framework */; };
 		2BD0D88814AB4380004E1E49 /* libz.1.1.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BD0D88714AB4380004E1E49 /* libz.1.1.3.dylib */; };
 		2BD0D88A14AB438A004E1E49 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BD0D88914AB438A004E1E49 /* Security.framework */; };
-		2BD3419814C6F97F00441F7D /* GBHabit.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD3419714C6F97F00441F7D /* GBHabit.m */; };
-		2BD3419B14C6F97F00441F7D /* GBTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD3419A14C6F97F00441F7D /* GBTask.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,6 +91,14 @@
 		14EA76F314AB20AB009FF411 /* DashBoardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DashBoardViewController.h; path = ../DashBoardViewController.h; sourceTree = "<group>"; };
 		14EA76F414AB20AB009FF411 /* DashBoardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DashBoardViewController.m; path = ../DashBoardViewController.m; sourceTree = "<group>"; };
 		14EA76F514AB20AB009FF411 /* DashBoardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DashBoardViewController.xib; path = ../DashBoardViewController.xib; sourceTree = "<group>"; };
+		2B2B1CB214C8E80E0068B36E /* GBUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GBUser.h; sourceTree = "<group>"; };
+		2B2B1CB314C8E80F0068B36E /* GBUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GBUser.m; sourceTree = "<group>"; };
+		2B2B1CB514C8E80F0068B36E /* GBTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GBTask.h; sourceTree = "<group>"; };
+		2B2B1CB614C8E80F0068B36E /* GBTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GBTask.m; sourceTree = "<group>"; };
+		2B2B1CB814C8E80F0068B36E /* GBHabit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GBHabit.h; sourceTree = "<group>"; };
+		2B2B1CB914C8E80F0068B36E /* GBHabit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GBHabit.m; sourceTree = "<group>"; };
+		2B2B1CBB14C8E8100068B36E /* GBRelation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GBRelation.h; sourceTree = "<group>"; };
+		2B2B1CBC14C8E8100068B36E /* GBRelation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GBRelation.m; sourceTree = "<group>"; };
 		2BD0D85514AB260D004E1E49 /* GBDataModelManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GBDataModelManager.h; sourceTree = "<group>"; };
 		2BD0D85614AB260D004E1E49 /* GBDataModelManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GBDataModelManager.m; sourceTree = "<group>"; };
 		2BD0D85714AB260D004E1E49 /* HabitTypeObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HabitTypeObject.h; path = /Volumes/Broadway/Dev/Github/Groubit/Groubit_iOS/Groubit_iOS/HabitTypeObject.h; sourceTree = "<absolute>"; };
@@ -103,10 +113,6 @@
 		2BD0D88614AB436E004E1E49 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		2BD0D88714AB4380004E1E49 /* libz.1.1.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.1.3.dylib; path = usr/lib/libz.1.1.3.dylib; sourceTree = SDKROOT; };
 		2BD0D88914AB438A004E1E49 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
-		2BD3419614C6F97F00441F7D /* GBHabit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GBHabit.h; sourceTree = "<group>"; };
-		2BD3419714C6F97F00441F7D /* GBHabit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GBHabit.m; sourceTree = "<group>"; };
-		2BD3419914C6F97F00441F7D /* GBTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GBTask.h; sourceTree = "<group>"; };
-		2BD3419A14C6F97F00441F7D /* GBTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GBTask.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -260,10 +266,14 @@
 		2B926AFE14B93E4F002E03F7 /* DataModel */ = {
 			isa = PBXGroup;
 			children = (
-				2BD3419914C6F97F00441F7D /* GBTask.h */,
-				2BD3419A14C6F97F00441F7D /* GBTask.m */,
-				2BD3419614C6F97F00441F7D /* GBHabit.h */,
-				2BD3419714C6F97F00441F7D /* GBHabit.m */,
+				2B2B1CBB14C8E8100068B36E /* GBRelation.h */,
+				2B2B1CBC14C8E8100068B36E /* GBRelation.m */,
+				2B2B1CB814C8E80F0068B36E /* GBHabit.h */,
+				2B2B1CB914C8E80F0068B36E /* GBHabit.m */,
+				2B2B1CB514C8E80F0068B36E /* GBTask.h */,
+				2B2B1CB614C8E80F0068B36E /* GBTask.m */,
+				2B2B1CB214C8E80E0068B36E /* GBUser.h */,
+				2B2B1CB314C8E80F0068B36E /* GBUser.m */,
 				2BD0D85914AB260D004E1E49 /* TaskTypeObject.h */,
 				2BD0D85A14AB260D004E1E49 /* TaskTypeObject.m */,
 				2BD0D85514AB260D004E1E49 /* GBDataModelManager.h */,
@@ -395,8 +405,10 @@
 				14EA76F114AB201F009FF411 /* HabitsViewController.m in Sources */,
 				14EA76F614AB20AB009FF411 /* DashBoardViewController.m in Sources */,
 				14E365BB14AB2D7B0064CA5B /* FriendsViewController.m in Sources */,
-				2BD3419814C6F97F00441F7D /* GBHabit.m in Sources */,
-				2BD3419B14C6F97F00441F7D /* GBTask.m in Sources */,
+				2B2B1CB414C8E80F0068B36E /* GBUser.m in Sources */,
+				2B2B1CB714C8E80F0068B36E /* GBTask.m in Sources */,
+				2B2B1CBA14C8E80F0068B36E /* GBHabit.m in Sources */,
+				2B2B1CBD14C8E8100068B36E /* GBRelation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

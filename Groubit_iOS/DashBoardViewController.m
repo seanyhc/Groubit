@@ -10,9 +10,12 @@
 #import "GBDataModelManager.h"
 #import "GBHabit.h"
 #import "GBTask.h"
+#import "GBUser.h"
 #import "Groubit_iOSAppDelegate.h"
 
 @implementation DashBoardViewController
+
+@synthesize localUserName;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -33,11 +36,17 @@
 
 #pragma mark - View lifecycle
 
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    //[self initTestData];
+    GBDataModelManager* dataModel = [GBDataModelManager getDataModelManager];
     
+    NSLog(@" view did load. Local user : %@", dataModel.localUserName);
+    
+    [localUserName setText:dataModel.localUserName];
 }
 
 - (void)viewDidUnload
@@ -55,6 +64,61 @@
 
 #pragma mark - GUI Triggered Actions
 
+- (IBAction)changeUserName:(id)sender{
+
+    GBDataModelManager* dataModel = [GBDataModelManager getDataModelManager];
+    dataModel.localUserName = [localUserName text];
+    
+    NSLog(@"Current local user : %@", dataModel.localUserName);
+    
+}
+
+- (IBAction)initTestData:(id)sender{
+    
+    NSLog(@"Enter DashboardViewControll::createHabit");
+    
+    
+    GBDataModelManager* dataModel = [GBDataModelManager getDataModelManager];
+    
+    // set local user
+    [dataModel setLocalUserName:@"Jeffrey"];
+    
+    // create users
+    [dataModel createUser:@"Jeffrey" withPassword:@"1234"];
+    [dataModel createUser:@"Joey" withPassword:@"1234"];
+    [dataModel createUser:@"Sean" withPassword:@"1234"];
+    
+    // create habits
+    [dataModel createHabitForUser:@"Jeffrey" withName:@"Jeffrey_Habit1" withStartDate:[NSDate date] withFrequency:kDaily withAttempts:7];
+    
+    [dataModel createHabitForUser:@"Jeffrey" withName:@"Jeffrey_Habit2" withStartDate:[NSDate date] withFrequency:kWeekly withAttempts:7];
+    
+    [dataModel createHabitForUserWithNanny:@"Jeffrey" withName:@"Jeffrey_Habit3" withNannyName:@"Joey" withStartDate:[NSDate date] withFrequency:kWeekly withAttempts:7];
+    
+    
+    [dataModel createHabitForUser:@"Joey" withName:@"Joey_Habit1" withStartDate:[NSDate date] withFrequency:kDaily withAttempts:7];
+    
+    [dataModel createHabitForUser:@"Joey" withName:@"Joey_Habit2" withStartDate:[NSDate date] withFrequency:kWeekly withAttempts:7];
+    
+    [dataModel createHabitForUser:@"Sean" withName:@"Sean_Habit1" withStartDate:[NSDate date] withFrequency:kDaily withAttempts:7];
+    
+    [dataModel createHabitForUser:@"Sean" withName:@"Sean_Habit2" withStartDate:[NSDate date] withFrequency:kWeekly withAttempts:7];
+    
+    
+    
+    // setup relationship
+    [dataModel createFriend:@"Sean"];
+    [dataModel createFriend:@"Joey"];    
+    //[dataModel createNanny:@"Sean" withHabitID:<#(NSString *)#>]
+ 
+    
+    
+   
+    
+   
+
+}
+
 - (IBAction)createHabit:(id)sender{
     
     NSLog(@"Enter DashboardViewControll::createHabit");
@@ -66,6 +130,8 @@
     [dataModel createHabit:@"MyHabit" withStartDate:[NSDate date] withFrequency:kWeekly withAttempts:3];
     
 }
+
+
 
 - (IBAction)getAllHabitsByOwnerName:(id)sender{
     
@@ -133,7 +199,7 @@
         GBHabit* habit = (GBHabit*)[habits objectAtIndex:i];
         NSLog(@"Retrived Habit Name: %@, HabitID: %@, HabitOwner: %@, HabitStartDate: %@", habit.HabitName, habit.HabitID, habit.HabitOwner,habit.HabitStartDate);
         
-        if (i == 1){
+        if (i == 0){
             [dataModel setHabitStatus:habit.HabitID withStatus:kHabitStatusCompleted];
         }
     }
@@ -158,6 +224,28 @@
         if( i==0){
             [dataModel setTaskStatus:task.TaskID taskStatus:kTaskStatusCompleted];
         }
+    }
+    
+}
+
+- (IBAction)getFriends:(id)sender{
+
+    GBDataModelManager* dataModel = [GBDataModelManager getDataModelManager];
+    
+    // test 1 get friend
+    NSArray *friendList = [dataModel getFriendList];
+    for (NSString *friend in friendList){
+        NSLog(@"%@ has friend:%@", dataModel.localUserName, friend);
+    }
+}
+
+- (IBAction)getNanny:(id)sender{
+
+    GBDataModelManager* dataModel = [GBDataModelManager getDataModelManager];
+    
+    NSArray *nannyList = [dataModel getNannyList];
+    for (NSString *nannyName in nannyList){
+        NSLog(@"%@ has nanny:%@", dataModel.localUserName,nannyName);
     }
     
 }

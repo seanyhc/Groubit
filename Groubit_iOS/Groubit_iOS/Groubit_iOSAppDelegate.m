@@ -23,9 +23,6 @@
     [self.window addSubview:tabController.view];
     [self.window makeKeyAndVisible];
     
-    // j2do : replace this fixed string with real username
-    self.localUserName = [NSString stringWithString:@"Alice"];
-    
     return YES;
 }
 

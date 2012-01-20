@@ -9,6 +9,9 @@
 #import "GBDataModelManager.h"
 #import "GBHabit.h"
 #import "GBTask.h"
+#import "GBUser.h"
+#import "GBRelation.h"
+
 #import "Groubit_iOSAppDelegate.h"
 
 @implementation GBDataModelManager
@@ -16,58 +19,105 @@
 @synthesize objectContext;
 @synthesize localUserName;
 
+
 static GBDataModelManager* dataModel = nil; 
+
+static NSArray *sHabitFrequencyStr;
+static NSArray *sHabitStatusStr;
+static NSArray *sTaskStatusStr;
+static NSArray *sRelationStr;
+
+
+-(id) init{
+    
+    [super init];
+    
+    sHabitStatusStr = [[NSArray alloc] initWithObjects:@"init",
+                                                       @"inProgress",
+                                                       @"completed",
+                                                       @"pending",
+                                                       @"illegal", nil];
+    
+    sTaskStatusStr = [[NSArray alloc] initWithObjects:@"init",
+                                                      @"completed",
+                                                      @"illegal", nil];
+    
+    sHabitFrequencyStr = [[NSArray alloc] initWithObjects:@"daily",
+                                                          @"weekly",
+                                                          @"biweekly",
+                                                          @"monthly",
+                                                          @"custom", nil ];
+    
+    sRelationStr = [[NSArray alloc] initWithObjects:@"friend",
+                                                    @"nanny", nil];
+    
+    Groubit_iOSAppDelegate* appDelegate = [[UIApplication sharedApplication] delegate];
+    
+    self.objectContext = appDelegate.managedObjectContext;
+    
+    NSLog(@"Set local username : %@", localUserName);
+    self.localUserName = [[NSString alloc ]initWithString:@"Jeffrey"];
+
+    return self;
+}
+
 
 +(GBDataModelManager*) getDataModelManager
 {
     if(dataModel == nil)
     {
-        Groubit_iOSAppDelegate* appDelegate = [[UIApplication sharedApplication] delegate];
-       
         dataModel = [[GBDataModelManager alloc] init];
-        dataModel.objectContext = appDelegate.managedObjectContext;
-        dataModel.localUserName = [NSString stringWithString:@"Alice"];
     }
     return dataModel;
 }
 
 
-- (bool) createHabit:(NSString*) habitName
-       withStartDate:(NSDate*) habitStartDate
-       withFrequency: (HabitFrequency)habitFrequency
-        withAttempts: (int) attempts
-{
+- (bool) createHabitForUserWithNanny:(NSString*) userName
+                            withName:(NSString*) habitName
+                       withNannyName: (NSString*) nannyName
+                       withStartDate:(NSDate*) habitStartDate
+                       withFrequency: (HabitFrequency)habitFrequency
+                        withAttempts: (int) attempts{
 
-    NSLog(@"Enter HabitDataModel::createHabit. habitName:%@, habitStartDate:%@, habitFrequency:%d, habitAttempts:%d",
+    NSLog(@"Enter HabitDataModel::createHabitForUserWithNanny. userName:%@, habitName:%@, nannyName:%@,habitStartDate:%@, habitFrequency:%d, habitAttempts:%d",
+          userName,
+          nannyName,
           habitName,
           habitStartDate,
           habitFrequency,
           attempts);
-    
 
+    GBUser *habitOwner;
+
+    habitOwner= [self getUser:userName];    
+    if(!habitOwner){
+        NSLog(@"Cannot retrieve habit owner");
+        return false;
+    }
+    
     
     GBHabit* newHabit;
     newHabit = [NSEntityDescription insertNewObjectForEntityForName:@"GBHabit" inManagedObjectContext:objectContext];
     
-
-    // j2do : create these value based on enum value    
-    NSString* habitStatusStr = [NSString stringWithString:@"HABIT_STATUS_INIT"];
-    NSString* habitFrequencyStr = [[NSString alloc]initWithString:@"weekly"];
+    
+    NSString* habitStatusStr = [NSString stringWithString:[sHabitStatusStr objectAtIndex:kHabitStatusInit]];
+    NSString* habitFrequencyStr = [[NSString alloc]initWithString:[sHabitFrequencyStr objectAtIndex:habitFrequency]];
     
     newHabit.HabitID = [[NSString alloc] initWithFormat:@"HABIT_%@",[GBDataModelManager createLocalUUID]];
-    newHabit.HabitOwner = self.localUserName;
+    newHabit.HabitOwner = userName;
     newHabit.HabitName = habitName;
     newHabit.HabitFrequency = habitFrequencyStr;
     newHabit.HabitStatus = habitStatusStr;
     newHabit.HabitAttempts = [NSNumber numberWithInt:attempts];
     newHabit.HabitStartDate = habitStartDate;
+    newHabit.belongsToUser = habitOwner;
     
     NSError *error;
     [objectContext save:&error];
     
     // j2do : Error Handling Here
     
-
+    
     
     NSLog(@"New Habit[%@] Created", habitName);
     
@@ -87,10 +137,53 @@ static GBDataModelManager* dataModel = nil;
         
     }
     
+    // Automatically setup relationship
+    if(nannyName){
+        [self createNanny:nannyName withHabitID:newHabit.HabitID];
+    }
     
     return true;
+
+    
+    
 }
 
+
+- (bool) createHabitForUser:(NSString*) userName
+                   withName:(NSString*) habitName
+              withStartDate:(NSDate*) habitStartDate
+              withFrequency: (HabitFrequency)habitFrequency
+               withAttempts: (int) attempts{
+
+
+    NSLog(@"Enter HabitDataModel::createHabitForUser. userName:%@, habitName:%@, habitStartDate:%@, habitFrequency:%d, habitAttempts:%d",
+          userName,
+          habitName,
+          habitStartDate,
+          habitFrequency,
+          attempts);
+    
+    return [self createHabitForUserWithNanny:userName withName:habitName withNannyName:nil withStartDate:habitStartDate withFrequency:habitFrequency withAttempts:attempts];
+    
+      
+}
+
+
+- (bool) createHabit:(NSString*) habitName
+       withStartDate:(NSDate*) habitStartDate
+       withFrequency: (HabitFrequency)habitFrequency
+        withAttempts: (int) attempts
+{
+    NSLog(@"Enter HabitDataModel::createHabitForUser. habitName:%@, habitStartDate:%@, habitFrequency:%d, habitAttempts:%d",
+          habitName,
+          habitStartDate,
+          habitFrequency,
+          attempts);
+    
+    return [self createHabitForUser:self.localUserName withName:habitName
+                      withStartDate:habitStartDate withFrequency:habitFrequency withAttempts:attempts];
+   
+}
 
 
 - (NSArray *) getAllHabitsByType:(GBUserType) userType
@@ -164,6 +257,36 @@ static GBDataModelManager* dataModel = nil;
     return objects;    
 }
 
+- (GBHabit*) getHabitByID : (NSString*) habitID{
+    
+    NSLog(@"Enter HabitDataModel::getHabitByID. haibtID:%@",habitID);
+    
+    
+    NSPredicate *predicate;
+    
+    
+    predicate = [NSPredicate predicateWithFormat:@"(HabitID = %@)", habitID];
+    
+    NSArray *objects = [self queryManagedObject:kHabit withPredicate:predicate];
+    
+    NSLog(@"Retrieved %d habits", [objects count]);
+    
+    if( objects.count == 0){
+        
+        NSLog(@"No user habit retrieved");
+        return nil;
+        
+    }else if (objects.count > 1){
+        
+        NSLog(@"More than 1 habit object retrieved");
+        return nil;
+        
+    } 
+    
+    return [objects lastObject];
+    
+}
+
 
 
 // j2do
@@ -190,8 +313,6 @@ static GBDataModelManager* dataModel = nil;
     return NULL;
 }
 
-
-// j2do
 - (void) setHabitStatus: (NSString*) habitID 
              withStatus:(HabitStatus) habitStatus
 {
@@ -217,7 +338,7 @@ static GBDataModelManager* dataModel = nil;
     
     }else{
         GBHabit *habit = (GBHabit*) [objects lastObject];
-        habit.HabitStatus = [NSString stringWithString:@"HABIT_STATUS_COMPLETED"];
+        habit.HabitStatus = [NSString stringWithString:[sHabitStatusStr objectAtIndex:kHabitStatusInProgress]];
         [objectContext save:&error];
         
         if(!error){
@@ -309,7 +430,7 @@ static GBDataModelManager* dataModel = nil;
     newTask = [NSEntityDescription insertNewObjectForEntityForName:@"GBTask" inManagedObjectContext:objectContext];
     
     newTask.TaskID = [[NSString alloc] initWithFormat:@"TASK_%@",[GBDataModelManager createLocalUUID]];
-    newTask.TaskStatus = [NSString stringWithString:@"TASK_STATUS_INIT"];
+    newTask.TaskStatus = [NSString stringWithString:[sTaskStatusStr objectAtIndex:kTaskStatusInit]];
     newTask.TaskTargetDate = taskTargetDate;
     newTask.TaskName = [NSString stringWithFormat:@"TASK_@%",newTask.TaskID];
     newTask.belongsToHabit = newHabit;
@@ -350,7 +471,7 @@ static GBDataModelManager* dataModel = nil;
         
     }else{
         GBTask *task = (GBTask*) [objects lastObject];
-        task.TaskStatus = [NSString stringWithString:@"TASK_STATUS_COMPLETED"];
+        task.TaskStatus = [NSString stringWithString:[sTaskStatusStr objectAtIndex:kTaskStatusCompleted]];
         [objectContext save:&error];
         
         if(!error){
@@ -359,39 +480,6 @@ static GBDataModelManager* dataModel = nil;
     }
     
     [request release];
-    
-    
-
-    
-    /*
-    Groubit_iOSAppDelegate* appDelegate = [[UIApplication sharedApplication] delegate];
-    
-    NSManagedObjectContext* objectContext = [appDelegate managedObjectContext];
-    NSEntityDescription* desc = [NSEntityDescription entityForName:@"TaskType" inManagedObjectContext:objectContext];
-    
-    NSFetchRequest* request = [[NSFetchRequest alloc] init];
-    [request setEntity:desc];
-    
-    NSPredicate* predicate = [NSPredicate predicateWithFormat:@"(TaskID = %@)", taskID];
-    [request setPredicate:predicate];
-    
-    
-    NSError *error;
-    
-    NSArray *objects = [objectContext executeFetchRequest:request error:&error];
-    
-    
-    if([objects count] >0) {
-        TaskTypeObject* habit = (TaskTypeObject*)[objects objectAtIndex:0];
-        
-        habit.TaskStatus = [[NSString alloc ] initWithString:@"Completed"];
-        
-        NSLog(@"Complete task [%@]", taskID);
-        [objectContext save:&error];   
-        
-    }
-    */
-    
 }
 
 // j2do
@@ -418,8 +506,6 @@ static GBDataModelManager* dataModel = nil;
     
     return objects;
 
-    
-    return NULL;
 }
 
 // j2do
@@ -433,34 +519,248 @@ static GBDataModelManager* dataModel = nil;
 
 // USER RELATED API
 
-- (bool) createLocalUser: (NSString *) ownerName
-            withNickName: (NSString*) nickName 
+- (bool) createUser: (NSString *) username
             withPassword: (NSString*) password
 {
 
-    return false;
+    NSLog(@"Enter HabitDataModel::createHabitForUser. userName:%@, password:%@",
+          username,
+          password);
+    
+    
+    GBUser* newUser = nil;
+    newUser = [NSEntityDescription insertNewObjectForEntityForName:@"GBUser" inManagedObjectContext:objectContext];
+    
+    
+    
+    newUser.UserID = [[NSString alloc] initWithFormat:@"USER_%@",[GBDataModelManager createLocalUUID]];
+    newUser.UserPass = [NSString stringWithString:password];
+    newUser.UserName = [NSString stringWithString:username];
+    
+    
+    NSError *error;
+    [objectContext save:&error];
+    
+    if(error){
+        return false;
+    }
+    
+    return true;
 }
 
-- (bool) createFriend: (NSString*) email
+- (GBUser*) getUser : (NSString*) username{
+
+    NSLog(@"Enter HabitDataModel::getUser. username:%@",username);
+    
+    
+    NSPredicate *predicate;
+    
+ 
+    predicate = [NSPredicate predicateWithFormat:@"(UserName = %@)", username];
+       
+    NSArray *objects = [self queryManagedObject:kUser withPredicate:predicate];
+    
+    NSLog(@"Retrieved %d Users", [objects count]);
+    
+    if( objects.count == 0){
+  
+        NSLog(@"No user object retrieved");
+        return nil;
+    
+    }else if (objects.count > 1){
+        
+        NSLog(@"More than 1 user object retrieved");
+        return nil;
+    
+    } 
+    
+    return [objects lastObject];
+
+}
+
+- (bool) createFriend: (NSString*) username
 {
-    return false;
+    NSLog(@"Enter HabitDataModel::createFriend. username:%@",username);
+    
+    
+    GBUser *from, *to;
+    // get Current User
+    
+    from = [dataModel getUser:self.localUserName];
+    
+    if(!from){
+        return false;
+    }
+    
+    // get target User
+    
+    to = [dataModel getUser:username];
+    
+    if(!to){
+        return false;
+    }
+    
+    
+    GBRelation* newRelation = nil;
+    newRelation = [NSEntityDescription insertNewObjectForEntityForName:@"GBRelation" inManagedObjectContext:objectContext];
+    
+    
+    
+    newRelation.RelationID = [[NSString alloc] initWithFormat:@"RELATION_%@",[GBDataModelManager createLocalUUID]];
+    newRelation.RelationType = (NSString*)[sRelationStr objectAtIndex:kFriend];
+    newRelation.fromUser = from;
+    newRelation.toUser = to;
+    
+    NSError *error;
+    [objectContext save:&error];
+    
+    if(error){
+        return false;
+    }
+    
+
+    
+    return true;
 }
 
-- (bool) createNanny: (NSString*) UserID withHabitID:(NSString*) HabitID
+- (bool) createNanny: (NSString*) username withHabitID:(NSString*) HabitID
 {
 
-    return false;
+    NSLog(@"Enter HabitDataModel::createNanny. username:%@, habit:%@",username, HabitID);
+    
+    
+    GBUser *from, *to;
+    GBHabit *habit;
+    
+    // get Current User
+    
+    from = [dataModel getUser:self.localUserName];
+    
+    if(!from){
+        NSLog(@" Can not retrieve local user");
+        return false;
+    }
+    
+    // get target User
+    
+    to = [dataModel getUser:username];
+    
+    if(!to){
+        NSLog(@" Can not retrieve target user");
+        return false;
+    }
+    
+    
+    // get the habit
+    
+    habit = [dataModel getHabitByID:HabitID];
+    
+    if(!habit){
+        NSLog(@" Can not retrieve the habit ");
+        return false;
+    
+    }else{
+        
+        
+    }
+    
+    
+    GBRelation* newRelation = nil;
+    newRelation = [NSEntityDescription insertNewObjectForEntityForName:@"GBRelation" inManagedObjectContext:objectContext];
+    
+    
+    
+    newRelation.RelationID = [[NSString alloc] initWithFormat:@"RELATION_%@",[GBDataModelManager createLocalUUID]];
+    newRelation.RelationType = (NSString*)[sRelationStr objectAtIndex:kNanny];
+    newRelation.fromUser = from;
+    newRelation.toUser = to;
+    newRelation.hasHabit = [NSSet setWithObject:habit];
+    
+    NSError *error;
+    [objectContext save:&error];
+    
+    if(error){
+        return false;
+    }
+    
+    
+    
+    return true;
+
 }
+
 
 - (NSArray *) getFriendList
 {
-    return [NSArray arrayWithObjects:@"Jeffrey",@"Joey",@"Sean", nil];
+    NSLog(@"Enter HabitDataModel::getFriendList.");
+    
+    
+    NSPredicate *predicate;
+    
+    
+    predicate = [NSPredicate predicateWithFormat:@"(RelationType = %@ AND fromUser.UserName = %@)", [sRelationStr objectAtIndex:kFriend], self.localUserName];
+    
+    NSArray *objects = [self queryManagedObject:kRelation withPredicate:predicate];
+    
+    NSLog(@"Retrieved %d relation", [objects count]);
+    
+    if( objects.count == 0){
+        
+        NSLog(@"No friend retrieved");
+        return nil;
+        
+    }
+    
+    NSMutableArray *friendNameList = [NSMutableArray array];
+    
+    for(GBRelation *relation in objects ){
+    
+        [friendNameList addObject:relation.toUser.UserName];
+    }
+    
+    return friendNameList;
     
 }
 
 - (NSArray *) getNannyList
 {
-    return NULL;
+    NSLog(@"Enter HabitDataModel::getNannyList.");
+    
+    
+    NSPredicate *predicate;
+    
+    
+    predicate = [NSPredicate predicateWithFormat:@"(RelationType = %@ AND fromUser.UserName = %@)", [sRelationStr objectAtIndex:kNanny], self.localUserName];
+        
+    NSArray *objects = [self queryManagedObject:kRelation withPredicate:predicate];
+    
+    NSLog(@"Retrieved %d relation", [objects count]);
+    
+    if( objects.count == 0){
+        
+        NSLog(@"No Nanny retrieved");
+        return nil;
+        
+    }
+    
+    NSMutableArray *nannyNameList = [NSMutableArray array];
+    
+    for(GBRelation *relation in objects ){
+        
+        [nannyNameList addObject:relation.toUser.UserName];
+        
+        NSLog(@"Found Nanny:%@", relation.toUser.UserName);
+        // for test
+        NSSet *habits = relation.hasHabit;
+        NSLog(@"Nannied Habits:");
+        for(GBHabit *habit in habits){
+        
+            NSLog(@"Habit Name:%@", habit.HabitName);
+        }
+        
+    }
+    
+    return nannyNameList;
 }
 
 
@@ -542,6 +842,11 @@ static GBDataModelManager* dataModel = nil;
         desc = [NSEntityDescription entityForName:@"GBTask" inManagedObjectContext:objectContext];
     }else if(type == kHabit){
         desc = [NSEntityDescription entityForName:@"GBHabit" inManagedObjectContext:objectContext];
+    }else if(type == kUser){
+        desc = [NSEntityDescription entityForName:@"GBUser" inManagedObjectContext:objectContext];
+    }else if(type == kRelation){
+        desc = [NSEntityDescription entityForName:@"GBRelation" inManagedObjectContext:objectContext];
+        
     }
     
     NSFetchRequest* request = [[NSFetchRequest alloc] init];

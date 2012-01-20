@@ -2,27 +2,29 @@
 //  GBHabit.h
 //  Groubit_iOS
 //
-//  Created by Jeffrey on 1/18/12.
+//  Created by Jeffrey on 1/20/12.
 //  Copyright (c) 2012 UCB MIMS. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class GBTask;
+@class GBRelation, GBTask, GBUser;
 
 @interface GBHabit : NSManagedObject {
 @private
 }
-@property (nonatomic, retain) NSString * HabitName;
-@property (nonatomic, retain) NSString * HabitOwner;
+@property (nonatomic, retain) NSNumber * HabitAttempts;
 @property (nonatomic, retain) NSString * HabitDescription;
 @property (nonatomic, retain) NSString * HabitFrequency;
+@property (nonatomic, retain) NSString * HabitID;
+@property (nonatomic, retain) NSString * HabitName;
+@property (nonatomic, retain) NSString * HabitOwner;
 @property (nonatomic, retain) NSDate * HabitStartDate;
 @property (nonatomic, retain) NSString * HabitStatus;
-@property (nonatomic, retain) NSString * HabitID;
-@property (nonatomic, retain) NSNumber * HabitAttempts;
 @property (nonatomic, retain) NSSet *tasks;
+@property (nonatomic, retain) GBUser *belongsToUser;
+@property (nonatomic, retain) GBRelation *referencedByRelation;
 @end
 
 @interface GBHabit (CoreDataGeneratedAccessors)

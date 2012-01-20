@@ -20,38 +20,44 @@
 
 
 typedef enum {
-    kHabitStatusInit = 0,
-    kHabitStatusInProgress = 1,
-    kHabitStatusCompleted = 2,
-    kHabitStatusPending = 3,
-    kHabitStatusIllegal = 4
+    kHabitStatusInit,
+    kHabitStatusInProgress ,
+    kHabitStatusCompleted,
+    kHabitStatusPending,
+    kHabitStatusIllegal
 } HabitStatus;
 
 typedef enum {
-    kDaily = 0,
-    kWeekly = 1,
-    kBiWeekly = 2,
-    kMonthly = 3,
-    kCustom = 4
+    kTaskStatusInit,
+    kTaskStatusCompleted,
+    kTaskStatusIllegal
+} TaskStatus;
+
+typedef enum {
+    kDaily,
+    kWeekly,
+    kBiWeekly,
+    kMonthly,
+    kCustom
 } HabitFrequency;
 
 typedef enum {
-    kUserTypeInternal = 0,
-    kUserTypeFriend = 1,
-    kUserTypeALL = 2
+    kUserTypeInternal,
+    kUserTypeFriend,
+    kUserTypeALL
 } GBUserType;
 
 typedef enum{
-    kHabit = 0,
-    kTask  = 1,
-    kUser  = 2
+    kHabit,
+    kTask,
+    kUser,
+    kRelation
 } GBObjectType;
 
-typedef enum {
-    kTaskStatusInit = 0,
-    kTaskStatusCompleted = 1,
-    kTaskStatusIllegal = 2
-} TaskStatus;
+typedef enum{
+    kFriend,
+    kNanny
+} GBRelationType;
 
 + (GBDataModelManager*) getDataModelManager;
 
@@ -77,6 +83,45 @@ typedef enum {
                       withFrequency: (HabitFrequency)habitFrequency
                       withAttempts: (int) attempts;   
 
+
+
+/**
+ 
+ Create a new habit for a specific user.
+ 
+ @param userName         the name of the owner
+ @param habitName        the name of the habiit
+ @param nannyName        the user name of the nanny
+ @param habitStartDate   the date when the habit will start
+ @param habitFrequency   the frequency the habit should be exerciesed. 
+ @param attempts         the number of tasks to be created
+ @return success or fail
+ */
+
+- (bool) createHabitForUserWithNanny:(NSString*) userName
+                       withName:(NSString*) habitName
+                       withNannyName: (NSString*) nannyName
+                       withStartDate:(NSDate*) habitStartDate
+                       withFrequency: (HabitFrequency)habitFrequency
+                       withAttempts: (int) attempts;
+
+/**
+ 
+ Create a new habit for a specific user.
+ 
+ @param userName         the name of the owner
+ @param habitName        the name of the habiit
+ @param habitStartDate   the date when the habit will start
+ @param habitFrequency   the frequency the habit should be exerciesed. 
+ @param attempts         the number of tasks to be created
+ @return success or fail
+ */
+
+- (bool) createHabitForUser:(NSString*) userName
+                   withName:(NSString*) habitName
+                   withStartDate:(NSDate*) habitStartDate
+                   withFrequency: (HabitFrequency)habitFrequency
+                   withAttempts: (int) attempts;
 
 /**
  
@@ -108,6 +153,17 @@ typedef enum {
  @return a list of habits with type "GBHabit"
  */
 - (NSArray *) getAllHabitsByOwnerNames:(NSArray*) ownerNames;
+
+
+
+/**
+ 
+ Retrieve Habit object with given ID
+ 
+ @param habitID   the ID of the habit
+ @return habit object
+ */
+- (GBHabit*) getHabitByID : (NSString*) habitID;
 
 /**
  
@@ -218,26 +274,38 @@ typedef enum {
  @return success or failure
  */
 
-- (bool) createLocalUser: (NSString *) ownerName
-            withNickName: (NSString*) nickName 
+- (bool) createUser: (NSString *) ownerName
             withPassword: (NSString*) password;
+
+
+
+/**
+ 
+ Retrieve User object with given name
+ 
+ @param username   the name of the user
+ @return user object
+ */
+
+- (GBUser*) getUser : (NSString*) username;
 
 /**
  
  Add a new frend for current user
  
- @param email  the email address of the friend 
+ @param email  the name of the user
+ @return success or failure
  */
-- (bool) createFriend: (NSString*) email;
+- (bool) createFriend: (NSString*) username;
 
 /**
  
  Setup Nanny relathionship with a particular friend
  
- @param UserID  the user ID of the friend
+ @param UserID  the user name of the friend
  @param HabitID the ID of the habit 
  */
-- (bool) createNanny: (NSString*) UserID withHabitID:(NSString*) HabitID;
+- (bool) createNanny: (NSString*) username withHabitID:(NSString*) HabitID;
 
 /**
  
