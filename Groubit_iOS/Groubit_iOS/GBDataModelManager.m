@@ -18,7 +18,7 @@
 
 @synthesize objectContext;
 @synthesize localUserName;
-
+@synthesize localUserID;
 
 static GBDataModelManager* dataModel = nil; 
 
@@ -26,6 +26,7 @@ static NSArray *sHabitFrequencyStr;
 static NSArray *sHabitStatusStr;
 static NSArray *sTaskStatusStr;
 static NSArray *sRelationStr;
+static NSArray *sRelationStatusStr;
 
 
 -(id) init{
@@ -51,6 +52,11 @@ static NSArray *sRelationStr;
     sRelationStr = [[NSArray alloc] initWithObjects:@"friend",
                                                     @"nanny", nil];
     
+    sRelationStatusStr = [[NSArray alloc] initWithObjects:@"pending",
+                                                          @"confirmed",
+                                                          @"rejected",nil];
+    
+    
     Groubit_iOSAppDelegate* appDelegate = [[UIApplication sharedApplication] delegate];
     
     self.objectContext = appDelegate.managedObjectContext;
@@ -71,7 +77,26 @@ static NSArray *sRelationStr;
     return dataModel;
 }
 
+- (void) SycnData
+{
+    
+    NSError *error;
+    
+    if(objectContext)
+        [objectContext save:&error];
+    
+    if(error){
+    
+        NSLog(@"Sync Context Error: %@", error);
+    }
+    
+    
+}
 
+
+#pragma mark - 
+#pragma mark HABIT RELATED FUNCTION
+#pragma mark - 
 - (bool) createHabitForUserWithNanny:(NSString*) userName
                             withName:(NSString*) habitName
                        withNannyName: (NSString*) nannyName
@@ -111,7 +136,8 @@ static NSArray *sRelationStr;
     newHabit.HabitAttempts = [NSNumber numberWithInt:attempts];
     newHabit.HabitStartDate = habitStartDate;
     newHabit.belongsToUser = habitOwner;
-    
+    newHabit.updateAt = newHabit.createAt = [NSDate date];
+
     NSError *error;
     [objectContext save:&error];
     
@@ -417,8 +443,9 @@ static NSArray *sRelationStr;
 }
 
 
-// Task Related API
-
+#pragma mark - 
+#pragma mark TASK RELATED FUNCTION
+#pragma mark - 
 
 - (bool) createTaskForHabit: (GBHabit*) newHabit
              withTargetDate:(NSDate*) taskTargetDate
@@ -434,7 +461,7 @@ static NSArray *sRelationStr;
     newTask.TaskTargetDate = taskTargetDate;
     newTask.TaskName = [NSString stringWithFormat:@"TASK_@%",newTask.TaskID];
     newTask.belongsToHabit = newHabit;
-  
+    newTask.createAt = newTask.updateAt = [NSDate date];
     
     NSError *error;
     [objectContext save:&error];
@@ -516,8 +543,10 @@ static NSArray *sRelationStr;
 }
 
 
+#pragma mark - 
+#pragma mark USER  RELATED FUNCTION
+#pragma mark - 
 
-// USER RELATED API
 
 - (bool) createUser: (NSString *) username
             withPassword: (NSString*) password
@@ -536,7 +565,7 @@ static NSArray *sRelationStr;
     newUser.UserID = [[NSString alloc] initWithFormat:@"USER_%@",[GBDataModelManager createLocalUUID]];
     newUser.UserPass = [NSString stringWithString:password];
     newUser.UserName = [NSString stringWithString:username];
-    
+    newUser.createAt = newUser.updateAt = [NSDate date];
     
     NSError *error;
     [objectContext save:&error];
@@ -578,6 +607,11 @@ static NSArray *sRelationStr;
 
 }
 
+
+#pragma mark - 
+#pragma mark RELATION RELATED FUNCTION
+#pragma mark - 
+
 - (bool) createFriend: (NSString*) username
 {
     NSLog(@"Enter HabitDataModel::createFriend. username:%@",username);
@@ -608,8 +642,10 @@ static NSArray *sRelationStr;
     
     newRelation.RelationID = [[NSString alloc] initWithFormat:@"RELATION_%@",[GBDataModelManager createLocalUUID]];
     newRelation.RelationType = (NSString*)[sRelationStr objectAtIndex:kFriend];
+    newRelation.RelationStatus = (NSString*)[sRelationStatusStr objectAtIndex:kRelationStatusPending];
     newRelation.fromUser = from;
     newRelation.toUser = to;
+    newRelation.createAt = newRelation.updateAt = [NSDate date];
     
     NSError *error;
     [objectContext save:&error];
@@ -674,7 +710,9 @@ static NSArray *sRelationStr;
     newRelation.RelationType = (NSString*)[sRelationStr objectAtIndex:kNanny];
     newRelation.fromUser = from;
     newRelation.toUser = to;
-    newRelation.hasHabit = [NSSet setWithObject:habit];
+    newRelation.hasHabit = habit;
+    newRelation.RelationStatus = (NSString*)[sRelationStatusStr objectAtIndex:kRelationStatusPending];
+    newRelation.createAt = newRelation.updateAt = [NSDate date];
     
     NSError *error;
     [objectContext save:&error];
@@ -751,12 +789,10 @@ static NSArray *sRelationStr;
         
         NSLog(@"Found Nanny:%@", relation.toUser.UserName);
         // for test
-        NSSet *habits = relation.hasHabit;
-        NSLog(@"Nannied Habits:");
-        for(GBHabit *habit in habits){
+        GBHabit *habit = relation.hasHabit;
         
-            NSLog(@"Habit Name:%@", habit.HabitName);
-        }
+        NSLog(@"Nannied Habit Name:%@", habit.HabitName);
+        
         
     }
     
@@ -845,9 +881,9 @@ static NSArray *sRelationStr;
     }else if(type == kUser){
         desc = [NSEntityDescription entityForName:@"GBUser" inManagedObjectContext:objectContext];
     }else if(type == kRelation){
-        desc = [NSEntityDescription entityForName:@"GBRelation" inManagedObjectContext:objectContext];
-        
+        desc = [NSEntityDescription entityForName:@"GBRelation" inManagedObjectContext:objectContext];        
     }
+    
     
     NSFetchRequest* request = [[NSFetchRequest alloc] init];
 
@@ -879,6 +915,9 @@ static NSArray *sRelationStr;
     return (NSString*)CFUUIDCreateString(kCFAllocatorDefault, uuid);
    }
 
+- (void)SyncData
+{
 
+}
 
 @end

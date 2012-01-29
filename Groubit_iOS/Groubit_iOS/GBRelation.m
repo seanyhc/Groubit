@@ -12,10 +12,13 @@
 
 
 @implementation GBRelation
+@dynamic createAt;
 @dynamic RelationID;
 @dynamic RelationType;
+@dynamic updateAt;
+@dynamic RelationStatus;
 @dynamic fromUser;
-@dynamic toUser;
 @dynamic hasHabit;
+@dynamic toUser;
 
 @end

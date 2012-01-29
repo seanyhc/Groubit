@@ -11,10 +11,12 @@
 
 
 @implementation GBTask
+@dynamic createAt;
 @dynamic TaskID;
 @dynamic TaskName;
 @dynamic TaskStatus;
 @dynamic TaskTargetDate;
+@dynamic updateAt;
 @dynamic belongsToHabit;
 
 @end

@@ -14,9 +14,11 @@
 @interface GBUser : NSManagedObject {
 @private
 }
+@property (nonatomic, retain) NSDate * createAt;
+@property (nonatomic, retain) NSDate * updateAt;
+@property (nonatomic, retain) NSString * UserID;
 @property (nonatomic, retain) NSString * UserName;
 @property (nonatomic, retain) NSString * UserPass;
-@property (nonatomic, retain) NSString * UserID;
 @property (nonatomic, retain) NSSet *habits;
 @property (nonatomic, retain) NSSet *hasRelation;
 @property (nonatomic, retain) NSSet *referencedByRelation;

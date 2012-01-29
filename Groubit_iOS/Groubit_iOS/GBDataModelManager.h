@@ -13,11 +13,12 @@
  
     NSManagedObjectContext *obectContext;
     NSString *localUserName;
+    NSStream *localUserID;
 }
 
 @property (nonatomic, retain) NSManagedObjectContext *objectContext;
 @property (nonatomic, retain) NSString *localUserName;
-
+@property (nonatomic, retain) NSStream *localUserID;
 
 typedef enum {
     kHabitStatusInit,
@@ -58,6 +59,12 @@ typedef enum{
     kFriend,
     kNanny
 } GBRelationType;
+
+typedef enum{
+    kRelationStatusPending,
+    kRelationStatusConfirmed,
+    kRelationStatusRejected
+} GBRelationStatus;
 
 + (GBDataModelManager*) getDataModelManager;
 
@@ -311,7 +318,7 @@ typedef enum{
  
  Retreive all the frineds of current user
  
- @return a list of user names
+ @return a list of user names (NSString)
  */
 - (NSArray *) getFriendList;
 
@@ -320,7 +327,7 @@ typedef enum{
  
  Retreive a list of user that acting as the Nanny of current user
  
- @return a list of user names
+ @return a list of user names (NSString)
  */
 - (NSArray *) getNannyList;
 
@@ -329,7 +336,7 @@ typedef enum{
 /*  
  *   Helper functions
  */
-
+- (void)SyncData;
 - (NSArray *) getTaskSchedule: (NSDate*) startDate withFrequency: (NSString*) frequency withAttempts: (int) attempts;
 - (NSArray*)queryManagedObject: (GBObjectType)type withPredicate:(NSPredicate *)predicate;
 + (NSString *)createLocalUUID;

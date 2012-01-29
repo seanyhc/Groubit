@@ -12,6 +12,9 @@
 #import "GBTask.h"
 #import "GBUser.h"
 #import "Groubit_iOSAppDelegate.h"
+#import "TaipeiStation.h"
+#import "Parse/Parse.h"
+
 
 @implementation DashBoardViewController
 
@@ -119,15 +122,21 @@
 
 }
 
-- (IBAction)createHabit:(id)sender{
+- (IBAction)cleanParseData:(id)sender{
     
-    NSLog(@"Enter DashboardViewControll::createHabit");
+        
+    PFQuery *userQuery = [PFQuery queryWithClassName:@"GBUser"];
+    NSArray *userList = [userQuery findObjects];
+    
+    for(PFObject* user in userList){
+    
+        NSLog(@"userID:%@", [user objectForKey:@"UserID"]);
+        
+        [user deleteInBackground];
+    }
     
     
-    GBDataModelManager* dataModel = [GBDataModelManager getDataModelManager];
     
-    
-    [dataModel createHabit:@"MyHabit" withStartDate:[NSDate date] withFrequency:kWeekly withAttempts:3];
     
 }
 
@@ -180,7 +189,7 @@
     
     for(int i=0; i < [tasks count]; i++){
         GBTask* task = (GBTask*)[tasks objectAtIndex:i];
-        NSLog(@"Retrived TaskID: %@, TargetDate: %@, Status: %@", task.TaskID, task.TaskTargetDate, task.TaskStatus);
+        NSLog(@"Retrived TaskID: %@, TargetDate: %@, Status: %@, createAt:%@, updateAt:%@", task.TaskID, task.TaskTargetDate, task.TaskStatus, task.createAt, task.updateAt);
     }
     
 }
@@ -250,5 +259,11 @@
     
 }
 
+- (IBAction)syncNow:(id)sender
+{
+    TaipeiStation* ts = [[TaipeiStation alloc] init];
+    [ts syncAll];
+    
+}
 
 @end

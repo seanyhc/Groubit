@@ -14,6 +14,7 @@
 @interface GBHabit : NSManagedObject {
 @private
 }
+@property (nonatomic, retain) NSDate * createAt;
 @property (nonatomic, retain) NSNumber * HabitAttempts;
 @property (nonatomic, retain) NSString * HabitDescription;
 @property (nonatomic, retain) NSString * HabitFrequency;
@@ -22,9 +23,10 @@
 @property (nonatomic, retain) NSString * HabitOwner;
 @property (nonatomic, retain) NSDate * HabitStartDate;
 @property (nonatomic, retain) NSString * HabitStatus;
-@property (nonatomic, retain) NSSet *tasks;
+@property (nonatomic, retain) NSDate * updateAt;
 @property (nonatomic, retain) GBUser *belongsToUser;
 @property (nonatomic, retain) GBRelation *referencedByRelation;
+@property (nonatomic, retain) NSSet *tasks;
 @end
 
 @interface GBHabit (CoreDataGeneratedAccessors)

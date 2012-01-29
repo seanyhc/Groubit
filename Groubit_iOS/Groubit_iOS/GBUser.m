@@ -12,9 +12,11 @@
 
 
 @implementation GBUser
+@dynamic createAt;
+@dynamic updateAt;
+@dynamic UserID;
 @dynamic UserName;
 @dynamic UserPass;
-@dynamic UserID;
 @dynamic habits;
 @dynamic hasRelation;
 @dynamic referencedByRelation;

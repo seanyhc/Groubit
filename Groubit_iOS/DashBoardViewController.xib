@@ -58,12 +58,12 @@
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<string key="IBUIText">Test Actions</string>
-						<object class="NSFont" key="IBUIFont" id="692511712">
+						<object class="NSFont" key="IBUIFont" id="237642012">
 							<string key="NSName">Helvetica</string>
 							<double key="NSSize">17</double>
 							<int key="NSfFlags">16</int>
 						</object>
-						<object class="NSColor" key="IBUITextColor" id="15936044">
+						<object class="NSColor" key="IBUITextColor" id="899856485">
 							<int key="NSColorSpace">1</int>
 							<bytes key="NSRGB">MCAwIDAAA</bytes>
 						</object>
@@ -89,7 +89,7 @@
 							<int key="NSfFlags">16</int>
 						</object>
 						<int key="IBUIButtonType">1</int>
-						<string key="IBUINormalTitle">Create Habit</string>
+						<string key="IBUINormalTitle">Clean Parse Date</string>
 						<object class="NSColor" key="IBUIHighlightedTitleColor" id="936669465">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MQA</bytes>
@@ -175,7 +175,7 @@
 						<string key="NSFrame">{{30, 131}, {124, 37}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="265439557"/>
+						<reference key="NSNextKeyView" ref="722356045"/>
 						<string key="NSReuseIdentifierKey">_NS:222</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -219,7 +219,6 @@
 						<string key="NSFrame">{{30, 326}, {249, 37}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:222</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -235,13 +234,13 @@
 						</object>
 						<reference key="IBUINormalTitleShadowColor" ref="625182449"/>
 					</object>
-					<object class="IBUIButton" id="265439557">
+					<object class="IBUIButton" id="722356045">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{162, 131}, {113, 37}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="821516256"/>
+						<reference key="NSNextKeyView" ref="1009426464"/>
 						<string key="NSReuseIdentifierKey">_NS:222</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -257,7 +256,7 @@
 						</object>
 						<reference key="IBUINormalTitleShadowColor" ref="625182449"/>
 					</object>
-					<object class="IBUITextField" id="38082659">
+					<object class="IBUITextField" id="311158691">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{158, 184}, {117, 31}}</string>
@@ -274,7 +273,7 @@
 						<object class="NSColor" key="IBUITextColor">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MAA</bytes>
-							<object class="NSColorSpace" key="NSCustomColorSpace" id="934521317">
+							<object class="NSColorSpace" key="NSCustomColorSpace" id="821193702">
 								<int key="NSID">2</int>
 							</object>
 						</object>
@@ -286,13 +285,13 @@
 							<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						</object>
 					</object>
-					<object class="IBUILabel" id="821516256">
+					<object class="IBUILabel" id="1009426464">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{40, 189}, {77, 21}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="38082659"/>
+						<reference key="NSNextKeyView" ref="311158691"/>
 						<string key="NSReuseIdentifierKey">_NS:311</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -300,11 +299,32 @@
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<string key="IBUIText">LocalUser</string>
-						<reference key="IBUIFont" ref="692511712"/>
-						<reference key="IBUITextColor" ref="15936044"/>
+						<reference key="IBUIFont" ref="237642012"/>
+						<reference key="IBUITextColor" ref="899856485"/>
 						<nil key="IBUIHighlightedColor"/>
 						<int key="IBUIBaselineAdjustment">1</int>
 						<float key="IBUIMinimumFontSize">10</float>
+					</object>
+					<object class="IBUIButton" id="979253444">
+						<reference key="NSNextResponder" ref="191373211"/>
+						<int key="NSvFlags">292</int>
+						<string key="NSFrame">{{30, 371}, {245, 37}}</string>
+						<reference key="NSSuperview" ref="191373211"/>
+						<reference key="NSWindow"/>
+						<string key="NSReuseIdentifierKey">_NS:222</string>
+						<bool key="IBUIOpaque">NO</bool>
+						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+						<int key="IBUIContentHorizontalAlignment">0</int>
+						<int key="IBUIContentVerticalAlignment">0</int>
+						<reference key="IBUIFont" ref="167724949"/>
+						<int key="IBUIButtonType">1</int>
+						<string key="IBUINormalTitle">Sync Now</string>
+						<reference key="IBUIHighlightedTitleColor" ref="936669465"/>
+						<object class="NSColor" key="IBUINormalTitleColor">
+							<int key="NSColorSpace">1</int>
+							<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
+						</object>
+						<reference key="IBUINormalTitleShadowColor" ref="625182449"/>
 					</object>
 				</object>
 				<string key="NSFrame">{{0, 20}, {320, 460}}</string>
@@ -314,7 +334,7 @@
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">3</int>
 					<bytes key="NSWhite">MQA</bytes>
-					<reference key="NSCustomColorSpace" ref="934521317"/>
+					<reference key="NSCustomColorSpace" ref="821193702"/>
 				</object>
 				<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics"/>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -397,7 +417,7 @@
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">getNanny:</string>
-						<reference key="source" ref="265439557"/>
+						<reference key="source" ref="722356045"/>
 						<reference key="destination" ref="975951072"/>
 						<int key="IBEventType">7</int>
 					</object>
@@ -406,7 +426,7 @@
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">changeUserName:</string>
-						<reference key="source" ref="38082659"/>
+						<reference key="source" ref="311158691"/>
 						<reference key="destination" ref="975951072"/>
 						<int key="IBEventType">13</int>
 					</object>
@@ -415,7 +435,7 @@
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">changeUserName:</string>
-						<reference key="source" ref="38082659"/>
+						<reference key="source" ref="311158691"/>
 						<reference key="destination" ref="975951072"/>
 						<int key="IBEventType">20</int>
 					</object>
@@ -425,9 +445,27 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">localUserName</string>
 						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="38082659"/>
+						<reference key="destination" ref="311158691"/>
 					</object>
 					<int key="connectionID">29</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">syncNow:</string>
+						<reference key="source" ref="979253444"/>
+						<reference key="destination" ref="372490531"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">31</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">cleanParseData:</string>
+						<reference key="source" ref="107481703"/>
+						<reference key="destination" ref="372490531"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">32</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -449,12 +487,13 @@
 							<reference ref="306247236"/>
 							<reference ref="436505287"/>
 							<reference ref="267241090"/>
-							<reference ref="265439557"/>
+							<reference ref="722356045"/>
 							<reference ref="20385892"/>
 							<reference ref="55159535"/>
 							<reference ref="107481703"/>
-							<reference ref="821516256"/>
-							<reference ref="38082659"/>
+							<reference ref="1009426464"/>
+							<reference ref="311158691"/>
+							<reference ref="979253444"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -511,17 +550,22 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">22</int>
-						<reference key="object" ref="265439557"/>
+						<reference key="object" ref="722356045"/>
 						<reference key="parent" ref="191373211"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">25</int>
-						<reference key="object" ref="38082659"/>
+						<reference key="object" ref="311158691"/>
 						<reference key="parent" ref="191373211"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">26</int>
-						<reference key="object" ref="821516256"/>
+						<reference key="object" ref="1009426464"/>
+						<reference key="parent" ref="191373211"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">30</int>
+						<reference key="object" ref="979253444"/>
 						<reference key="parent" ref="191373211"/>
 					</object>
 				</object>
@@ -541,6 +585,7 @@
 					<string>22.IBPluginDependency</string>
 					<string>25.IBPluginDependency</string>
 					<string>26.IBPluginDependency</string>
+					<string>30.IBPluginDependency</string>
 					<string>5.IBPluginDependency</string>
 					<string>6.IBPluginDependency</string>
 					<string>7.IBPluginDependency</string>
@@ -552,6 +597,7 @@
 					<string>DashBoardViewController</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>UIResponder</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -579,7 +625,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">29</int>
+			<int key="maxID">32</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -592,7 +638,7 @@
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>changeUserName:</string>
-							<string>createHabit:</string>
+							<string>cleanParseData:</string>
 							<string>getAllHabitsByOwnerName:</string>
 							<string>getAllTasks:</string>
 							<string>getFriends:</string>
@@ -600,9 +646,11 @@
 							<string>initTestData:</string>
 							<string>setHabitCompleted:</string>
 							<string>setTaskCompleted:</string>
+							<string>syncNow:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
@@ -619,7 +667,7 @@
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>changeUserName:</string>
-							<string>createHabit:</string>
+							<string>cleanParseData:</string>
 							<string>getAllHabitsByOwnerName:</string>
 							<string>getAllTasks:</string>
 							<string>getFriends:</string>
@@ -627,6 +675,7 @@
 							<string>initTestData:</string>
 							<string>setHabitCompleted:</string>
 							<string>setTaskCompleted:</string>
+							<string>syncNow:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -635,7 +684,7 @@
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
-								<string key="name">createHabit:</string>
+								<string key="name">cleanParseData:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
@@ -664,6 +713,10 @@
 							</object>
 							<object class="IBActionInfo">
 								<string key="name">setTaskCompleted:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">syncNow:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 						</object>

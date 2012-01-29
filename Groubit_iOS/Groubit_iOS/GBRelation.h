@@ -14,17 +14,13 @@
 @interface GBRelation : NSManagedObject {
 @private
 }
+@property (nonatomic, retain) NSDate * createAt;
 @property (nonatomic, retain) NSString * RelationID;
 @property (nonatomic, retain) NSString * RelationType;
+@property (nonatomic, retain) NSDate * updateAt;
+@property (nonatomic, retain) NSString * RelationStatus;
 @property (nonatomic, retain) GBUser *fromUser;
+@property (nonatomic, retain) GBHabit *hasHabit;
 @property (nonatomic, retain) GBUser *toUser;
-@property (nonatomic, retain) NSSet *hasHabit;
-@end
 
-@interface GBRelation (CoreDataGeneratedAccessors)
-
-- (void)addHasHabitObject:(GBHabit *)value;
-- (void)removeHasHabitObject:(GBHabit *)value;
-- (void)addHasHabit:(NSSet *)values;
-- (void)removeHasHabit:(NSSet *)values;
 @end

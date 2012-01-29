@@ -13,6 +13,7 @@
 
 
 @implementation GBHabit
+@dynamic createAt;
 @dynamic HabitAttempts;
 @dynamic HabitDescription;
 @dynamic HabitFrequency;
@@ -21,8 +22,9 @@
 @dynamic HabitOwner;
 @dynamic HabitStartDate;
 @dynamic HabitStatus;
-@dynamic tasks;
+@dynamic updateAt;
 @dynamic belongsToUser;
 @dynamic referencedByRelation;
+@dynamic tasks;
 
 @end

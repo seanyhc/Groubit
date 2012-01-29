@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="562" systemVersion="11C74" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="GBHabit" representedClassName="GBHabit">
+        <attribute name="createAt" optional="YES" attributeType="Date"/>
         <attribute name="HabitAttempts" optional="YES" attributeType="Integer 32" defaultValueString="0"/>
         <attribute name="HabitDescription" optional="YES" attributeType="String"/>
         <attribute name="HabitFrequency" optional="YES" attributeType="String"/>
@@ -9,25 +10,33 @@
         <attribute name="HabitOwner" optional="YES" attributeType="String"/>
         <attribute name="HabitStartDate" optional="YES" attributeType="Date"/>
         <attribute name="HabitStatus" optional="YES" attributeType="String"/>
+        <attribute name="updateAt" optional="YES" attributeType="Date"/>
         <relationship name="belongsToUser" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="GBUser" inverseName="habits" inverseEntity="GBUser"/>
         <relationship name="referencedByRelation" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="GBRelation" inverseName="hasHabit" inverseEntity="GBRelation"/>
         <relationship name="tasks" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="GBTask" inverseName="belongsToHabit" inverseEntity="GBTask"/>
     </entity>
     <entity name="GBRelation" representedClassName="GBRelation">
+        <attribute name="createAt" optional="YES" attributeType="Date"/>
         <attribute name="RelationID" optional="YES" attributeType="String"/>
+        <attribute name="RelationStatus" optional="YES" attributeType="String"/>
         <attribute name="RelationType" optional="YES" attributeType="String"/>
+        <attribute name="updateAt" optional="YES" attributeType="Date"/>
         <relationship name="fromUser" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="GBUser" inverseName="hasRelation" inverseEntity="GBUser"/>
-        <relationship name="hasHabit" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="GBHabit" inverseName="referencedByRelation" inverseEntity="GBHabit"/>
+        <relationship name="hasHabit" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="GBHabit" inverseName="referencedByRelation" inverseEntity="GBHabit"/>
         <relationship name="toUser" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="GBUser" inverseName="referencedByRelation" inverseEntity="GBUser"/>
     </entity>
     <entity name="GBTask" representedClassName="GBTask">
+        <attribute name="createAt" optional="YES" attributeType="Date"/>
         <attribute name="TaskID" optional="YES" attributeType="String"/>
         <attribute name="TaskName" optional="YES" attributeType="String"/>
         <attribute name="TaskStatus" optional="YES" attributeType="String"/>
         <attribute name="TaskTargetDate" optional="YES" attributeType="Date"/>
+        <attribute name="updateAt" optional="YES" attributeType="Date"/>
         <relationship name="belongsToHabit" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="GBHabit" inverseName="tasks" inverseEntity="GBHabit"/>
     </entity>
     <entity name="GBUser" representedClassName="GBUser">
+        <attribute name="createAt" optional="YES" attributeType="Date"/>
+        <attribute name="updateAt" optional="YES" attributeType="Date"/>
         <attribute name="UserID" optional="YES" attributeType="String"/>
         <attribute name="UserName" optional="YES" attributeType="String"/>
         <attribute name="UserPass" optional="YES" attributeType="String"/>
@@ -37,8 +46,8 @@
     </entity>
     <elements>
         <element name="GBHabit" positionX="-425" positionY="-153" width="128" height="180"/>
-        <element name="GBTask" positionX="-164" positionY="-141" width="128" height="120"/>
-        <element name="GBUser" positionX="-396" positionY="-396" width="128" height="135"/>
-        <element name="GBRelation" positionX="-758" positionY="-372" width="128" height="120"/>
+        <element name="GBRelation" positionX="-441" positionY="-369" width="128" height="165"/>
+        <element name="GBTask" positionX="-164" positionY="-141" width="128" height="150"/>
+        <element name="GBUser" positionX="-630" positionY="-126" width="128" height="165"/>
     </elements>
 </model>
