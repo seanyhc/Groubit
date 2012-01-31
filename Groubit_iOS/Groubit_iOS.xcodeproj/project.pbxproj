@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		14688F7214D7A96A006DAEBA /* HabitsTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14688F7114D7A96A006DAEBA /* HabitsTableController.m */; };
 		14E365BB14AB2D7B0064CA5B /* FriendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14E365B914AB2D7B0064CA5B /* FriendsViewController.m */; };
 		14E365BC14AB2D7B0064CA5B /* FriendsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14E365BA14AB2D7B0064CA5B /* FriendsViewController.xib */; };
 		14EA769914AAEC63009FF411 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14EA769814AAEC63009FF411 /* UIKit.framework */; };
@@ -59,6 +60,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		14688F7014D7A96A006DAEBA /* HabitsTableController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HabitsTableController.h; path = iPhone/HabitsTableController.h; sourceTree = "<group>"; };
+		14688F7114D7A96A006DAEBA /* HabitsTableController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HabitsTableController.m; path = iPhone/HabitsTableController.m; sourceTree = "<group>"; };
 		14E365B814AB2D7B0064CA5B /* FriendsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendsViewController.h; sourceTree = "<group>"; };
 		14E365B914AB2D7B0064CA5B /* FriendsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendsViewController.m; sourceTree = "<group>"; };
 		14E365BA14AB2D7B0064CA5B /* FriendsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FriendsViewController.xib; sourceTree = "<group>"; };
@@ -235,6 +238,8 @@
 				14EA76B314AAEC63009FF411 /* MainWindow_iPhone.xib */,
 				2B2B1CBE14C9690F0068B36E /* TaipeiStation.h */,
 				2B2B1CBF14C9690F0068B36E /* TaipeiStation.m */,
+				14688F7014D7A96A006DAEBA /* HabitsTableController.h */,
+				14688F7114D7A96A006DAEBA /* HabitsTableController.m */,
 			);
 			name = iPhone;
 			sourceTree = "<group>";
@@ -415,6 +420,7 @@
 				2BCBEAB214C9BA9A003359AF /* GBRelation.m in Sources */,
 				2BCBEAB514C9BA9A003359AF /* GBTask.m in Sources */,
 				2BCBEAB814C9BA9A003359AF /* GBUser.m in Sources */,
+				14688F7214D7A96A006DAEBA /* HabitsTableController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
