@@ -92,20 +92,20 @@
     [dataModel createUser:@"Sean" withPassword:@"1234"];
     
     // create habits
-    [dataModel createHabitForUser:@"Jeffrey" withName:@"Jeffrey_Habit1" withStartDate:[NSDate date] withFrequency:kDaily withAttempts:7];
+    [dataModel createHabitForUser:@"Jeffrey" withName:@"Jeffrey_Habit1" withStartDate:[NSDate date] withFrequency:kDaily withAttempts:7 withDescription:@"Habit1 for Jeffrey"];
     
-    [dataModel createHabitForUser:@"Jeffrey" withName:@"Jeffrey_Habit2" withStartDate:[NSDate date] withFrequency:kWeekly withAttempts:7];
+    [dataModel createHabitForUser:@"Jeffrey" withName:@"Jeffrey_Habit2" withStartDate:[NSDate date] withFrequency:kWeekly withAttempts:7 withDescription:@"Habit2 for Jeffrey"];
     
-    [dataModel createHabitForUserWithNanny:@"Jeffrey" withName:@"Jeffrey_Habit3" withNannyName:@"Joey" withStartDate:[NSDate date] withFrequency:kWeekly withAttempts:7];
+    [dataModel createHabitForUserWithNanny:@"Jeffrey" withName:@"Jeffrey_Habit3" withNannyName:@"Joey" withStartDate:[NSDate date] withFrequency:kWeekly withAttempts:7 withDescription:@"Habit3 for Jeffrey"];
     
     
-    [dataModel createHabitForUser:@"Joey" withName:@"Joey_Habit1" withStartDate:[NSDate date] withFrequency:kDaily withAttempts:7];
+    [dataModel createHabitForUser:@"Joey" withName:@"Joey_Habit1" withStartDate:[NSDate date] withFrequency:kDaily withAttempts:7 withDescription:@"Habit1 for Joey"];
     
-    [dataModel createHabitForUser:@"Joey" withName:@"Joey_Habit2" withStartDate:[NSDate date] withFrequency:kWeekly withAttempts:7];
+    [dataModel createHabitForUser:@"Joey" withName:@"Joey_Habit2" withStartDate:[NSDate date] withFrequency:kWeekly withAttempts:7 withDescription:@"Habit2 for Joey"];
     
-    [dataModel createHabitForUser:@"Sean" withName:@"Sean_Habit1" withStartDate:[NSDate date] withFrequency:kDaily withAttempts:7];
+    [dataModel createHabitForUser:@"Sean" withName:@"Sean_Habit1" withStartDate:[NSDate date] withFrequency:kDaily withAttempts:7 withDescription:@"Habit1 for Sean"];
     
-    [dataModel createHabitForUser:@"Sean" withName:@"Sean_Habit2" withStartDate:[NSDate date] withFrequency:kWeekly withAttempts:7];
+    [dataModel createHabitForUser:@"Sean" withName:@"Sean_Habit2" withStartDate:[NSDate date] withFrequency:kWeekly withAttempts:7 withDescription:@"Habit2 for Sean"];
     
     
     
@@ -128,6 +128,13 @@
     PFQuery *userQuery = [PFQuery queryWithClassName:@"GBUser"];
     NSArray *userList = [userQuery findObjects];
     
+    
+    if( userList && userList.count == 0){
+    
+        NSLog(@"No User object stored in Parse.");
+       
+    }
+    
     for(PFObject* user in userList){
     
         NSLog(@"userID:%@", [user objectForKey:@"UserID"]);
@@ -135,6 +142,43 @@
         [user deleteInBackground];
     }
     
+    
+    PFQuery *habitQuery = [PFQuery queryWithClassName:@"GBHabit"];
+    NSArray *habitList = [habitQuery findObjects];
+    
+    
+    if( habitList && habitList.count == 0){
+        
+        NSLog(@"No Habit object stored in Parse.");
+        
+    }
+    
+    for(PFObject* habit in habitList){
+        
+        NSLog(@"HabitID:%@", [habit objectForKey:@"HabitID"]);
+        
+        [habit deleteInBackground];
+    }
+    
+
+    PFQuery *taskQuery = [PFQuery queryWithClassName:@"GBTask"];
+    NSArray *taskList = [taskQuery findObjects];
+    
+    
+    if( taskList && taskList.count == 0){
+        
+        NSLog(@"No Task object stored in Parse.");
+        
+    }
+    
+    for(PFObject* task in taskList){
+        
+        NSLog(@"TaskID:%@", [task objectForKey:@"TaskID"]);
+        
+        [task deleteInBackground];
+    }
+    
+
     
     
     
@@ -261,9 +305,193 @@
 
 - (IBAction)syncNow:(id)sender
 {
-    TaipeiStation* ts = [[TaipeiStation alloc] init];
+    TaipeiStation* ts = [TaipeiStation getSyncEngine];
     [ts syncAll];
     
+}
+
+
+- (IBAction)printParseObjects:(id)sender
+{
+    // print user
+
+    
+    PFQuery *userQuery = [PFQuery queryWithClassName:@"GBUser"];
+    NSArray *pfUsers = [userQuery findObjects];
+    
+    NSLog(@" Retreived %d users", pfUsers.count);
+    
+    for( PFObject *user in pfUsers){
+    
+        NSLog(@" User: %@", user  );
+    }
+    
+    // print relation
+    
+    PFQuery *relationQuery = [PFQuery queryWithClassName:@"GBRelations"];
+    NSArray *pfRelations = [relationQuery findObjects];
+    
+    NSLog(@" Retreived %d relations", pfRelations.count);
+    
+    for( PFObject *relation in pfRelations){
+        
+        NSLog(@" Relation: %@", relation  );
+    }
+    
+
+    
+    // print habits
+    
+    
+    PFQuery *habitQuery = [PFQuery queryWithClassName:@"GBHabit"];
+    NSArray *pfHabits = [habitQuery findObjects];
+    
+    NSLog(@" Retreived %d habits", pfHabits.count);
+    
+    for( PFObject *habit in pfHabits){
+        
+        NSLog(@" Habit: %@", habit  );
+    }
+    
+    
+    // print tasks
+    
+    PFQuery *taskQuery = [PFQuery queryWithClassName:@"GBTask"];
+    NSArray *pfTasks = [taskQuery findObjects];
+    
+    NSLog(@" Retreived %d tasks", pfTasks.count);
+    
+    for( PFObject *task in pfTasks){
+        
+        NSLog(@" Task: %@", task  );
+    }
+
+    
+    
+}
+
+
+- (IBAction)printLocalObjects:(id)sender
+{
+
+    GBDataModelManager* dataModel = [GBDataModelManager getDataModelManager];
+    
+    NSArray *users  = [dataModel getUserByType:kUserTypeALL];
+    
+    NSLog(@" Retrieved %d users", users.count);
+    
+    for(GBUser *user in users){
+    
+        NSLog(@"Local User:%@", user);
+    }
+    
+    NSArray *habits = [dataModel getAllHabitsByType:kUserTypeALL];
+    
+    NSLog(@" Retrieved %d habits", habits.count);
+    
+    for(GBHabit *habit in habits){
+        
+        NSLog(@"Local Habit:%@", habit);
+    }
+    
+    
+    NSArray *tasks = [dataModel getAllTasks:kUserTypeALL];
+    
+    NSLog(@" Retrieved %d tasks", tasks.count);
+    
+    for(GBTask *task in tasks){
+        
+  //      NSLog(@"Local Task:%@", task);
+    }
+
+}
+
+- (IBAction)createHabit:(id)sender
+{
+    GBDataModelManager* dataModel = [GBDataModelManager getDataModelManager];
+    [dataModel createHabitForUser:@"Jeffrey" withName:@"Jeffrey_Habit4" withStartDate:[NSDate date] withFrequency:kDaily withAttempts:7 withDescription:@"Habit4 for Jeffrey"];
+}
+
+- (IBAction)createRemoteHabit:(id)sender
+{
+    
+    NSLog(@"Create new habit on remote." );
+    PFObject *pfHabit = [PFObject objectWithClassName:@"GBHabit"];
+    [pfHabit setObject:@"12345" forKey:@"HabitID"];
+    [pfHabit setObject:@"RemoteHabitName" forKey:@"HabitName"];
+    [pfHabit setObject:@"Jeffrey" forKey:@"HabitOwner"];
+    [pfHabit setObject:@"Remote Habit" forKey:@"HabitDescription"];
+    [pfHabit setObject:@"weekly" forKey:@"HabitFrequency"];
+    [pfHabit setObject:[NSNumber numberWithInt:7] forKey:@"HabitAttempts"];
+    [pfHabit setObject:@"init" forKey:@"HabitStatus"];
+    [pfHabit setObject:[NSDate date] forKey:@"HabitStartDate"];
+ 
+    [pfHabit saveInBackground];
+    
+    
+    pfHabit = [PFObject objectWithClassName:@"GBHabit"];
+    [pfHabit setObject:@"6789" forKey:@"HabitID"];
+    [pfHabit setObject:@"RemoteHabitName111" forKey:@"HabitName"];
+    [pfHabit setObject:@"Joey" forKey:@"HabitOwner"];
+    [pfHabit setObject:@"Remote Habit111" forKey:@"HabitDescription"];
+    [pfHabit setObject:@"weekly" forKey:@"HabitFrequency"];
+    [pfHabit setObject:[NSNumber numberWithInt:7] forKey:@"HabitAttempts"];
+    [pfHabit setObject:@"init" forKey:@"HabitStatus"];
+    [pfHabit setObject:[NSDate date] forKey:@"HabitStartDate"];
+    
+    [pfHabit saveInBackground];
+    
+}
+- (IBAction)updateRemoteHabit:(id)sender
+{
+
+    PFQuery *newHabitQuery = [PFQuery queryWithClassName:@"GBHabit"];
+    [newHabitQuery whereKey:@"HabitOwner" equalTo:@"Jeffrey"];
+    [newHabitQuery whereKey:@"HabitID" equalTo:@"12345"];
+    
+    NSArray *newPFHabits = [newHabitQuery findObjects];
+
+    PFObject *habit = [newPFHabits lastObject];
+    
+    [habit setObject:@"completed" forKey:@"HabitStatus"];
+    
+    [habit saveInBackground];
+    
+    newHabitQuery = [PFQuery queryWithClassName:@"GBHabit"];
+    [newHabitQuery whereKey:@"HabitOwner" equalTo:@"Joey"];
+    [newHabitQuery whereKey:@"HabitID" equalTo:@"6789"];
+    
+    newPFHabits = [newHabitQuery findObjects];
+    
+    habit = [newPFHabits lastObject];
+    
+    [habit setObject:@"completed" forKey:@"HabitStatus"];
+    
+    [habit saveInBackground];
+
+    
+}
+- (IBAction)updateLocalHabit:(id)sender
+{
+
+    GBDataModelManager* dataModel = [GBDataModelManager getDataModelManager];
+    GBHabit *habit = (GBHabit*)[dataModel getLocalObjectByAttribute:@"HabitName" withAttributeValue:@"Jeffrey_Habit4" withObjectType:kHabit];
+    
+    NSArray *habits = [dataModel getAllHabitsByOwnerName:@"Jeffrey"];
+    
+    
+    if(!habit || habits.count == 0 )
+        NSLog(@" no habit retrieved");
+    
+    for( GBHabit *habit in habits){
+        habit.HabitStatus = [NSString stringWithString:@"completed"];
+        habit.updateAt = [NSDate date];
+        [dataModel SyncData];
+
+    }
+    
+    
+        
 }
 
 @end

@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "GBHabit.h"
+#import "Parse/Parse.h"
 
 @interface GBDataModelManager : NSObject {
  
@@ -66,6 +67,11 @@ typedef enum{
     kRelationStatusRejected
 } GBRelationStatus;
 
+typedef enum{
+    kSyncUpdateSince,
+    kSyncCreateSince
+} GBSyncAttr;
+
 + (GBDataModelManager*) getDataModelManager;
 
 
@@ -88,7 +94,8 @@ typedef enum{
 - (bool) createHabit:(NSString*) habitName
                       withStartDate:(NSDate*) habitStartDate
                       withFrequency: (HabitFrequency)habitFrequency
-                      withAttempts: (int) attempts;   
+                      withAttempts: (int) attempts
+                      withDescription: (NSString*) desc;   
 
 
 
@@ -110,7 +117,8 @@ typedef enum{
                        withNannyName: (NSString*) nannyName
                        withStartDate:(NSDate*) habitStartDate
                        withFrequency: (HabitFrequency)habitFrequency
-                       withAttempts: (int) attempts;
+                       withAttempts: (int) attempts
+                       withDescription: (NSString*) desc;
 
 /**
  
@@ -128,7 +136,11 @@ typedef enum{
                    withName:(NSString*) habitName
                    withStartDate:(NSDate*) habitStartDate
                    withFrequency: (HabitFrequency)habitFrequency
-                   withAttempts: (int) attempts;
+                   withAttempts: (int) attempts
+                   withDescription: (NSString*) desc;
+
+
+- (bool) createHabitWithRemoteHabit: (PFObject*) remoteHabit;
 
 /**
  
@@ -237,6 +249,8 @@ typedef enum{
                               withTargetDate:(NSDate*) taskTargetDate;
 
 
+- (bool) createTaskWithRemoteTask: (PFObject*) remoteTask;
+
 /**
  
  Mark a particular task as completed
@@ -264,6 +278,14 @@ typedef enum{
  */
 - (NSArray *) getMyBabyTasks;
 
+/**
+ 
+ Retrieve all tasks that associated with a specific Habit
+ 
+ @param habitID  the ID of the habit
+ @return a list of task with type "TaskTypeObject"
+ */
+- (NSArray *) getTasksWithHabitID:(NSString*) habitID;
 
 
 /*  
@@ -294,7 +316,18 @@ typedef enum{
  @return user object
  */
 
-- (GBUser*) getUser : (NSString*) username;
+- (GBUser*) getUserByName : (NSString*) username;
+
+/**
+
+ Retrieve User object with given name
+ 
+ @param type   user type. It could be internal ( current owner), friends, or both
+ @return users of that type
+ 
+ */
+ 
+- (NSArray*) getUserByType : (GBUserType) userType;
 
 /**
  
@@ -333,12 +366,20 @@ typedef enum{
 
 
 
+
+//- (NSArray *) getAllRelations;
+
+
 /*  
  *   Helper functions
  */
 - (void)SyncData;
 - (NSArray *) getTaskSchedule: (NSDate*) startDate withFrequency: (NSString*) frequency withAttempts: (int) attempts;
 - (NSArray*)queryManagedObject: (GBObjectType)type withPredicate:(NSPredicate *)predicate;
+- (NSArray *) getLocalObjects: (NSDate *) date withObjectType: (GBObjectType) objType withAttr: (GBSyncAttr) attr ; 
+- (NSManagedObject *) getLocalObjectByAttribute: (NSString*) attributeName withAttributeValue: (NSString*) attributeValue withObjectType: (GBObjectType) objType;
+
+
 + (NSString *)createLocalUUID;
 
 @end

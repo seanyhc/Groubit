@@ -27,6 +27,14 @@
 - (IBAction)getNanny:(id)sender;
 - (IBAction)syncNow:(id)sender;
 
+- (IBAction)printParseObjects:(id)sender;
+- (IBAction)printLocalObjects:(id)sender;
+- (IBAction)createHabit:(id)sender;
+
+- (IBAction)createRemoteHabit:(id)sender;
+- (IBAction)updateRemoteHabit:(id)sender;
+- (IBAction)updateLocalHabit:(id)sender;
+
 /*
 - (IBAction)updateHabit:(id)sender;
 

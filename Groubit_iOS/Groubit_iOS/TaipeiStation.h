@@ -22,6 +22,9 @@
 - (bool)syncUserData;
 - (bool)syncRelation;
 - (bool)syncHabit;
+- (bool)syncTasks: (NSString*) habitID;
+
++(TaipeiStation*) getSyncEngine;
 
 @end
 

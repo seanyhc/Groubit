@@ -11,6 +11,7 @@
 #import "GBTask.h"
 #import "GBUser.h"
 #import "GBRelation.h"
+#import "Parse/Parse.h"
 
 #import "Groubit_iOSAppDelegate.h"
 
@@ -94,27 +95,74 @@ static NSArray *sRelationStatusStr;
 }
 
 
+
+
 #pragma mark - 
 #pragma mark HABIT RELATED FUNCTION
 #pragma mark - 
+
+- (bool) createHabitWithRemoteHabit: (PFObject*) remoteHabit
+{
+    NSLog(@"Enter HabitDataModel::createHabitWithRemoteHabit. remoteHabit:%@", remoteHabit);
+
+    
+    GBHabit* newHabit;
+    GBUser *habitOwner;
+    
+    habitOwner= [self getUserByName:[remoteHabit objectForKey:@"HabitOwner"]];    
+    if(!habitOwner){
+        NSLog(@"Cannot retrieve habit owner");
+        return false;
+    }
+    
+    newHabit = [NSEntityDescription insertNewObjectForEntityForName:@"GBHabit" inManagedObjectContext:objectContext];
+    
+    newHabit.HabitID           = [remoteHabit objectForKey:@"HabitID"];
+    newHabit.HabitOwner        = [remoteHabit objectForKey:@"HabitOwner"];
+    newHabit.HabitName         = [remoteHabit objectForKey:@"HabitName"];
+    newHabit.HabitStatus       = [remoteHabit objectForKey:@"HabitStatus"];
+    newHabit.HabitFrequency    = [remoteHabit objectForKey:@"HabitFrequency"];
+    newHabit.HabitAttempts     = [remoteHabit objectForKey:@"HabitAttempts"];
+    newHabit.HabitStartDate    = [remoteHabit objectForKey:@"HabitStartDate"];
+    newHabit.belongsToUser     = habitOwner;
+    newHabit.HabitDescription  = [remoteHabit objectForKey:@"HabitDescription"];
+    newHabit.createAt          = remoteHabit.createdAt;
+    newHabit.updateAt          = remoteHabit.updatedAt;
+
+    
+    NSError *error;
+    [objectContext save:&error];
+    
+    // j2do : Error Handling Here
+    
+    
+    
+    NSLog(@"New Habit[%@] Created", newHabit.HabitName);
+    
+
+    return true;
+}
+
 - (bool) createHabitForUserWithNanny:(NSString*) userName
                             withName:(NSString*) habitName
-                       withNannyName: (NSString*) nannyName
-                       withStartDate:(NSDate*) habitStartDate
-                       withFrequency: (HabitFrequency)habitFrequency
-                        withAttempts: (int) attempts{
+                            withNannyName: (NSString*) nannyName
+                            withStartDate:(NSDate*) habitStartDate
+                            withFrequency: (HabitFrequency)habitFrequency
+                            withAttempts: (int) attempts
+                            withDescription:(NSString*) desc{
 
-    NSLog(@"Enter HabitDataModel::createHabitForUserWithNanny. userName:%@, habitName:%@, nannyName:%@,habitStartDate:%@, habitFrequency:%d, habitAttempts:%d",
+    NSLog(@"Enter HabitDataModel::createHabitForUserWithNanny. userName:%@, habitName:%@, nannyName:%@,habitStartDate:%@, habitFrequency:%d, habitAttempts:%d, habitDesc:%@",
           userName,
           nannyName,
           habitName,
           habitStartDate,
           habitFrequency,
-          attempts);
+          attempts,
+          desc);
 
     GBUser *habitOwner;
 
-    habitOwner= [self getUser:userName];    
+    habitOwner= [self getUserByName:userName];    
     if(!habitOwner){
         NSLog(@"Cannot retrieve habit owner");
         return false;
@@ -136,6 +184,7 @@ static NSArray *sRelationStatusStr;
     newHabit.HabitAttempts = [NSNumber numberWithInt:attempts];
     newHabit.HabitStartDate = habitStartDate;
     newHabit.belongsToUser = habitOwner;
+    newHabit.HabitDescription = desc;
     newHabit.updateAt = newHabit.createAt = [NSDate date];
 
     NSError *error;
@@ -177,19 +226,21 @@ static NSArray *sRelationStatusStr;
 
 - (bool) createHabitForUser:(NSString*) userName
                    withName:(NSString*) habitName
-              withStartDate:(NSDate*) habitStartDate
-              withFrequency: (HabitFrequency)habitFrequency
-               withAttempts: (int) attempts{
+                   withStartDate:(NSDate*) habitStartDate
+                   withFrequency: (HabitFrequency)habitFrequency
+                   withAttempts: (int) attempts
+                   withDescription:(NSString *)desc{
 
 
-    NSLog(@"Enter HabitDataModel::createHabitForUser. userName:%@, habitName:%@, habitStartDate:%@, habitFrequency:%d, habitAttempts:%d",
+    NSLog(@"Enter HabitDataModel::createHabitForUser. userName:%@, habitName:%@, habitStartDate:%@, habitFrequency:%d, habitAttempts:%d, habitDesc:%@",
           userName,
           habitName,
           habitStartDate,
           habitFrequency,
-          attempts);
+          attempts,
+          desc);
     
-    return [self createHabitForUserWithNanny:userName withName:habitName withNannyName:nil withStartDate:habitStartDate withFrequency:habitFrequency withAttempts:attempts];
+    return [self createHabitForUserWithNanny:userName withName:habitName withNannyName:nil withStartDate:habitStartDate withFrequency:habitFrequency withAttempts:attempts withDescription:desc];
     
       
 }
@@ -198,7 +249,8 @@ static NSArray *sRelationStatusStr;
 - (bool) createHabit:(NSString*) habitName
        withStartDate:(NSDate*) habitStartDate
        withFrequency: (HabitFrequency)habitFrequency
-        withAttempts: (int) attempts
+       withAttempts: (int) attempts
+       withDescription:(NSString*) desc
 {
     NSLog(@"Enter HabitDataModel::createHabitForUser. habitName:%@, habitStartDate:%@, habitFrequency:%d, habitAttempts:%d",
           habitName,
@@ -207,7 +259,7 @@ static NSArray *sRelationStatusStr;
           attempts);
     
     return [self createHabitForUser:self.localUserName withName:habitName
-                      withStartDate:habitStartDate withFrequency:habitFrequency withAttempts:attempts];
+                      withStartDate:habitStartDate withFrequency:habitFrequency withAttempts:attempts withDescription:desc];
    
 }
 
@@ -451,6 +503,7 @@ static NSArray *sRelationStatusStr;
              withTargetDate:(NSDate*) taskTargetDate
 {
 
+    NSLog(@"Enter HabitDataModel::createTaskForHabit. habitID: %@, target date:%@", newHabit.HabitID, taskTargetDate);
     
        
     GBTask* newTask = nil;
@@ -459,7 +512,7 @@ static NSArray *sRelationStatusStr;
     newTask.TaskID = [[NSString alloc] initWithFormat:@"TASK_%@",[GBDataModelManager createLocalUUID]];
     newTask.TaskStatus = [NSString stringWithString:[sTaskStatusStr objectAtIndex:kTaskStatusInit]];
     newTask.TaskTargetDate = taskTargetDate;
-    newTask.TaskName = [NSString stringWithFormat:@"TASK_@%",newTask.TaskID];
+    newTask.TaskName = [NSString stringWithFormat:@"TASK_%@",newTask.TaskID];
     newTask.belongsToHabit = newHabit;
     newTask.createAt = newTask.updateAt = [NSDate date];
     
@@ -467,6 +520,54 @@ static NSArray *sRelationStatusStr;
     [objectContext save:&error];
     
     NSLog(@"New Task[%@] Created. Target Date: %@", newTask.TaskName, taskTargetDate);
+    
+    return true;
+}
+
+- (NSArray *) getTasksWithHabitID:(NSString*) habitID{
+
+    NSLog(@"Enter HabitDataModel::getTasksWithHabitID. habitID:%@",habitID);
+    
+    NSPredicate *predicate;
+    
+    predicate = [NSPredicate predicateWithFormat:@"(belongsToHabit.HabitID = %@)", habitID];
+    
+    NSArray *objects = [self queryManagedObject:kTask withPredicate:predicate];
+    
+    NSLog(@"Retrieved %d Tasks", [objects count]);
+    
+    return objects;
+}
+
+- (bool) createTaskWithRemoteTask: (PFObject*) remoteTask
+{
+
+    NSLog(@"Enter HabitDataModel::createTaskWithRemoteTask. remote task: %@", remoteTask);
+    
+    GBHabit *newHabit = [dataModel getHabitByID:[remoteTask objectForKey:@"HabitID"]];
+    
+    if(!newHabit){
+        NSLog(@"Can not retrive associated habit");
+        return false;
+    }
+                      
+                      
+    GBTask* newTask = nil;
+    newTask = [NSEntityDescription insertNewObjectForEntityForName:@"GBTask" inManagedObjectContext:objectContext];
+    
+    newTask.TaskID = [remoteTask objectForKey:@"TaskID"];
+    newTask.TaskStatus = [remoteTask objectForKey:@"TaskStatus"];
+    newTask.TaskTargetDate = [remoteTask objectForKey:@"TaskTargetStatus"];
+    newTask.TaskName = [remoteTask objectForKey:@"TaskName"];
+    
+    newTask.belongsToHabit = newHabit;
+    newTask.createAt = remoteTask.createdAt;
+    newTask.updateAt = remoteTask.updatedAt;
+    
+    NSError *error;
+    [objectContext save:&error];
+    
+    NSLog(@"New Task[%@] Created. Target Date: %@", newTask.TaskName, newTask.TaskTargetDate);
     
     return true;
 }
@@ -516,22 +617,26 @@ static NSArray *sRelationStatusStr;
     
     NSLog(@"Enter HabitDataModel::getAllTasks. userType:%d",userType);
     
-    NSPredicate *predicate;
+    NSMutableArray *allTasks = [NSMutableArray array];
     
-    if(userType == kUserTypeInternal){    
-        predicate = [NSPredicate predicateWithFormat:@"(belongsToHabit.HabitOwner = %@)", self.localUserName];
+    NSArray *allHabits = [self getAllHabitsByType:userType];
+    
+    
+    for( GBHabit *habit in allHabits){
+    
+        NSArray *tasks = [self getTasksWithHabitID:habit.HabitID];
+        
+        for (GBTask *task in tasks){
+            [allTasks addObject:task];
+        }
     }
-    else{
-        // j2do : get a list of friends
-        return NULL;
-    }
-    
-    NSArray *objects = [self queryManagedObject:kTask withPredicate:predicate];
-    
-    NSLog(@"Retrieved %d Tasks", [objects count]);
     
     
-    return objects;
+    
+    NSLog(@"Retrieved %d Tasks", [allTasks count]);
+    
+    
+    return allTasks;
 
 }
 
@@ -577,9 +682,9 @@ static NSArray *sRelationStatusStr;
     return true;
 }
 
-- (GBUser*) getUser : (NSString*) username{
+- (GBUser*) getUserByName : (NSString*) username{
 
-    NSLog(@"Enter HabitDataModel::getUser. username:%@",username);
+    NSLog(@"Enter HabitDataModel::getUserByName. username:%@",username);
     
     
     NSPredicate *predicate;
@@ -608,6 +713,43 @@ static NSArray *sRelationStatusStr;
 }
 
 
+- (NSArray*) getUserByType : (GBUserType) userType
+{
+
+    NSLog(@"Enter HabitDataModel::getUserByType. user type:%d",userType);
+    
+    NSMutableArray *userNameList = nil;
+    if(userType == kUserTypeALL){
+    
+        userNameList = [NSMutableArray arrayWithArray:[self getFriendList]];
+        [userNameList addObject:localUserName];
+        
+    }else if (userType == kUserTypeFriend){
+    
+        userNameList = [NSMutableArray arrayWithArray:[self getFriendList]];        
+    }else if (userType == kUserTypeInternal){
+        
+        userNameList = [NSMutableArray arrayWithObject:localUserName];
+    }
+    
+    
+    
+    NSMutableArray *userList = [NSMutableArray array];
+    
+    for(NSString *name in userNameList){
+    
+        GBUser *user= [self getUserByName:name];
+        
+        if(user) 
+            [userList addObject:user];
+    }
+    
+    return userList;
+    
+       
+}
+
+
 #pragma mark - 
 #pragma mark RELATION RELATED FUNCTION
 #pragma mark - 
@@ -620,7 +762,7 @@ static NSArray *sRelationStatusStr;
     GBUser *from, *to;
     // get Current User
     
-    from = [dataModel getUser:self.localUserName];
+    from = [dataModel getUserByName:self.localUserName];
     
     if(!from){
         return false;
@@ -628,7 +770,7 @@ static NSArray *sRelationStatusStr;
     
     // get target User
     
-    to = [dataModel getUser:username];
+    to = [dataModel getUserByName:username];
     
     if(!to){
         return false;
@@ -670,7 +812,7 @@ static NSArray *sRelationStatusStr;
     
     // get Current User
     
-    from = [dataModel getUser:self.localUserName];
+    from = [dataModel getUserByName:self.localUserName];
     
     if(!from){
         NSLog(@" Can not retrieve local user");
@@ -679,7 +821,7 @@ static NSArray *sRelationStatusStr;
     
     // get target User
     
-    to = [dataModel getUser:username];
+    to = [dataModel getUserByName:username];
     
     if(!to){
         NSLog(@" Can not retrieve target user");
@@ -797,6 +939,73 @@ static NSArray *sRelationStatusStr;
     }
     
     return nannyNameList;
+}
+
+
+- (NSArray *) getLocalObjects: (NSDate *) date withObjectType: (GBObjectType) objType withAttr: (GBSyncAttr) attr
+{
+
+    NSLog(@"Enter HabitDataModel::getLocalObjects. date:%@, object type: %d, attr : %d", date, objType, attr);
+    
+    
+    NSPredicate *predicate;
+    
+    NSString* dateColumeName = nil;
+    
+    if (attr == kSyncCreateSince){
+        
+        dateColumeName = [NSString stringWithString:@"createAt"];
+    
+    }else if (attr == kSyncUpdateSince){
+    
+        dateColumeName = [NSString stringWithString:@"updateAt"];
+    }
+    
+    
+  //  predicate = [NSPredicate predicateWithFormat:@"(%@ >= %@ AND %@ <= %@)", dateColumeName, date, dateColumeName, [NSDate date]];
+    predicate = [NSPredicate predicateWithFormat:@"(%K >= %@)", dateColumeName, date];
+    NSArray *objects = [self queryManagedObject:objType withPredicate:predicate];
+    
+    NSLog(@"Retrieved %d objects", [objects count]);
+    
+    if( objects.count == 0){
+        
+        NSLog(@"No object retrieved");
+        return nil;
+        
+    }
+    
+    return objects;
+}
+
+
+- (NSManagedObject *) getLocalObjectByAttribute: (NSString*) attributeName withAttributeValue: (NSString*) attributeValue withObjectType: (GBObjectType) objType
+{
+
+    NSLog(@"Enter HabitDataModel::getLocalObjectByAttribute. attributeName: %@, attributeValue: %@, objType : %d", attributeName, attributeValue, objType);
+    
+    NSManagedObject *result = nil;
+    NSPredicate *predicate;
+    
+    
+    predicate = [NSPredicate predicateWithFormat:@"(%@ = %@)", attributeName, attributeValue];
+    NSArray *objects = [self queryManagedObject:objType withPredicate:predicate];
+    
+    if( !objects || objects.count == 0 ){
+    
+        NSLog(@" No object retrieved");
+        
+    }else if (objects.count > 1){
+    
+        NSLog(@" More than one object retrieved");
+    
+    }else{
+    
+        result = objects.lastObject;
+    }
+    
+    return result;
+    
 }
 
 
@@ -918,6 +1127,13 @@ static NSArray *sRelationStatusStr;
 - (void)SyncData
 {
 
+    NSError *error;
+    [objectContext save:&error];
+    
+    if(error){
+        NSLog(@" Save Context Error");
+    }
+    
 }
 
 @end
