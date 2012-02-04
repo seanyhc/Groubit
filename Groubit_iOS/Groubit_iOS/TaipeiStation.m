@@ -14,9 +14,13 @@
 #import "GBRelation.h"
 #import "Parse/Parse.h"
 
+#define DEFALUT_SYNC_INTERVAL 10.0    // sync every 10 secs
+
 @implementation TaipeiStation
 
 @synthesize lastSyncDate;
+@synthesize syncTimer;
+
 
 static TaipeiStation* syncEngine = nil; 
 
@@ -443,7 +447,7 @@ static TaipeiStation* syncEngine = nil;
 
 - (bool) syncAll 
 {
-    NSLog(@"TaipeiStation::syncAll");
+    NSLog(@"Enter TaipeiStation::syncAll");
     
     if (!lastSyncDate){
         // j2do : maybe a leak..
@@ -453,6 +457,7 @@ static TaipeiStation* syncEngine = nil;
     
     NSLog(@"Last Sync Date: %@", lastSyncDate);   
   
+    /*
   
     [self syncUserData];
     
@@ -460,12 +465,62 @@ static TaipeiStation* syncEngine = nil;
     
     [self syncHabit];
     
+     */
     
     lastSyncDate = [[NSDate alloc]init];
     NSLog(@" Set Last Sync Date to %@", lastSyncDate);
     return true;
 }
 
+-(void) startSyncTimer: (NSTimer*) timer
+{
+
+    NSLog(@"Enter TaipeiStation::startSyncTimer");
+    
+    if(!syncTimer)
+    {
+        NSLog(@"create Sync Timers");
+        syncTimer = [NSTimer scheduledTimerWithTimeInterval:DEFALUT_SYNC_INTERVAL
+                                      target:self
+                                      selector:@selector(startSyncTimer:)
+                                      userInfo:nil
+                                      repeats:YES];
+
+    }
+    
+    [self syncAll];
+    
+        
+}
+
+-(void) stopSyncTimer
+{
+    NSLog(@"Enter TaipeiStation::stopSyncTimer");
+
+    if(syncTimer)
+    {
+        [syncTimer invalidate];
+        syncTimer = nil;
+    }
+
+}
+
+
++(bool) enableRegularSync
+{
+    NSLog(@"Enter TaipeiStation::enableRegularSync");
+    
+
+    TaipeiStation *syncEngine = [TaipeiStation getSyncEngine];
+    
+    if(syncEngine)
+    {
+        [syncEngine startSyncTimer:nil];
+        
+    }
+    
+    return true;
+}
 
 
 

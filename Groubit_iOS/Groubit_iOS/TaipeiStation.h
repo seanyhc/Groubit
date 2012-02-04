@@ -13,17 +13,22 @@
 {
     GBDataModelManager *dataModel;
     NSDate *lastSyncDate;
+    NSTimer *syncTimer;
 
 }
 
 @property (nonatomic, retain) NSDate *lastSyncDate;
+@property (nonatomic, assign) NSTimer *syncTimer;
 
 - (bool)syncAll;
 - (bool)syncUserData;
 - (bool)syncRelation;
 - (bool)syncHabit;
 - (bool)syncTasks: (NSString*) habitID;
+- (void) startSyncTimer:(NSTimer*) timer;
+- (void) stopSyncTimer;
 
++(bool) enableRegularSync;
 +(TaipeiStation*) getSyncEngine;
 
 @end

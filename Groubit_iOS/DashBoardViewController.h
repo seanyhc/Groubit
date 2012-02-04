@@ -10,41 +10,7 @@
 
 @interface DashBoardViewController : UIViewController
 {
-    IBOutlet UITextField *localUserName;
+    
 }
-
-@property (nonatomic, retain) UITextField *localUserName;
-
-- (IBAction)changeUserName:(id)sender;
-
-- (IBAction)initTestData:(id)sender;
-- (IBAction)cleanParseData:(id)sender;
-- (IBAction)getAllHabitsByOwnerName:(id)sender;
-- (IBAction)getAllTasks:(id)sender;
-- (IBAction)setHabitCompleted:(id)sender;
-- (IBAction)setTaskCompleted:(id)sender;
-- (IBAction)getFriends:(id)sender;
-- (IBAction)getNanny:(id)sender;
-- (IBAction)syncNow:(id)sender;
-
-- (IBAction)printParseObjects:(id)sender;
-- (IBAction)printLocalObjects:(id)sender;
-- (IBAction)createHabit:(id)sender;
-
-- (IBAction)createRemoteHabit:(id)sender;
-- (IBAction)updateRemoteHabit:(id)sender;
-- (IBAction)updateLocalHabit:(id)sender;
-
-/*
-- (IBAction)updateHabit:(id)sender;
-
-
-- (IBAction)createTask:(id)sender;
-- (IBAction)updateTask:(id)sender;
-- (IBAction)getAllTasks:(id)sender;
-
-- (IBAction)createFriend:(id)sender;
-*/
-
 
 @end
