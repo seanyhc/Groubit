@@ -7,6 +7,10 @@
 //
 
 #import "Groubit_iOSAppDelegate.h"
+#import "DashBoardViewController.h"
+#import "HabitsTableController.h"
+#import "FriendsViewController.h"
+#import "DebugViewController.h"
 
 @implementation Groubit_iOSAppDelegate
 
@@ -20,7 +24,24 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
-    [self.window addSubview:tabController.view];
+    
+    tabController = [[UITabBarController alloc] init];
+    
+    UIViewController *vc1 = [[DashBoardViewController alloc] init];
+    UIViewController *vc2 = [[HabitsTableController alloc] init];
+    UIViewController *vc3 = [[FriendsViewController alloc] init];
+    UIViewController *vc4 = [[DebugViewController alloc] init];
+    
+    NSArray *viewControllers = [ NSArray arrayWithObjects:vc1, vc2, vc3, vc4, nil];
+    
+    [vc1 release];
+    [vc2 release];
+    [vc3 release];
+    [vc4 release];
+    
+    [tabController setViewControllers:viewControllers];
+    //[self.window addSubview:tabController.view];
+    [self.window setRootViewController:tabController];
     [self.window makeKeyAndVisible];
     
     return YES;

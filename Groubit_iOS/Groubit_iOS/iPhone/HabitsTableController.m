@@ -23,7 +23,8 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-
+        UITabBarItem *tbi = [self tabBarItem];
+        [tbi setTitle:@"Habits"];
     }
     return self;
 }
