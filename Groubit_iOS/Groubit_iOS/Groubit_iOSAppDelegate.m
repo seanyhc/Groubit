@@ -28,7 +28,11 @@
     tabController = [[UITabBarController alloc] init];
     
     UIViewController *vc1 = [[DashBoardViewController alloc] init];
-    UIViewController *vc2 = [[HabitsTableController alloc] init];
+    UIViewController *hbc = [[HabitsTableController alloc] init];
+    
+    UINavigationController *vc2 = [[UINavigationController alloc] initWithRootViewController:hbc];
+    //have to set the title for nav controller since it doesn't have its own init method
+    [[vc2 tabBarItem] setTitle:@"Habits"];
     UIViewController *vc3 = [[FriendsViewController alloc] init];
     UIViewController *vc4 = [[DebugViewController alloc] init];
     

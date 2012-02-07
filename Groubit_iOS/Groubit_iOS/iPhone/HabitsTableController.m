@@ -14,6 +14,7 @@
 #import "Groubit_iOSAppDelegate.h"
 #import "TaipeiStation.h"
 #import "Parse/Parse.h"
+#import "HabitsDetailViewController.h"
 
 
 @implementation HabitsTableController
@@ -23,8 +24,20 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        /* 
+        //since the root of this tab is a nav controller init in 
+        //Groubit_iOSAppDelegate, there's no use init here
         UITabBarItem *tbi = [self tabBarItem];
         [tbi setTitle:@"Habits"];
+        */
+            
+        habitsList = [[NSMutableArray alloc] init];
+        
+        UIBarButtonItem *addButton = [[UIBarButtonItem alloc] init];
+        [addButton setTitle:@"Add"];
+        [[self navigationItem] setRightBarButtonItem:addButton];
+        [[self navigationItem] setTitle:@"Habits"];
+        
     }
     return self;
 }
@@ -57,7 +70,7 @@
     
     // * the arrayWithArray method that failed
     //habitsList = [NSMutableArray arrayWithArray:tempArray];
-    habitsList = [[NSMutableArray alloc] init];
+
     NSLog(@"end: HabitsTableController: viewDidLoad");
 
 }
@@ -117,9 +130,20 @@
     UITableViewCell *cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"UITableViewCell"] autorelease];
     GBHabit *habit = [habitsList objectAtIndex:[indexPath row]];
     [cell.textLabel setText:habit.HabitName];
-    [cell.detailTextLabel setText:habit.HabitOwner];
+    [cell.detailTextLabel setText:habit.HabitDescription];
 
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(!habitsDetailController){
+        habitsDetailController = [[HabitsDetailViewController alloc] init];
+    }
+    
+    [habitsDetailController setCurrentHabit:[habitsList objectAtIndex:[indexPath row]]];
+    
+    [[self navigationController] pushViewController:habitsDetailController animated:YES];
 }
 
 @end
