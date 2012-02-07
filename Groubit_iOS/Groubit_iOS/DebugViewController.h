@@ -40,6 +40,12 @@
 - (IBAction)startSyncTimer:(id)sender;
 - (IBAction)stopSyncTimer:(id)sender;
 
+- (IBAction)userDefinedAction1:(id)sender;
+- (IBAction)userDefinedAction2:(id)sender;
+- (IBAction)userDefinedAction3:(id)sender;
+
+
+
 
 
 @end
