@@ -53,26 +53,13 @@
     [super viewDidLoad];
     NSLog(@"start: HabitsTableController: viewDidLoad");
     
-    GBDataModelManager* dataModel = [GBDataModelManager getDataModelManager];
-    NSArray *tempArray = [dataModel getAllHabitsByType:kUserTypeInternal];
+
     
     // * the arrayWithArray method that failed
     //habitsList = [NSMutableArray arrayWithArray:tempArray];
     habitsList = [[NSMutableArray alloc] init];
-    
-    for(int i=0; i < [tempArray count]; i++){
-        GBHabit* habit = (GBHabit*)[tempArray objectAtIndex:i];
-        [habitsList addObject:habit];
-        
-    }
-
-    for(int i=0; i < [habitsList count]; i++){
-        GBHabit* habit = (GBHabit*)[habitsList objectAtIndex:i];
-        NSLog(@"Retrived Habit Name: %@, HabitID: %@, HabitOwner: %@, HabitStartDate: %@", habit.HabitName, habit.HabitID, habit.HabitOwner,habit.HabitStartDate);
-    }
-    
-    NSLog(@"habitsList count1: %d", [habitsList count]);
     NSLog(@"end: HabitsTableController: viewDidLoad");
+
 }
 
 
@@ -81,6 +68,35 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
+    
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    NSLog(@"start: HabitsTableController: viewWillAppear");
+    //refresh the habit list
+    GBDataModelManager* dataModel = [GBDataModelManager getDataModelManager];
+    NSArray *tempArray = [dataModel getAllHabitsByType:kUserTypeInternal];
+    [habitsList removeAllObjects];
+    
+    for(int i=0; i < [tempArray count]; i++){
+        GBHabit* habit = (GBHabit*)[tempArray objectAtIndex:i];
+        [habitsList addObject:habit];
+        
+    }
+    
+
+    /*
+    //just for debugging
+    for(int i=0; i < [habitsList count]; i++){
+        GBHabit* habit = (GBHabit*)[habitsList objectAtIndex:i];
+        NSLog(@"Retrived Habit Name: %@, HabitID: %@, HabitOwner: %@, HabitStartDate: %@", habit.HabitName, habit.HabitID, habit.HabitOwner,habit.HabitStartDate);
+    }
+    */
+    
+    [[self tableView] reloadData];
+    NSLog(@"habitsList count1: %d", [habitsList count]);
+    NSLog(@"end: HabitsTableController: viewWillAppear");
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
