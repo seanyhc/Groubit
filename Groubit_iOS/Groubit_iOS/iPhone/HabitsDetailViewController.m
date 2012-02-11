@@ -44,6 +44,8 @@
 {
     [super viewWillAppear:animated];
     
+    [[self navigationItem] setTitle:currentHabit.HabitName];
+    
     [nameLabel setText:currentHabit.HabitName];
     [descLabel setText:currentHabit.HabitDescription];
     [freqLabel setText:currentHabit.HabitFrequency];
