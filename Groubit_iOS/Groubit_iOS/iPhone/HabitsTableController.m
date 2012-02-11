@@ -15,6 +15,7 @@
 #import "TaipeiStation.h"
 #import "Parse/Parse.h"
 #import "HabitsDetailViewController.h"
+#import "HabitsAddController.h"
 
 
 @implementation HabitsTableController
@@ -32,9 +33,7 @@
         */
             
         habitsList = [[NSMutableArray alloc] init];
-        
-        UIBarButtonItem *addButton = [[UIBarButtonItem alloc] init];
-        [addButton setTitle:@"Add"];
+        UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addButtonPressed)];
         [[self navigationItem] setRightBarButtonItem:addButton];
         [[self navigationItem] setTitle:@"Habits"];
         
@@ -146,4 +145,13 @@
     [[self navigationController] pushViewController:habitsDetailController animated:YES];
 }
 
+-(void)addButtonPressed{
+    NSLog(@"addButton pressed");
+    
+    if(!habitsAddController){
+        habitsAddController = [[HabitsAddController alloc] init];
+    }
+    
+    [self.navigationController pushViewController:habitsAddController animated:YES];
+}
 @end

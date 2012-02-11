@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		14688F7214D7A96A006DAEBA /* HabitsTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14688F7114D7A96A006DAEBA /* HabitsTableController.m */; };
+		14B6D51E14E5E6C7009B95A0 /* HabitsAddController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B6D51C14E5E6C7009B95A0 /* HabitsAddController.m */; };
+		14B6D51F14E5E6C7009B95A0 /* HabitsAddController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14B6D51D14E5E6C7009B95A0 /* HabitsAddController.xib */; };
 		14E365BB14AB2D7B0064CA5B /* FriendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14E365B914AB2D7B0064CA5B /* FriendsViewController.m */; };
 		14E365BC14AB2D7B0064CA5B /* FriendsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14E365BA14AB2D7B0064CA5B /* FriendsViewController.xib */; };
 		14EA769914AAEC63009FF411 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14EA769814AAEC63009FF411 /* UIKit.framework */; };
@@ -64,6 +66,9 @@
 /* Begin PBXFileReference section */
 		14688F7014D7A96A006DAEBA /* HabitsTableController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HabitsTableController.h; path = iPhone/HabitsTableController.h; sourceTree = "<group>"; };
 		14688F7114D7A96A006DAEBA /* HabitsTableController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HabitsTableController.m; path = iPhone/HabitsTableController.m; sourceTree = "<group>"; };
+		14B6D51B14E5E6C7009B95A0 /* HabitsAddController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HabitsAddController.h; path = iPhone/HabitsAddController.h; sourceTree = "<group>"; };
+		14B6D51C14E5E6C7009B95A0 /* HabitsAddController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HabitsAddController.m; path = iPhone/HabitsAddController.m; sourceTree = "<group>"; };
+		14B6D51D14E5E6C7009B95A0 /* HabitsAddController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HabitsAddController.xib; path = iPhone/HabitsAddController.xib; sourceTree = "<group>"; };
 		14E365B814AB2D7B0064CA5B /* FriendsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendsViewController.h; sourceTree = "<group>"; };
 		14E365B914AB2D7B0064CA5B /* FriendsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendsViewController.m; sourceTree = "<group>"; };
 		14E365BA14AB2D7B0064CA5B /* FriendsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FriendsViewController.xib; sourceTree = "<group>"; };
@@ -248,6 +253,9 @@
 				2B2B1CBF14C9690F0068B36E /* TaipeiStation.m */,
 				14688F7014D7A96A006DAEBA /* HabitsTableController.h */,
 				14688F7114D7A96A006DAEBA /* HabitsTableController.m */,
+				14B6D51B14E5E6C7009B95A0 /* HabitsAddController.h */,
+				14B6D51C14E5E6C7009B95A0 /* HabitsAddController.m */,
+				14B6D51D14E5E6C7009B95A0 /* HabitsAddController.xib */,
 			);
 			name = iPhone;
 			sourceTree = "<group>";
@@ -380,6 +388,7 @@
 				14EA76F714AB20AB009FF411 /* DashBoardViewController.xib in Resources */,
 				14E365BC14AB2D7B0064CA5B /* FriendsViewController.xib in Resources */,
 				2B09D8CF14DD155B00A76133 /* DebugViewController.xib in Resources */,
+				14B6D51F14E5E6C7009B95A0 /* HabitsAddController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -431,6 +440,7 @@
 				2BCBEAB814C9BA9A003359AF /* GBUser.m in Sources */,
 				14688F7214D7A96A006DAEBA /* HabitsTableController.m in Sources */,
 				2B09D8CE14DD155B00A76133 /* DebugViewController.m in Sources */,
+				14B6D51E14E5E6C7009B95A0 /* HabitsAddController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

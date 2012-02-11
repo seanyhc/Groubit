@@ -9,11 +9,13 @@
 #import <UIKit/UIKit.h>
 
 #import "HabitsDetailViewController.h"
+#import "HabitsAddController.h"
 
 @interface HabitsTableController : UITableViewController
 {
     NSMutableArray *habitsList;
     HabitsDetailViewController *habitsDetailController;
+    HabitsAddController *habitsAddController;
 }
 
 
