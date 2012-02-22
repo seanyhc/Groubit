@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		14688F7214D7A96A006DAEBA /* HabitsTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14688F7114D7A96A006DAEBA /* HabitsTableController.m */; };
+		14B6D51E14E5E6C7009B95A0 /* HabitsAddController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B6D51C14E5E6C7009B95A0 /* HabitsAddController.m */; };
+		14B6D51F14E5E6C7009B95A0 /* HabitsAddController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14B6D51D14E5E6C7009B95A0 /* HabitsAddController.xib */; };
 		14E365BB14AB2D7B0064CA5B /* FriendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14E365B914AB2D7B0064CA5B /* FriendsViewController.m */; };
 		14E365BC14AB2D7B0064CA5B /* FriendsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14E365BA14AB2D7B0064CA5B /* FriendsViewController.xib */; };
 		14EA769914AAEC63009FF411 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14EA769814AAEC63009FF411 /* UIKit.framework */; };
@@ -30,6 +32,9 @@
 		14EA76D014AAEC63009FF411 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 14EA76CE14AAEC63009FF411 /* InfoPlist.strings */; };
 		14EA76D214AAEC63009FF411 /* Groubit_iOSTests.h in Resources */ = {isa = PBXBuildFile; fileRef = 14EA76D114AAEC63009FF411 /* Groubit_iOSTests.h */; };
 		14EA76D414AAEC63009FF411 /* Groubit_iOSTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 14EA76D314AAEC63009FF411 /* Groubit_iOSTests.m */; };
+
+		14EA76F114AB201F009FF411 /* HabitsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14EA76EF14AB201F009FF411 /* HabitsDetailViewController.m */; };
+		14EA76F214AB201F009FF411 /* HabitsDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14EA76F014AB201F009FF411 /* HabitsDetailViewController.xib */; };
 		2B09D8CE14DD155B00A76133 /* DebugViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B09D8CC14DD155B00A76133 /* DebugViewController.m */; };
 		2B09D8CF14DD155B00A76133 /* DebugViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B09D8CD14DD155B00A76133 /* DebugViewController.xib */; };
 		2B09D8D314DD1B4000A76133 /* DashboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B09D8D214DD1B4000A76133 /* DashboardViewController.m */; };
@@ -61,6 +66,9 @@
 /* Begin PBXFileReference section */
 		14688F7014D7A96A006DAEBA /* HabitsTableController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HabitsTableController.h; path = iPhone/HabitsTableController.h; sourceTree = "<group>"; };
 		14688F7114D7A96A006DAEBA /* HabitsTableController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HabitsTableController.m; path = iPhone/HabitsTableController.m; sourceTree = "<group>"; };
+		14B6D51B14E5E6C7009B95A0 /* HabitsAddController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HabitsAddController.h; path = iPhone/HabitsAddController.h; sourceTree = "<group>"; };
+		14B6D51C14E5E6C7009B95A0 /* HabitsAddController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HabitsAddController.m; path = iPhone/HabitsAddController.m; sourceTree = "<group>"; };
+		14B6D51D14E5E6C7009B95A0 /* HabitsAddController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HabitsAddController.xib; path = iPhone/HabitsAddController.xib; sourceTree = "<group>"; };
 		14E365B814AB2D7B0064CA5B /* FriendsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendsViewController.h; sourceTree = "<group>"; };
 		14E365B914AB2D7B0064CA5B /* FriendsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendsViewController.m; sourceTree = "<group>"; };
 		14E365BA14AB2D7B0064CA5B /* FriendsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FriendsViewController.xib; sourceTree = "<group>"; };
@@ -88,6 +96,10 @@
 		14EA76CF14AAEC63009FF411 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		14EA76D114AAEC63009FF411 /* Groubit_iOSTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Groubit_iOSTests.h; sourceTree = "<group>"; };
 		14EA76D314AAEC63009FF411 /* Groubit_iOSTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Groubit_iOSTests.m; sourceTree = "<group>"; };
+
+		14EA76EE14AB201F009FF411 /* HabitsDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HabitsDetailViewController.h; path = iPhone/HabitsDetailViewController.h; sourceTree = "<group>"; };
+		14EA76EF14AB201F009FF411 /* HabitsDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HabitsDetailViewController.m; path = iPhone/HabitsDetailViewController.m; sourceTree = "<group>"; };
+		14EA76F014AB201F009FF411 /* HabitsDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HabitsDetailViewController.xib; path = iPhone/HabitsDetailViewController.xib; sourceTree = "<group>"; };
 		2B09D8CB14DD155B00A76133 /* DebugViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DebugViewController.h; sourceTree = "<group>"; };
 		2B09D8CC14DD155B00A76133 /* DebugViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DebugViewController.m; sourceTree = "<group>"; };
 		2B09D8CD14DD155B00A76133 /* DebugViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DebugViewController.xib; sourceTree = "<group>"; };
@@ -224,6 +236,10 @@
 				2B09D8D114DD1B4000A76133 /* DashboardViewController.h */,
 				2B09D8D214DD1B4000A76133 /* DashboardViewController.m */,
 				2B926AFE14B93E4F002E03F7 /* DataModel */,
+
+				14EA76EE14AB201F009FF411 /* HabitsDetailViewController.h */,
+				14EA76EF14AB201F009FF411 /* HabitsDetailViewController.m */,
+				14EA76F014AB201F009FF411 /* HabitsDetailViewController.xib */,
 				14E365B814AB2D7B0064CA5B /* FriendsViewController.h */,
 				14E365B914AB2D7B0064CA5B /* FriendsViewController.m */,
 				14E365BA14AB2D7B0064CA5B /* FriendsViewController.xib */,
@@ -237,6 +253,9 @@
 				2B2B1CBF14C9690F0068B36E /* TaipeiStation.m */,
 				14688F7014D7A96A006DAEBA /* HabitsTableController.h */,
 				14688F7114D7A96A006DAEBA /* HabitsTableController.m */,
+				14B6D51B14E5E6C7009B95A0 /* HabitsAddController.h */,
+				14B6D51C14E5E6C7009B95A0 /* HabitsAddController.m */,
+				14B6D51D14E5E6C7009B95A0 /* HabitsAddController.xib */,
 			);
 			name = iPhone;
 			sourceTree = "<group>";
@@ -365,8 +384,11 @@
 				14EA76A514AAEC63009FF411 /* InfoPlist.strings in Resources */,
 				14EA76B514AAEC63009FF411 /* MainWindow_iPhone.xib in Resources */,
 				14EA76BC14AAEC63009FF411 /* MainWindow_iPad.xib in Resources */,
+
+				14EA76F214AB201F009FF411 /* HabitsDetailViewController.xib in Resources */,
 				14E365BC14AB2D7B0064CA5B /* FriendsViewController.xib in Resources */,
 				2B09D8CF14DD155B00A76133 /* DebugViewController.xib in Resources */,
+				14B6D51F14E5E6C7009B95A0 /* HabitsAddController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -408,6 +430,8 @@
 				14EA76B214AAEC63009FF411 /* Groubit_iOSAppDelegate_iPhone.m in Sources */,
 				14EA76B914AAEC63009FF411 /* Groubit_iOSAppDelegate_iPad.m in Sources */,
 				2BD0D85B14AB260D004E1E49 /* GBDataModelManager.m in Sources */,
+
+				14EA76F114AB201F009FF411 /* HabitsDetailViewController.m in Sources */,
 				14E365BB14AB2D7B0064CA5B /* FriendsViewController.m in Sources */,
 				2B2B1CC014C969100068B36E /* TaipeiStation.m in Sources */,
 				2BCBEAAE14C9BA99003359AF /* GBHabit.m in Sources */,
@@ -416,6 +440,7 @@
 				2BCBEAB814C9BA9A003359AF /* GBUser.m in Sources */,
 				14688F7214D7A96A006DAEBA /* HabitsTableController.m in Sources */,
 				2B09D8CE14DD155B00A76133 /* DebugViewController.m in Sources */,
+				14B6D51E14E5E6C7009B95A0 /* HabitsAddController.m in Sources */,
 				2B09D8D314DD1B4000A76133 /* DashboardViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

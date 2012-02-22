@@ -14,6 +14,9 @@
 
 @implementation DashboardViewController
 
+/* sean: this shouldn't be called after I changed the
+ initiated the tabcontroller by codes
+>>>>>>> sean_dev_branch
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
@@ -22,7 +25,7 @@
     }
     return self;
 }
-
+*/
 
 
 - (void)didReceiveMemoryWarning
