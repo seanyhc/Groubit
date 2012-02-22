@@ -30,29 +30,6 @@
 {
     // Override point for customization after application launch.
 
-    tabController = [[UITabBarController alloc] init];
-
-    UIViewController *vc1 = [[DashboardViewController alloc] init];
-    [vc1.tabBarItem setTitle:@"Dashboard"];
-    UIViewController *hbc = [[HabitsTableController alloc] init];
-
-    UINavigationController *vc2 = [[UINavigationController alloc] initWithRootViewController:hbc];
-    //have to set the title for nav controller since it doesn't have its own init method
-    [[vc2 tabBarItem] setTitle:@"Habits"];
-    UIViewController *vc3 = [[FriendsViewController alloc] init];
-    UIViewController *vc4 = [[DebugViewController alloc] init];
-
-    NSArray *viewControllers = [ NSArray arrayWithObjects:vc1, vc2, vc3, vc4, nil];
-
-    [vc1 release];
-    [vc2 release];
-    [vc3 release];
-    [vc4 release];
-
-    [tabController setViewControllers:viewControllers];
-    //[self.window addSubview:tabController.view];
-    [self.window setRootViewController:tabController];
-    //[self.window addSubview:tabController.view];
     /*
     // Create RegisterLoginViewController
     RegisterLoginViewController *loginViewController = [[RegisterLoginViewController alloc] init];
@@ -63,7 +40,6 @@
     // The window retains loginViewController, so we can release our reference
     [loginViewController release];
     */
-    // Show the window
 
     tabController = [[UITabBarController alloc] init];
 
@@ -87,6 +63,8 @@
     [tabController setViewControllers:viewControllers];
     //[self.window addSubview:tabController.view];
     [self.window setRootViewController:tabController];
+
+    // Show the window
     [self.window makeKeyAndVisible];
 
     return YES;
