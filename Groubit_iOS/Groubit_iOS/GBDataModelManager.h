@@ -46,6 +46,8 @@ typedef enum {
 typedef enum {
     kUserTypeInternal,
     kUserTypeFriend,
+    kUserTypeBaby,
+    kUserTypeNanny,
     kUserTypeALL
 } GBUserType;
 
@@ -287,6 +289,9 @@ typedef enum{
  */
 - (NSArray *) getTasksWithHabitID:(NSString*) habitID;
 
+
+
+- (NSArray *) getRecentTask: (GBUserType) userType withPeriod:(int)days;
 
 /*  
  *   USER/FRIEND RELATED METHODS 

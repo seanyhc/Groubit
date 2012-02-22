@@ -503,4 +503,25 @@
     [syncEngine stopSyncTimer];
 }
 
+- (IBAction)userDefinedAction1:(id)sender
+{
+    GBDataModelManager* dataModel = [GBDataModelManager getDataModelManager];
+    [dataModel getRecentTask:kUserTypeInternal withPeriod:10];
+    
+    [dataModel getRecentTask:kUserTypeBaby withPeriod:20];
+    
+}
+
+- (IBAction)userDefinedAction2:(id)sender
+{
+
+}
+
+- (IBAction)userDefinedAction3:(id)sender
+{
+
+}
+
+
+
 @end

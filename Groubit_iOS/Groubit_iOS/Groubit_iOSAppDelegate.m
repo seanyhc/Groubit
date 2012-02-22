@@ -27,7 +27,8 @@
     
     tabController = [[UITabBarController alloc] init];
     
-    UIViewController *vc1 = [[DashBoardViewController alloc] init];
+    UIViewController *vc1 = [[DashboardViewController alloc] init];
+    [vc1.tabBarItem setTitle:@"Dashboard"];
     UIViewController *hbc = [[HabitsTableController alloc] init];
     
     UINavigationController *vc2 = [[UINavigationController alloc] initWithRootViewController:hbc];

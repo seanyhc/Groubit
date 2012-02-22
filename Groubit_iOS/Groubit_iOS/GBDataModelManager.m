@@ -647,6 +647,53 @@ static NSArray *sRelationStatusStr;
     return NULL;
 }
 
+- (NSArray *) getRecentTask: (GBUserType) userType withPeriod:(int)days
+{
+    NSLog(@"Enter HabitDataModel::getRecentTasks. userType:%d, withPeriod:%d",userType, days);
+    
+    NSArray* userNameList = nil;
+    
+    if( userType == kUserTypeInternal ){
+    
+        userNameList = [NSArray arrayWithObject:localUserName];
+        
+    }else if (userType == kUserTypeBaby){
+    
+        userNameList = [self getNannyList];
+    }
+    
+    
+    //NSPredicate *predicate;
+    
+    NSMutableArray *predicates = [[NSMutableArray alloc] initWithCapacity:userNameList.count];
+    
+    for(NSString* name in userNameList){
+        
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(belongsToHabit.HabitOwner = %@)", name];
+        [predicates addObject:predicate];
+    }
+    
+    
+    NSPredicate* orPredicate = [NSCompoundPredicate orPredicateWithSubpredicates:predicates];
+    
+    
+    
+    NSDate *now = [NSDate date];
+    NSDate *target = [NSDate dateWithTimeIntervalSinceNow:(days*24*60*60)];
+    
+    NSPredicate *timePredicate = [NSPredicate predicateWithFormat:@"(TaskTargetDate >= %@ AND TaskTargetDate <= %@)", now, target];
+    
+    NSPredicate *andPredicate = [NSCompoundPredicate andPredicateWithSubpredicates:[NSArray arrayWithObjects:orPredicate, timePredicate, nil]];
+    
+    NSLog(@"Query Predicate : %@", andPredicate);
+    
+    NSArray *objects = [self queryManagedObject:kTask withPredicate:andPredicate];
+    
+    NSLog(@"Retrieved %d Tasks", [objects count]);
+    
+    return objects;
+}
+
 
 #pragma mark - 
 #pragma mark USER  RELATED FUNCTION
