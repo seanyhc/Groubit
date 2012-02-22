@@ -264,6 +264,9 @@
 				C63E0DAF14E61D350070E902 /* RegisterLoginViewController.h */,
 				C63E0DB014E61D350070E902 /* RegisterLoginViewController.m */,
 				C63E0DB114E61D350070E902 /* RegisterLoginViewController.xib */,
+				14B6D51B14E5E6C7009B95A0 /* HabitsAddController.h */,
+				14B6D51C14E5E6C7009B95A0 /* HabitsAddController.m */,
+				14B6D51D14E5E6C7009B95A0 /* HabitsAddController.xib */,
 			);
 			name = iPhone;
 			sourceTree = "<group>";
@@ -398,6 +401,7 @@
 				2B09D8CF14DD155B00A76133 /* DebugViewController.xib in Resources */,
 				14B6D51F14E5E6C7009B95A0 /* HabitsAddController.xib in Resources */,
 				C63E0DB314E61D350070E902 /* RegisterLoginViewController.xib in Resources */,
+				14B6D51F14E5E6C7009B95A0 /* HabitsAddController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

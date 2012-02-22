@@ -12,6 +12,10 @@
 #import "FriendsViewController.h"
 #import "DebugViewController.h"
 #import "RegisterLoginViewController.h"
+#import "DashBoardViewController.h"
+#import "HabitsTableController.h"
+#import "FriendsViewController.h"
+#import "DebugViewController.h"
 
 @implementation Groubit_iOSAppDelegate
 
@@ -60,6 +64,29 @@
     [loginViewController release];
     */
     // Show the window
+
+    tabController = [[UITabBarController alloc] init];
+
+    UIViewController *vc1 = [[DashboardViewController alloc] init];
+    [vc1.tabBarItem setTitle:@"Dashboard"];
+    UIViewController *hbc = [[HabitsTableController alloc] init];
+
+    UINavigationController *vc2 = [[UINavigationController alloc] initWithRootViewController:hbc];
+    //have to set the title for nav controller since it doesn't have its own init method
+    [[vc2 tabBarItem] setTitle:@"Habits"];
+    UIViewController *vc3 = [[FriendsViewController alloc] init];
+    UIViewController *vc4 = [[DebugViewController alloc] init];
+
+    NSArray *viewControllers = [ NSArray arrayWithObjects:vc1, vc2, vc3, vc4, nil];
+
+    [vc1 release];
+    [vc2 release];
+    [vc3 release];
+    [vc4 release];
+
+    [tabController setViewControllers:viewControllers];
+    //[self.window addSubview:tabController.view];
+    [self.window setRootViewController:tabController];
     [self.window makeKeyAndVisible];
 
     return YES;
