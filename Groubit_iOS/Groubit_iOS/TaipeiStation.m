@@ -182,7 +182,7 @@ static TaipeiStation* syncEngine = nil;
     
     PFQuery *relationQuery = [PFQuery queryWithClassName:@"GBRelation"];
     [relationQuery whereKey:@"createAt" greaterThan:lastSyncDate] ;
-    [relationQuery whereKey:@"toUser" equalTo:dataModel.localUserName];
+    [relationQuery whereKey:@"relationToUser" equalTo:dataModel.localUserName];
     NSArray *newPFRelations = [relationQuery findObjects];
     
     if( newPFRelations && newPFRelations.count > 0 ){
@@ -198,12 +198,28 @@ static TaipeiStation* syncEngine = nil;
                 // friend request
                 // TODO : prompt user 
                 NSLog(@"Friend Request from User:%@, status: %@", fromUser, status);
+                
+                
+                // 0. create local relation object
+                
+                //[dataModel createRelationWithRemoteRelation:pfRelation];
+                
+                // 1. add user(originator) to local
+                
+                // 2. create notification object
+                
+                
+                
                 //[dataModel createFriend:fromUser];
                 
             }else if ([type isEqualToString:@"nanny"]){
             
                 NSLog(@"Nanny Request from User:%@, status: %@", fromUser, status);
                 // nanny request
+                
+                
+                // 0. 
+                
                 // TODO prompt user
                 
             }
@@ -226,6 +242,8 @@ static TaipeiStation* syncEngine = nil;
         [pfRelation setObject:relation.RelationID forKey:@"RelationID"];
         [pfRelation setObject:relation.RelationType forKey:@"RelationType"];
         [pfRelation setObject:relation.RelationStatus forKey:@"RelationStatus"];
+        [pfRelation setObject:relation.relationToUser forKey:@"relationToUser"];
+        [pfRelation setObject:relation.relationFromUser forKey:@"relationFromUser"];
         
         [pfRelation saveInBackground];            
     }
