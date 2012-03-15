@@ -186,23 +186,6 @@ typedef enum{
  */
 - (GBHabit*) getHabitByID : (NSString*) habitID;
 
-/**
- 
- Retrieve all habits of current user where the specified user is the Nanny 
- 
- @param friendName  the name of the user
- @return a list of habits with type "HabitTypeObject"
- */
-- (NSArray *) getMyNanniedHabits:(NSString*) friendName;
-
-/**
- 
- Retrieve all habits of a particular friend where the current user is the Nanny 
- 
- @param friendName  the name of the user
- @return a list of habits with type "HabitTypeObject"
- */
-- (NSArray *) getMyBabyHabits:(NSString*) friendName;
 
 /**
  
@@ -222,15 +205,6 @@ typedef enum{
  @param habitID  the ID of the habit
  */
 - (void) deleteHabitByID:(NSString*)habitID;
-
-/**
- 
- Delete a habit. All the associated tasks will be deleted as well.  
- 
- @param habitID  the name of the habit
- */
-- (void) deleteHabitByName:(NSString*)habitName;
-
 
 
 /*  
@@ -272,13 +246,7 @@ typedef enum{
 
 - (NSArray *) getAllTasks:(GBUserType) userType;
 
-/**
- 
- Retrieve all tasks that belongs the Baby of current User
 
- @return a list of task with type "TaskTypeObject"
- */
-- (NSArray *) getMyBabyTasks;
 
 /**
  
