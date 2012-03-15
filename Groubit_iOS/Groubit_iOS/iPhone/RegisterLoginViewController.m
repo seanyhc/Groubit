@@ -17,6 +17,7 @@
 
 @synthesize userName;
 @synthesize passWord;
+@synthesize loginWarn;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -86,12 +87,18 @@
             NSString *errorString = [[error userInfo] objectForKey:@"error"];
             // Show the errorString somewhere and let the user try again.
             NSLog(@"Signup error: %@", errorString);
+            
+            loginWarn.text = @"";
+            loginWarn.text = errorString;
         }
     }];
     
 }
 
 - (IBAction)login:(id)sender{
+    
+    loginWarn.text = @"";
+    
     [PFUser logInWithUsernameInBackground:[userName text] password:[passWord text] 
             block:^(PFUser *user, NSError *error) {
         if (user) {
