@@ -2,7 +2,7 @@
 //  GBTask.h
 //  Groubit_iOS
 //
-//  Created by Jeffrey on 1/20/12.
+//  Created by Jeffrey on 3/10/12.
 //  Copyright (c) 2012 UCB MIMS. All rights reserved.
 //
 
@@ -11,9 +11,8 @@
 
 @class GBHabit;
 
-@interface GBTask : NSManagedObject {
-@private
-}
+@interface GBTask : NSManagedObject
+
 @property (nonatomic, retain) NSDate * createAt;
 @property (nonatomic, retain) NSString * TaskID;
 @property (nonatomic, retain) NSString * TaskName;

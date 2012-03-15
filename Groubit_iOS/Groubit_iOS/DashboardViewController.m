@@ -16,7 +16,7 @@
 
 /* sean: this shouldn't be called after I changed the
  initiated the tabcontroller by codes
->>>>>>> sean_dev_branch
+
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
@@ -105,6 +105,7 @@
         
     if(section == 0 ){
     
+
         tasks = [dataModel getRecentTask:kUserTypeInternal withPeriod:3];
         
     }
@@ -158,8 +159,9 @@
     NSArray *tasks;
     
     if(indexPath.section == 0 ){
-        
+
         tasks = [dataModel getRecentTask:kUserTypeInternal withPeriod:3];
+
         
     }
     

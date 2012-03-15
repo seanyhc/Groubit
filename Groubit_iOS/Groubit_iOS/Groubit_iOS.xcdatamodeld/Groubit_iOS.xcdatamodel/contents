@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="562" systemVersion="11C74" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="878" systemVersion="11D50d" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="GBHabit" representedClassName="GBHabit">
         <attribute name="createAt" optional="YES" attributeType="Date"/>
         <attribute name="HabitAttempts" optional="YES" attributeType="Integer 32" defaultValueString="0"/>
@@ -15,10 +15,22 @@
         <relationship name="referencedByRelation" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="GBRelation" inverseName="hasHabit" inverseEntity="GBRelation"/>
         <relationship name="tasks" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="GBTask" inverseName="belongsToHabit" inverseEntity="GBTask"/>
     </entity>
+    <entity name="GBNotification" representedClassName="GBNotification" syncable="YES">
+        <attribute name="createAt" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="fromUser" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="notificationID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="status" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="text" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="toUser" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="updateAt" optional="YES" attributeType="Date" syncable="YES"/>
+    </entity>
     <entity name="GBRelation" representedClassName="GBRelation">
         <attribute name="createAt" optional="YES" attributeType="Date"/>
+        <attribute name="relationFromUser" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="RelationID" optional="YES" attributeType="String"/>
         <attribute name="RelationStatus" optional="YES" attributeType="String"/>
+        <attribute name="relationToUser" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="RelationType" optional="YES" attributeType="String"/>
         <attribute name="updateAt" optional="YES" attributeType="Date"/>
         <relationship name="fromUser" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="GBUser" inverseName="hasRelation" inverseEntity="GBUser"/>
@@ -46,7 +58,8 @@
     </entity>
     <elements>
         <element name="GBHabit" positionX="-425" positionY="-153" width="128" height="180"/>
-        <element name="GBRelation" positionX="-441" positionY="-369" width="128" height="165"/>
+        <element name="GBNotification" positionX="160" positionY="192" width="128" height="165"/>
+        <element name="GBRelation" positionX="-441" positionY="-369" width="128" height="195"/>
         <element name="GBTask" positionX="-164" positionY="-141" width="128" height="150"/>
         <element name="GBUser" positionX="-630" positionY="-126" width="128" height="165"/>
     </elements>

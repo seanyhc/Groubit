@@ -2,7 +2,7 @@
 //  GBTask.m
 //  Groubit_iOS
 //
-//  Created by Jeffrey on 1/20/12.
+//  Created by Jeffrey on 3/10/12.
 //  Copyright (c) 2012 UCB MIMS. All rights reserved.
 //
 
@@ -11,6 +11,7 @@
 
 
 @implementation GBTask
+
 @dynamic createAt;
 @dynamic TaskID;
 @dynamic TaskName;

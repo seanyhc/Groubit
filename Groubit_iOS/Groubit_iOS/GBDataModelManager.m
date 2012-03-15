@@ -264,6 +264,7 @@ static NSArray *sRelationStatusStr;
 }
 
 
+
 - (NSArray *) getAllHabitsByType:(GBUserType) userType
 {
     NSLog(@"Enter HabitDataModel::getAllHabits. userType:%d",userType);
@@ -367,30 +368,6 @@ static NSArray *sRelationStatusStr;
 
 
 
-// j2do
-- (NSArray *) getMyNanniedHabits:(NSString*) friendName
-{
-
-    NSLog(@"Enter HabitDataModel::getAllHabitsByOwnerName. ownerName:%@", friendName);
-    
-    
-    NSPredicate* predicate = [NSPredicate predicateWithFormat:@"(HabitOwner = %@)", friendName];
-    
-    NSArray *objects = [self queryManagedObject:kHabit withPredicate:predicate];
-    
-    NSLog(@"Retrieved %d Habits", [objects count]);
-    
-    return objects;
-}
-
-
-// j2do
-- (NSArray *) getMyBabyHabits:(NSString*) friendName
-{
-
-    return NULL;
-}
-
 - (void) setHabitStatus: (NSString*) habitID 
              withStatus:(HabitStatus) habitStatus
 {
@@ -461,38 +438,7 @@ static NSArray *sRelationStatusStr;
     
 }
 
-// j2do
-- (void) deleteHabitByName:(NSString*)habitName
-{
-    /*
 
-    Groubit_iOSAppDelegate* appDelegate = [[UIApplication sharedApplication] delegate];
-    
-    NSManagedObjectContext* objectContext = [appDelegate managedObjectContext];
-    NSEntityDescription* desc = [NSEntityDescription entityForName:@"HabitType" inManagedObjectContext:objectContext];
-    
-    NSFetchRequest* request = [[NSFetchRequest alloc] init];
-    [request setEntity:desc];
-    
-    NSPredicate* predicate = [NSPredicate predicateWithFormat:@"(HabitName = %@)", habitName];
-    [request setPredicate:predicate];
-    
-    
-    NSError *error;
-    
-    NSArray *objects = [objectContext executeFetchRequest:request error:&error];
-    
-    
-    for (int i=0; i< [objects count]; i++) {
-        HabitTypeObject* habit = (HabitTypeObject*)[objects objectAtIndex:i];
-        
-        NSLog(@"Deleting Habit [%@]", habit.HabitName);
-        [objectContext deleteObject:habit];   
-        
-    }
-    */
-
-}
 
 
 #pragma mark - 
@@ -640,12 +586,7 @@ static NSArray *sRelationStatusStr;
 
 }
 
-// j2do
-- (NSArray *) getMyBabyTasks
-{
 
-    return NULL;
-}
 
 - (NSArray *) getRecentTask: (GBUserType) userType withPeriod:(int)days
 {
@@ -806,7 +747,7 @@ static NSArray *sRelationStatusStr;
     NSLog(@"Enter HabitDataModel::createFriend. username:%@",username);
     
     
-    GBUser *from, *to;
+    GBUser *from;
     // get Current User
     
     from = [dataModel getUserByName:self.localUserName];
@@ -815,6 +756,7 @@ static NSArray *sRelationStatusStr;
         return false;
     }
     
+    /*
     // get target User
     
     to = [dataModel getUserByName:username];
@@ -822,7 +764,7 @@ static NSArray *sRelationStatusStr;
     if(!to){
         return false;
     }
-    
+    */
     
     GBRelation* newRelation = nil;
     newRelation = [NSEntityDescription insertNewObjectForEntityForName:@"GBRelation" inManagedObjectContext:objectContext];
@@ -832,8 +774,10 @@ static NSArray *sRelationStatusStr;
     newRelation.RelationID = [[NSString alloc] initWithFormat:@"RELATION_%@",[GBDataModelManager createLocalUUID]];
     newRelation.RelationType = (NSString*)[sRelationStr objectAtIndex:kFriend];
     newRelation.RelationStatus = (NSString*)[sRelationStatusStr objectAtIndex:kRelationStatusPending];
+    newRelation.relationToUser = [NSString stringWithString:username];
+    newRelation.relationFromUser = [NSString stringWithString:localUserName];
     newRelation.fromUser = from;
-    newRelation.toUser = to;
+   // newRelation.toUser = to;
     newRelation.createAt = newRelation.updateAt = [NSDate date];
     
     NSError *error;
@@ -897,6 +841,8 @@ static NSArray *sRelationStatusStr;
     
     newRelation.RelationID = [[NSString alloc] initWithFormat:@"RELATION_%@",[GBDataModelManager createLocalUUID]];
     newRelation.RelationType = (NSString*)[sRelationStr objectAtIndex:kNanny];
+    newRelation.relationToUser = [NSString stringWithString:username];
+    newRelation.relationFromUser = [NSString stringWithString:localUserName];
     newRelation.fromUser = from;
     newRelation.toUser = to;
     newRelation.hasHabit = habit;
@@ -989,6 +935,11 @@ static NSArray *sRelationStatusStr;
 }
 
 
+
+#pragma mark - 
+#pragma mark GENERIC FUNCTIONS
+#pragma mark - 
+
 - (NSArray *) getLocalObjects: (NSDate *) date withObjectType: (GBObjectType) objType withAttr: (GBSyncAttr) attr
 {
 
@@ -1055,6 +1006,45 @@ static NSArray *sRelationStatusStr;
     
 }
 
+- (NSArray*)queryManagedObject: (GBObjectType)type withPredicate:(NSPredicate *)predicate
+{
+    
+    NSLog(@"Enter HabitDataModel::queryManagedObject. type:%d, predicate:%@", type, predicate);
+    
+    
+    // j2do : map different object type string    
+    NSEntityDescription* desc = nil;
+    
+    if(type == kTask){
+        desc = [NSEntityDescription entityForName:@"GBTask" inManagedObjectContext:objectContext];
+    }else if(type == kHabit){
+        desc = [NSEntityDescription entityForName:@"GBHabit" inManagedObjectContext:objectContext];
+    }else if(type == kUser){
+        desc = [NSEntityDescription entityForName:@"GBUser" inManagedObjectContext:objectContext];
+    }else if(type == kRelation){
+        desc = [NSEntityDescription entityForName:@"GBRelation" inManagedObjectContext:objectContext];        
+    }
+    
+    
+    NSFetchRequest* request = [[NSFetchRequest alloc] init];
+    
+    [request setEntity:desc];
+    [request setPredicate:predicate];
+    
+    NSError *error;
+    NSArray *objects = [objectContext executeFetchRequest:request error:&error];
+    
+    
+    if(!objects){
+        
+        NSLog(@"Error Querying Objects, Error:%@", [error localizedDescription]);
+    }
+    
+    return objects;
+}
+
+
+
 
 // INTERNAL HELPER FUNCTIONS
 
@@ -1120,43 +1110,6 @@ static NSArray *sRelationStatusStr;
     return result;
 }
 
-
-- (NSArray*)queryManagedObject: (GBObjectType)type withPredicate:(NSPredicate *)predicate
-{
-    
-    NSLog(@"Enter HabitDataModel::queryManagedObject. type:%d, predicate:%@", type, predicate);
-      
-
-    // j2do : map different object type string    
-    NSEntityDescription* desc = nil;
-    
-    if(type == kTask){
-        desc = [NSEntityDescription entityForName:@"GBTask" inManagedObjectContext:objectContext];
-    }else if(type == kHabit){
-        desc = [NSEntityDescription entityForName:@"GBHabit" inManagedObjectContext:objectContext];
-    }else if(type == kUser){
-        desc = [NSEntityDescription entityForName:@"GBUser" inManagedObjectContext:objectContext];
-    }else if(type == kRelation){
-        desc = [NSEntityDescription entityForName:@"GBRelation" inManagedObjectContext:objectContext];        
-    }
-    
-    
-    NSFetchRequest* request = [[NSFetchRequest alloc] init];
-
-    [request setEntity:desc];
-    [request setPredicate:predicate];
-    
-    NSError *error;
-    NSArray *objects = [objectContext executeFetchRequest:request error:&error];
-    
-
-    if(!objects){
-    
-        NSLog(@"Error Querying Objects, Error:%@", [error localizedDescription]);
-    }
-    
-    return objects;
-}
 
 
 

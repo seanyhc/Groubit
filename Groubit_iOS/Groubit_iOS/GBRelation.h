@@ -2,7 +2,7 @@
 //  GBRelation.h
 //  Groubit_iOS
 //
-//  Created by Jeffrey on 1/20/12.
+//  Created by Jeffrey on 3/10/12.
 //  Copyright (c) 2012 UCB MIMS. All rights reserved.
 //
 
@@ -11,14 +11,15 @@
 
 @class GBHabit, GBUser;
 
-@interface GBRelation : NSManagedObject {
-@private
-}
+@interface GBRelation : NSManagedObject
+
 @property (nonatomic, retain) NSDate * createAt;
 @property (nonatomic, retain) NSString * RelationID;
+@property (nonatomic, retain) NSString * RelationStatus;
 @property (nonatomic, retain) NSString * RelationType;
 @property (nonatomic, retain) NSDate * updateAt;
-@property (nonatomic, retain) NSString * RelationStatus;
+@property (nonatomic, retain) NSString * relationToUser;
+@property (nonatomic, retain) NSString * relationFromUser;
 @property (nonatomic, retain) GBUser *fromUser;
 @property (nonatomic, retain) GBHabit *hasHabit;
 @property (nonatomic, retain) GBUser *toUser;
