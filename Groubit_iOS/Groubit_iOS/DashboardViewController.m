@@ -102,13 +102,13 @@
         
     if(section == 0 ){
     
-        tasks = [dataModel getRecentTask:kUserTypeInternal withPeriod:7];
+        tasks = [dataModel getRecentTask:kUserTypeInternal withPeriod:3];
         
     }
     
     if(section == 1)
     {
-        tasks = [dataModel getRecentTask:kUserTypeBaby withPeriod:7];
+        tasks = [dataModel getRecentTask:kUserTypeBaby withPeriod:3];
     
     }
     
@@ -156,13 +156,13 @@
     
     if(indexPath.section == 0 ){
         
-        tasks = [dataModel getRecentTask:kUserTypeInternal withPeriod:7];
+        tasks = [dataModel getRecentTask:kUserTypeInternal withPeriod:3];
         
     }
     
     if(indexPath.section == 1)
     {
-        tasks = [dataModel getRecentTask:kUserTypeBaby withPeriod:7];
+        tasks = [dataModel getRecentTask:kUserTypeBaby withPeriod:3];
         
     }
 
