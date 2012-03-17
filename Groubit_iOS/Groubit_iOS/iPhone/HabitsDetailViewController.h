@@ -10,12 +10,16 @@
 
 @class GBHabit;
 @interface HabitsDetailViewController : UIViewController
+<UITableViewDelegate, UITableViewDataSource>
 {
     IBOutlet UILabel *nameLabel;
     IBOutlet UILabel *descLabel;
     IBOutlet UILabel *freqLabel;
+    IBOutlet UITableView *taskTable;
     
     GBHabit *currentHabit;
+    NSMutableArray *tasksList;
 }
 @property (nonatomic, assign) GBHabit *currentHabit;
+@property (nonatomic, retain) IBOutlet UITableView *taskTable;
 @end
