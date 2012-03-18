@@ -12,6 +12,7 @@
 #import "GBHabit.h"
 #import "GBTask.h"
 #import "GBRelation.h"
+#import "GBNotification.h"
 #import "Parse/Parse.h"
 
 #define DEFALUT_SYNC_INTERVAL 10.0    // sync every 10 secs
@@ -457,7 +458,115 @@ static TaipeiStation* syncEngine = nil;
     
     }
     
+    return true;
+}
+
+- (bool) syncNotification
+{
+     NSLog(@"Enter TaipeiStation::syncNotification");
+     NSDate *now = [NSDate date];
     
+    // 1. sync nofication in common
+    
+   
+    NSArray *localNotifications = [dataModel getAllNotifications];
+    
+    if( localNotifications && localNotifications.count > 0){
+         NSLog(@"Merge Notification ...");
+        for( GBNotification *localNotification in localNotifications){
+            
+            PFQuery *remoteNotificationQuery = [PFQuery queryWithClassName:@"GBNotification"];
+            [remoteNotificationQuery whereKey:@"notificationID" equalTo:localNotification.notificationID];
+            NSArray *remoteNotificationArray = [remoteNotificationQuery findObjects];
+            
+            if(remoteNotificationArray && remoteNotificationArray.count == 1){
+                
+                PFObject *remoteNotification = remoteNotificationArray.lastObject;
+                
+                NSLog(@" Found notification in common. Notification ID: %@, local notification: %@, remote notification: %@, remote update :%@", localNotification.notificationID, localNotification, remoteNotification, remoteNotification.updatedAt);
+                
+                if(remoteNotification.updatedAt > localNotification.updateAt){
+                    
+                    // remote has latest date
+                    NSLog(@"Update local with remote status");
+                    localNotification.status        = [remoteNotification objectForKey:@"status"];
+                    localNotification.text      = [remoteNotification objectForKey:@"text"];
+
+                    localNotification.updateAt = now;
+                    
+                    [dataModel SyncData];
+                
+                    
+                }else{
+                    NSLog(@"Update Remote with local status");
+                    
+                    [remoteNotification setObject:localNotification.status forKey:@"status"];
+                    [remoteNotification setObject:localNotification.text forKey:@"text"];                    
+                    
+                    [remoteNotification saveInBackground];
+                }
+                
+            }
+            
+        }
+    }
+    
+    
+    // 2. upload local notification to remote
+    NSLog(@"retrive new Notification on local and create remote habits");
+    NSArray *newGBNotifications = [dataModel getLocalObjects:lastSyncDate withObjectType:kNotification withAttr:kSyncCreateSince];
+    
+    
+    for(GBNotification *notification in newGBNotifications){
+        
+        // j2do : check the id is unique on remote
+        
+        NSLog(@"Create new Notification on remote. Notification: %@", notification);
+        PFObject *pfNotification = [PFObject objectWithClassName:@"GBNotification"];
+        [pfNotification setObject:notification.notificationID forKey:@"notificationID"];
+        [pfNotification setObject:notification.type forKey:@"type"];
+        [pfNotification setObject:notification.fromUser forKey:@"fromUser"];
+        [pfNotification setObject:notification.toUser forKey:@"toUser"];
+        [pfNotification setObject:notification.text forKey:@"text"];
+        [pfNotification setObject:notification.status forKey:@"status"];
+      
+        
+        // j2do : setup relation with task and owner
+        
+        [pfNotification saveInBackground];  
+    }
+    
+
+    // 3. create local notification object based on remote object
+    
+    NSLog(@"retrieve new notification on remote and create local notification");
+    
+   
+    NSArray *localUsers = [dataModel getUserByType:kUserTypeALL];
+    NSMutableArray *localUserNames = [NSMutableArray array];
+    
+    for (GBUser * user in localUsers) {
+        [localUserNames addObject:user.UserName];
+    }
+    
+    PFQuery *newNotificationQuery = [PFQuery queryWithClassName:@"GBNotification"];
+    [newNotificationQuery whereKey:@"createdAt" greaterThan:lastSyncDate];
+    [newNotificationQuery whereKey:@"createdAt" lessThan:now ]; 
+    [newNotificationQuery whereKey:@"toUser" equalTo:[dataModel localUserName]];
+
+    NSArray *newPFNotifications = [newNotificationQuery findObjects];
+    
+    if( newPFNotifications && newPFNotifications.count > 0 ){
+        
+        for( PFObject* remoteNotification in newPFNotifications){
+            
+            [dataModel createNotificationWithRemoteNotification:remoteNotification];
+            
+        }
+        
+    }else{
+        NSLog(@" No new remote habits");
+    }
     
     
     return true;
@@ -484,6 +593,8 @@ static TaipeiStation* syncEngine = nil;
     [self syncHabit];
     
      */
+    
+    [self syncNotification];
     
     lastSyncDate = [[NSDate alloc]init];
     NSLog(@" Set Last Sync Date to %@", lastSyncDate);

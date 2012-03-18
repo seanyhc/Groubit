@@ -24,6 +24,7 @@
 - (bool)syncUserData;
 - (bool)syncRelation;
 - (bool)syncHabit;
+- (bool)syncNotification;
 - (bool)syncTasks: (NSString*) habitID;
 - (void) startSyncTimer:(NSTimer*) timer;
 - (void) stopSyncTimer;
