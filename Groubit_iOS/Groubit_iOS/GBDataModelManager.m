@@ -11,6 +11,7 @@
 #import "GBTask.h"
 #import "GBUser.h"
 #import "GBRelation.h"
+#import "GBNotification.h"
 #import "Parse/Parse.h"
 
 #import "Groubit_iOSAppDelegate.h"
@@ -28,6 +29,8 @@ static NSArray *sHabitStatusStr;
 static NSArray *sTaskStatusStr;
 static NSArray *sRelationStr;
 static NSArray *sRelationStatusStr;
+static NSArray *sNotificationTypeStr;
+static NSArray *sNotificationStatusStr;
 
 
 -(id) init{
@@ -56,6 +59,15 @@ static NSArray *sRelationStatusStr;
     sRelationStatusStr = [[NSArray alloc] initWithObjects:@"pending",
                                                           @"confirmed",
                                                           @"rejected",nil];
+    
+    
+    sNotificationTypeStr = [[NSArray alloc] initWithObjects:@"friendRequest",
+                                                            @"taskCompleted",
+                                                            @"habitCompleted",nil];
+    
+    sNotificationStatusStr = [[NSArray alloc] initWithObjects:@"new",
+                                                              @"viewed",
+                                                              nil];
     
     
     Groubit_iOSAppDelegate* appDelegate = [[UIApplication sharedApplication] delegate];
@@ -888,7 +900,7 @@ static NSArray *sRelationStatusStr;
     
     for(GBRelation *relation in objects ){
     
-        [friendNameList addObject:relation.toUser.UserName];
+        [friendNameList addObject:relation.relationToUser];
     }
     
     return friendNameList;
@@ -934,6 +946,101 @@ static NSArray *sRelationStatusStr;
     return nannyNameList;
 }
 
+#pragma mark - 
+#pragma mark Notification Related Objects
+#pragma mark - 
+
+
+- (bool) createNotification:(NSString*)text fromUser:(NSString*)fromUserName toUser:(NSString*)toUserName status:(int)status type:(int)type
+{
+    NSLog(@"Enter HabitDataModel::createNotification. fromUser:%@, toUser:%@, text:%@, status:%d, type:%d", fromUserName, toUserName, text, status, type);
+
+    GBNotification* newNotification;
+    
+       
+    newNotification = [NSEntityDescription insertNewObjectForEntityForName:@"GBNotification" inManagedObjectContext:objectContext];
+    
+    
+    newNotification.notificationID  = [[NSString alloc] initWithFormat:@"NOTIFICATION_%@",[GBDataModelManager createLocalUUID]];
+    
+    newNotification.toUser          = toUserName;
+    newNotification.fromUser        = fromUserName;
+    newNotification.text            = text;
+    newNotification.status          = [sNotificationStatusStr objectAtIndex:status];
+    newNotification.type            = [sNotificationTypeStr objectAtIndex:type];
+    
+    newNotification.createAt = newNotification.updateAt  = [NSDate date];
+    
+    NSError *error;
+    [objectContext save:&error];
+
+    
+    return true;
+}
+
+
+- (NSArray *) getAllNotifications
+{
+
+    NSLog(@"Enter HabitDataModel::getAllNotification.");
+    
+    NSPredicate *predicate;
+    
+    predicate = [NSPredicate predicateWithFormat:@"(toUser = %@)", localUserName];
+    
+    NSArray *objects = [self queryManagedObject:kNotification withPredicate:predicate];
+    
+    NSLog(@"Retrieved %d Notifications", [objects count]);
+    
+    
+    return objects;
+    
+}
+
+- (bool) createNotificationWithRemoteNotification : (PFObject*) remoteNotification
+{
+
+    NSLog(@"Enter HabitDataModel::createNotificationWithRemoteNotification. remoteNotification:%@", remoteNotification);
+    
+    
+    GBNotification* newNotification;
+    GBUser *notificationOwner;
+    
+    notificationOwner= [self getUserByName:[remoteNotification objectForKey:@"toUser"]];    
+    if(!notificationOwner){
+        NSLog(@"Cannot retrieve notification owner");
+        return false;
+    }
+    
+    newNotification = [NSEntityDescription insertNewObjectForEntityForName:@"GBNotification" inManagedObjectContext:objectContext];
+    
+    
+    newNotification.notificationID  = [remoteNotification objectForKey:@"notificationID"];
+    
+    newNotification.toUser          = [remoteNotification objectForKey:@"toUser"];
+    newNotification.fromUser        = [remoteNotification objectForKey:@"fromUser"];
+    newNotification.text            = [remoteNotification objectForKey:@"text"];
+    newNotification.status          = [remoteNotification objectForKey:@"status"];
+    newNotification.type            = [remoteNotification objectForKey:@"type"];
+    
+    newNotification.createAt          = remoteNotification.createdAt;
+    newNotification.updateAt          = remoteNotification.updatedAt;
+    
+    
+    NSError *error;
+    [objectContext save:&error];
+    
+    // j2do : Error Handling Here
+    
+    
+    
+    NSLog(@"New Habit[%@] Created. Type : %@, Status, %@", newNotification.notificationID, newNotification.type, newNotification.status);
+    
+    
+    return true;
+    
+
+}
 
 
 #pragma mark - 
@@ -1023,6 +1130,8 @@ static NSArray *sRelationStatusStr;
         desc = [NSEntityDescription entityForName:@"GBUser" inManagedObjectContext:objectContext];
     }else if(type == kRelation){
         desc = [NSEntityDescription entityForName:@"GBRelation" inManagedObjectContext:objectContext];        
+    }else if(type == kNotification){
+        desc = [NSEntityDescription entityForName:@"GBNotification" inManagedObjectContext:objectContext];                
     }
     
     
@@ -1127,7 +1236,7 @@ static NSArray *sRelationStatusStr;
 - (void)SyncData
 {
 
-    NSError *error;
+    NSError *error = NULL;
     [objectContext save:&error];
     
     if(error){

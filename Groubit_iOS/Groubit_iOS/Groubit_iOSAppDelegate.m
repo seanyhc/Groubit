@@ -35,20 +35,24 @@
 
     tabController = [[UITabBarController alloc] init];
 
-    UIViewController *vc1 = [[DashboardViewController alloc] init];
+    UIViewController *dbc = [[DashboardViewController alloc] init];
+    UINavigationController *vc1 = [[UINavigationController alloc] initWithRootViewController:dbc];
     [vc1.tabBarItem setTitle:@"Dashboard"];
+   
     UIViewController *hbc = [[HabitsTableController alloc] init];
-
-
     UINavigationController *vc2 = [[UINavigationController alloc] initWithRootViewController:hbc];
     //have to set the title for nav controller since it doesn't have its own init method
     [[vc2 tabBarItem] setTitle:@"Habits"];
+    
     UIViewController *vc3 = [[FriendsViewController alloc] init];
     UIViewController *vc4 = [[DebugViewController alloc] init];
 
 
     NSArray *viewControllers = [ NSArray arrayWithObjects:vc1, vc2, vc3, vc4, nil];
 
+    
+    [dbc release];
+    [hbc release];
 
     [vc1 release];
     [vc2 release];

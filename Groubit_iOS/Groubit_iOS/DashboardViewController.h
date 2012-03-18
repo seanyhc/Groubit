@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DashboardViewController : UITableViewController
+#include "NotificationViewController.h"
 
+@interface DashboardViewController : UITableViewController
+{
+
+    NotificationViewController *notificationViewController;
+
+}
 @end

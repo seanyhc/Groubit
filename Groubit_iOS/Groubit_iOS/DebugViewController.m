@@ -11,6 +11,7 @@
 #import "GBHabit.h"
 #import "GBTask.h"
 #import "GBUser.h"
+#import "GBNotification.h"
 #import "Groubit_iOSAppDelegate.h"
 #import "TaipeiStation.h"
 #import "Parse/Parse.h"
@@ -367,7 +368,18 @@
         NSLog(@" Task: %@", task  );
     }
     
+    // print notifications
     
+    PFQuery *notificationQuery = [PFQuery queryWithClassName:@"GBNotification"];
+    NSArray *pfNotifications = [notificationQuery findObjects];
+    
+    NSLog(@" Retreived %d notifications", pfNotifications.count);
+    
+    for( PFObject *notification in pfNotifications){
+        
+        NSLog(@" Notification: %@", notification  );
+    }
+
     
 }
 
@@ -394,7 +406,7 @@
         
         NSLog(@"Local Habit:%@", habit);
     }
-    
+   
     
     NSArray *tasks = [dataModel getAllTasks:kUserTypeALL];
     
@@ -402,9 +414,19 @@
     
     for(GBTask *task in tasks){
         
-        //      NSLog(@"Local Task:%@", task);
+        NSLog(@"Local Task:%@", task);
     }
     
+    NSArray *notifications = [dataModel getAllNotifications];
+    
+    NSLog(@"Retrieved %d notifications", notifications.count);
+    
+    for(GBNotification *notification in notifications){
+        
+        NSLog(@"Local Notification:%@", notification);
+    }
+    
+
 }
 
 - (IBAction)createHabit:(id)sender
@@ -506,15 +528,29 @@
 - (IBAction)userDefinedAction1:(id)sender
 {
     GBDataModelManager* dataModel = [GBDataModelManager getDataModelManager];
-    [dataModel getRecentTask:kUserTypeInternal withPeriod:10];
     
-    [dataModel getRecentTask:kUserTypeBaby withPeriod:20];
+    [dataModel createNotification:@"New Friend Request From Joey" fromUser:@"Joey" toUser:@"Jeffrey" status:kNotificationStatusNew type:kFriendRequest];
+    [dataModel SyncData];
     
 }
 
 - (IBAction)userDefinedAction2:(id)sender
 {
 
+    
+    
+    NSLog(@"Create new Notification on remote." );
+    PFObject *pfNotification = [PFObject objectWithClassName:@"GBNotification"];
+    [pfNotification setObject:@"12345" forKey:@"notificationID"];
+    [pfNotification setObject:@"From A to B" forKey:@"text"];
+    [pfNotification setObject:@"new" forKey:@"status"];
+    [pfNotification setObject:@"new" forKey:@"type"];
+    [pfNotification setObject:@"Joey" forKey:@"fromUser"];
+    [pfNotification setObject:@"Jeffrey" forKey:@"toUser"];
+    
+    [pfNotification saveInBackground];
+
+    
 }
 
 - (IBAction)userDefinedAction3:(id)sender

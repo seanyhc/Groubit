@@ -1,33 +1,25 @@
 //
-//  DashboardViewController.m
+//  NotificationViewController.m
 //  Groubit_iOS
 //
-//  Created by Jeffrey on 2/4/12.
+//  Created by Jeffrey on 3/18/12.
 //  Copyright (c) 2012 UCB MIMS. All rights reserved.
 //
 
-#import "DashboardViewController.h"
 #import "NotificationViewController.h"
 #import "GBDataModelManager.h"
-#import "GBHabit.h"
-#import "GBTask.h"
-#import "GBUser.h"
+#import "GBNotification.h"
 
-@implementation DashboardViewController
-
-/* sean: this shouldn't be called after I changed the
- initiated the tabcontroller by codes
+@implementation NotificationViewController
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
     if (self) {
-        [self initWithStyle:style];
+        // Custom initialization
     }
     return self;
 }
-*/
-
 
 - (void)didReceiveMemoryWarning
 {
@@ -43,20 +35,8 @@
 {
     [super viewDidLoad];
 
-    
-    // setup navigation bar
-    UIBarButtonItem *notificationButton = [[UIBarButtonItem alloc] initWithTitle:@"Notifications" style:UIBarButtonItemStyleBordered target:self action:@selector(notificationButtonPressed)];
-    [[self navigationItem] setRightBarButtonItem:notificationButton];
-    [[self navigationItem] setTitle:@"Dashboard"];
-
-    
-    
-    UITableView* tableview = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
-    self.tableView = tableview;
-    [tableview release];
-    
-    
-    
+    [[self navigationItem] setTitle:@"Notifications"];
+    NSLog(@" Notification table view loaded");
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -102,60 +82,27 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
 
-    // Return the number of sections.
-    return 2;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    // Return the number of rows in the section.
-    
+
     GBDataModelManager* dataModel = [GBDataModelManager getDataModelManager];
-    NSArray *tasks;
+    NSArray *notifications;
+    
+    notifications = [dataModel getAllNotifications];
         
-    if(section == 0 ){
+    return notifications.count;
     
-
-        tasks = [dataModel getRecentTask:kUserTypeInternal withPeriod:3];
-        
-    }
-    
-    if(section == 1)
-    {
-        tasks = [dataModel getRecentTask:kUserTypeBaby withPeriod:3];
-    
-    }
-    
-    return tasks.count;
 }
-
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
-{
-    
-    NSString *target;
-    
-    if(section == 0){
-          
-        target = [NSString stringWithString:@"Upcoming Tasks"];
-    
-    }else if (section == 1){
-    
-        target = [NSString stringWithString:@"Baby Tasks"];
-    
-    }else{
-    
-        target = [NSString stringWithString:@"Rest Tasks"];
-    }
-    
-    
-    return target;
-}
-
-
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"DashBoardTaskCell";
+   
+    
+     
+    static NSString *CellIdentifier = @"NotificationCell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
@@ -166,26 +113,22 @@
     
     
     GBDataModelManager* dataModel = [GBDataModelManager getDataModelManager];
-    NSArray *tasks;
+    NSArray *notifications;
     
-    if(indexPath.section == 0 ){
-
-        tasks = [dataModel getRecentTask:kUserTypeInternal withPeriod:3];
-
-        
-    }
+    notifications = [dataModel getAllNotifications];
     
-    if(indexPath.section == 1)
-    {
-        tasks = [dataModel getRecentTask:kUserTypeBaby withPeriod:3];
-        
-    }
+    
+    NSLog(@" Notification Table Retrieved %d notifications", notifications.count);
+    
+    GBNotification *notification = [notifications objectAtIndex:indexPath.row];
+    cell.textLabel.text = [NSString stringWithString:notification.text];
+    cell.detailTextLabel.text = [NSString stringWithFormat:@" type:%@,  status: %@ ", notification.type, notification.status ];
 
     
-    GBTask *task = [tasks objectAtIndex:indexPath.row];
-    cell.textLabel.text = task.belongsToHabit.HabitName;
-    cell.detailTextLabel.text = [NSString stringWithFormat:@" Status:%@,  Target : %@ ", task.TaskStatus, task.TaskTargetDate ];
+    
     return cell;
+
+    
 }
 
 /*
@@ -240,19 +183,5 @@
      [detailViewController release];
      */
 }
-
-
-#pragma mark - Actions
--(void)notificationButtonPressed{
-    NSLog(@"Enter DashboardViewController::notificationButtonPressed");
-    
-    if(!notificationViewController){
-        NSLog(@"init notification table view");
-        notificationViewController = [[NotificationViewController alloc] init];
-    }
-    
-    [self.navigationController pushViewController:notificationViewController animated:YES];
-}
-
 
 @end

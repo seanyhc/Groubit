@@ -10,11 +10,14 @@
 #import "GBHabit.h"
 #import "Parse/Parse.h"
 
+
 @interface GBDataModelManager : NSObject {
  
     NSManagedObjectContext *obectContext;
     NSString *localUserName;
     NSStream *localUserID;
+    
+       
 }
 
 @property (nonatomic, retain) NSManagedObjectContext *objectContext;
@@ -55,7 +58,8 @@ typedef enum{
     kHabit,
     kTask,
     kUser,
-    kRelation
+    kRelation,
+    kNotification
 } GBObjectType;
 
 typedef enum{
@@ -73,6 +77,17 @@ typedef enum{
     kSyncUpdateSince,
     kSyncCreateSince
 } GBSyncAttr;
+
+typedef enum{
+    kNotificationStatusNew,
+    kNotificationStatusViewed
+} GBNotificationStatus;
+
+typedef enum{
+    kFriendRequest,
+    kTaskCompleted,
+    kHabitCompleted
+} GBNotificationType;
 
 + (GBDataModelManager*) getDataModelManager;
 
@@ -247,7 +262,6 @@ typedef enum{
 - (NSArray *) getAllTasks:(GBUserType) userType;
 
 
-
 /**
  
  Retrieve all tasks that associated with a specific Habit
@@ -341,6 +355,16 @@ typedef enum{
 
 
 //- (NSArray *) getAllRelations;
+
+
+
+/*
+ *  Notification Related Objects
+ */
+
+- (NSArray *) getAllNotifications;
+- (bool) createNotificationWithRemoteNotification : (PFObject*) remoteNotification;
+- (bool) createNotification:(NSString*)text fromUser:(NSString*)fromUserName toUser:(NSString*)toUserName status:(int)status type:(int)type;
 
 
 /*  

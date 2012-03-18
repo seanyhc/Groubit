@@ -28,8 +28,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "20"
          endingLineNumber = "20"
-         landmarkName = "objectContext"
-         landmarkType = "19">
+         landmarkName = "@implementation GBDataModelManager"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -70,7 +70,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "450"
          endingLineNumber = "450"
-         landmarkName = "-syncAll"
+         landmarkName = "-syncTasks:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -93,13 +93,27 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "Groubit_iOS/DashboardViewController.m"
-         timestampString = "350323478.436715"
+         timestampString = "353756816.666874"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "15"
-         endingLineNumber = "15"
+         startingLineNumber = "16"
+         endingLineNumber = "16"
          landmarkName = "@implementation DashboardViewController"
          landmarkType = "3">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "Groubit_iOS/TaipeiStation.m"
+         timestampString = "353748233.538937"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "472"
+         endingLineNumber = "472"
+         landmarkName = "-syncNotification"
+         landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
 </Bucket>
