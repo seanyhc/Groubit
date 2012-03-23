@@ -43,7 +43,6 @@
     // Do any additional setup after loading the view from its nib.
     [[self view] setBackgroundColor:[UIColor groupTableViewBackgroundColor]];
     
-    statusImagesList = [[NSArray alloc]   initWithObjects:@"checkbox_unchecked.png",@"checkbox_checked.png",nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated
