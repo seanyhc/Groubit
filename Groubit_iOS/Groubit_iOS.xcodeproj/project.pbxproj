@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		14688F7214D7A96A006DAEBA /* HabitsTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14688F7114D7A96A006DAEBA /* HabitsTableController.m */; };
+		147C92DD151BDACF00EA1E75 /* checkbox_checked.png in Resources */ = {isa = PBXBuildFile; fileRef = 147C92DB151BDACF00EA1E75 /* checkbox_checked.png */; };
+		147C92DE151BDACF00EA1E75 /* checkbox_unchecked.png in Resources */ = {isa = PBXBuildFile; fileRef = 147C92DC151BDACF00EA1E75 /* checkbox_unchecked.png */; };
 		14B6D51E14E5E6C7009B95A0 /* HabitsAddController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B6D51C14E5E6C7009B95A0 /* HabitsAddController.m */; };
 		14B6D51F14E5E6C7009B95A0 /* HabitsAddController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14B6D51D14E5E6C7009B95A0 /* HabitsAddController.xib */; };
 		14E365BB14AB2D7B0064CA5B /* FriendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14E365B914AB2D7B0064CA5B /* FriendsViewController.m */; };
@@ -69,6 +71,8 @@
 /* Begin PBXFileReference section */
 		14688F7014D7A96A006DAEBA /* HabitsTableController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HabitsTableController.h; path = iPhone/HabitsTableController.h; sourceTree = "<group>"; };
 		14688F7114D7A96A006DAEBA /* HabitsTableController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HabitsTableController.m; path = iPhone/HabitsTableController.m; sourceTree = "<group>"; };
+		147C92DB151BDACF00EA1E75 /* checkbox_checked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkbox_checked.png; sourceTree = "<group>"; };
+		147C92DC151BDACF00EA1E75 /* checkbox_unchecked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkbox_unchecked.png; sourceTree = "<group>"; };
 		14B6D51B14E5E6C7009B95A0 /* HabitsAddController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HabitsAddController.h; path = iPhone/HabitsAddController.h; sourceTree = "<group>"; };
 		14B6D51C14E5E6C7009B95A0 /* HabitsAddController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HabitsAddController.m; path = iPhone/HabitsAddController.m; sourceTree = "<group>"; };
 		14B6D51D14E5E6C7009B95A0 /* HabitsAddController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HabitsAddController.xib; path = iPhone/HabitsAddController.xib; sourceTree = "<group>"; };
@@ -233,6 +237,8 @@
 		14EA76A114AAEC63009FF411 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				147C92DB151BDACF00EA1E75 /* checkbox_checked.png */,
+				147C92DC151BDACF00EA1E75 /* checkbox_unchecked.png */,
 				14EA76A214AAEC63009FF411 /* Groubit_iOS-Info.plist */,
 				14EA76A314AAEC63009FF411 /* InfoPlist.strings */,
 				14EA76A614AAEC63009FF411 /* main.m */,
@@ -408,6 +414,8 @@
 				14B6D51F14E5E6C7009B95A0 /* HabitsAddController.xib in Resources */,
 				C63E0DB314E61D350070E902 /* RegisterLoginViewController.xib in Resources */,
 				14B6D51F14E5E6C7009B95A0 /* HabitsAddController.xib in Resources */,
+				147C92DD151BDACF00EA1E75 /* checkbox_checked.png in Resources */,
+				147C92DE151BDACF00EA1E75 /* checkbox_unchecked.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

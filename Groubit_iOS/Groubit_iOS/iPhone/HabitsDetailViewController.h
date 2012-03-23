@@ -19,6 +19,7 @@
     
     GBHabit *currentHabit;
     NSMutableArray *tasksList;
+    NSArray *statusImagesList;
 }
 @property (nonatomic, assign) GBHabit *currentHabit;
 @property (nonatomic, retain) IBOutlet UITableView *taskTable;

@@ -42,6 +42,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [[self view] setBackgroundColor:[UIColor groupTableViewBackgroundColor]];
+    
+    statusImagesList = [[NSArray alloc]   initWithObjects:@"checkbox_unchecked.png",@"checkbox_checked.png",nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -155,6 +157,17 @@
     GBTask *task = [tasksList objectAtIndex:indexPath.row];
     cell.textLabel.text = [NSString stringWithFormat:@"%@", task.TaskTargetDate ];
     cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", task.TaskStatus ];
+    
+    UIImage *cellImage;
+    NSLog(@"HabitsDetailViewController status: %d %@", indexPath.row, task.TaskStatus);
+    if([task.TaskStatus isEqualToString:@"init"]){
+        cellImage = [UIImage imageNamed:@"checkbox_unchecked.png"];      
+    } else if([task.TaskStatus isEqualToString: @"completed"]){
+        cellImage = [UIImage imageNamed:@"checkbox_checked.png"];
+
+    }
+    cell.imageView.image = cellImage;
+        
 
     return cell;
 }
@@ -163,7 +176,14 @@
     
     GBTask *task = [tasksList objectAtIndex:indexPath.row];
     GBDataModelManager* dataModel = [GBDataModelManager getDataModelManager];
-    [dataModel setTaskStatus:task.TaskID taskStatus:(kTaskStatusCompleted)];
+    
+    if([task.TaskStatus isEqualToString:@"init"]){
+        [dataModel setTaskStatus:task.TaskID taskStatus:(kTaskStatusCompleted)];    
+    } else if([task.TaskStatus isEqualToString: @"completed"]){
+        [dataModel setTaskStatus:task.TaskID taskStatus:(kTaskStatusInit)];
+        
+    }
+    
     
     [taskTable reloadData];
 
