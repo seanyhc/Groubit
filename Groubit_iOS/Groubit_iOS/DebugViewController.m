@@ -556,6 +556,17 @@
 - (IBAction)userDefinedAction3:(id)sender
 {
 
+    GBDataModelManager* dataModel = [GBDataModelManager getDataModelManager];
+    NSDate *today = [dataModel getDateWithIndex:-3];
+    
+    NSLog(@"Today : %@", today);
+    
+    
+    NSArray * tasks = [dataModel getTasksWithPeriod:@"Jeffrey" withStartDateIndex:-2 withEndDateIndex:3];
+    for(GBTask *task in tasks){
+        
+        NSLog(@"Upcoming Task:%@", task);
+    }
 }
 
 

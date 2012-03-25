@@ -275,6 +275,9 @@ typedef enum{
 
 - (NSArray *) getRecentTask: (GBUserType) userType withPeriod:(int)days;
 
+
+- (NSArray *) getTasksWithPeriod: (NSString*) userID withStartDateIndex: (int) startDate withEndDateIndex: (int) endDate;
+
 /*  
  *   USER/FRIEND RELATED METHODS 
  */
@@ -378,5 +381,10 @@ typedef enum{
 
 
 + (NSString *)createLocalUUID;
+
+- (NSDate*) getDateWithIndex: (int) index;
+- (NSDate*) getDateCeil : (NSDate*) date;
+- (NSDate*) getDateFloor: (NSDate*) date;
+
 
 @end

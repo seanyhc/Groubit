@@ -13,8 +13,8 @@
 #import "GBRelation.h"
 #import "GBNotification.h"
 #import "Parse/Parse.h"
-
 #import "Groubit_iOSAppDelegate.h"
+
 
 @implementation GBDataModelManager
 
@@ -557,7 +557,7 @@ static NSArray *sNotificationStatusStr;
         
     }else{
         GBTask *task = (GBTask*) [objects lastObject];
-        task.TaskStatus = [NSString stringWithString:[sTaskStatusStr objectAtIndex:kTaskStatusCompleted]];
+        task.TaskStatus = [NSString stringWithString:[sTaskStatusStr objectAtIndex:status]];
         [objectContext save:&error];
         
         if(!error){
@@ -598,7 +598,29 @@ static NSArray *sNotificationStatusStr;
 
 }
 
-
+- (NSArray *) getTasksWithPeriod: (NSString*) userID withStartDateIndex: (int) startDate withEndDateIndex: (int) endDate
+{
+    NSLog(@"Enter HabitDataModel::getTasksWithPeriod. userID:%@, withStartDateIndex:%d, withEndDateIndex:%d",userID, startDate, endDate);
+    
+    // calculate start date and end date. 
+  
+    NSDate *start = [self getDateFloor:[self getDateWithIndex:startDate]];
+    
+    NSDate *end   = [self getDateCeil:[self getDateWithIndex:endDate]];
+   
+    
+    NSLog(@" Start Date : %@, End Date : %@", start, end);
+    
+    NSPredicate *timePredicate = [NSPredicate predicateWithFormat:@"(TaskTargetDate >= %@ AND TaskTargetDate <= %@ AND belongsToHabit.HabitOwner = %@)", start, end, localUserName];
+    
+    
+    NSArray *objects = [self queryManagedObject:kTask withPredicate:timePredicate];
+    
+    NSLog(@"Retrieved %d Tasks", [objects count]);
+    
+    return objects;
+    
+}
 
 - (NSArray *) getRecentTask: (GBUserType) userType withPeriod:(int)days
 {
@@ -1170,14 +1192,14 @@ static NSArray *sNotificationStatusStr;
         
         
         for (int i =1; i<=attempts; i++) {
-            NSDate* newDate = [startDate dateByAddingTimeInterval:(dailyInterval*i)];
+            NSDate* newDate = [self getDateCeil:[startDate dateByAddingTimeInterval:(dailyInterval*i)]];
             [array addObject:newDate];
         }
         
     }else if ([frequency caseInsensitiveCompare:@"weekly"] == 0){
         
         for (int i =1; i<=attempts; i++) {
-            NSDate* newDate = [startDate dateByAddingTimeInterval:(weeklyInterval * i)];
+            NSDate* newDate = [self getDateCeil:[startDate dateByAddingTimeInterval:(weeklyInterval * i)]];
             [array addObject:newDate];
         }
         
@@ -1190,7 +1212,7 @@ static NSArray *sNotificationStatusStr;
         
         for (int i =1; i<=attempts; i++) {
             [comps setMonth:i];   
-            NSDate *newDate = [cal dateByAddingComponents:comps toDate:startDate options:0];
+            NSDate *newDate = [self getDateCeil:[cal dateByAddingComponents:comps toDate:startDate options:0]];
             [array addObject:newDate];
         }
         
@@ -1244,5 +1266,79 @@ static NSArray *sNotificationStatusStr;
     }
     
 }
+
+- (NSDate*) getDateWithIndex : (int) offset
+{
+    NSLog(@"Enter HabitDataModel::getDateWithIndex. index:%d", offset);
+    
+    NSDate *result;
+    
+    if(index == 0){
+        result = [NSDate date];
+    }
+    
+    NSDate *today = [NSDate date];
+    
+    NSCalendar *gregorian = [[NSCalendar alloc]
+                             
+                             initWithCalendarIdentifier:NSGregorianCalendar];
+    
+    NSDateComponents *offsetComponents = [[NSDateComponents alloc] init];
+    
+    [offsetComponents setDay:offset];
+    
+    // Calculate when, according to Tom Lehrer, World War III will end
+    
+    NSDate *newDate = [gregorian dateByAddingComponents:offsetComponents
+                              
+                                                        toDate:today options:0];
+    
+    
+    
+    return newDate;
+}
+
+- (NSDate*) getDateCeil : (NSDate*) date 
+{
+    NSLog(@"Enter HabitDataModel::getDateCeil. date:%@", date);
+    
+    NSDate *floorDate = [self getDateFloor:date];
+    
+    
+    NSTimeInterval secondsInADay = 86400;
+    
+    NSDate *ceilDate = [floorDate dateByAddingTimeInterval:secondsInADay-1];
+    
+    return ceilDate;
+    
+}
+
+- (NSDate*) getDateFloor: (NSDate*) date
+{
+        
+    NSLog(@"Enter HabitDataModel::getDateFloor. date:%@", date);
+    
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    
+    [gregorian setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
+    
+    NSDateComponents *overshootComponents = [gregorian components:NSHourCalendarUnit|NSMinuteCalendarUnit|NSSecondCalendarUnit fromDate:date];
+    
+    NSTimeInterval overshotByHours = [overshootComponents hour] * 60 * 60;
+    
+    NSTimeInterval overshotByMinutes = [overshootComponents minute] * 60;
+    
+    NSTimeInterval overshotBySeconds = [overshootComponents second];
+    
+    NSTimeInterval interval = [date timeIntervalSinceReferenceDate];
+   
+    NSTimeInterval floorInterval = interval - overshotByHours - overshotByMinutes - overshotBySeconds;
+    
+    NSDate *floorDate = [[[NSDate alloc] initWithTimeIntervalSinceReferenceDate:floorInterval] autorelease];
+    
+    
+    return floorDate;
+}
+
 
 @end
