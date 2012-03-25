@@ -12,13 +12,13 @@
 
 @interface GBNotification : NSManagedObject
 
-@property (nonatomic, retain) NSDate * createAt;
-@property (nonatomic, retain) NSString * fromUser;
-@property (nonatomic, retain) NSString * notificationID;
-@property (nonatomic, retain) NSString * status;
-@property (nonatomic, retain) NSString * text;
-@property (nonatomic, retain) NSString * toUser;
-@property (nonatomic, retain) NSString * type;
-@property (nonatomic, retain) NSDate * updateAt;
+@property (nonatomic, strong) NSDate * createAt;
+@property (nonatomic, strong) NSString * fromUser;
+@property (nonatomic, strong) NSString * notificationID;
+@property (nonatomic, strong) NSString * status;
+@property (nonatomic, strong) NSString * text;
+@property (nonatomic, strong) NSString * toUser;
+@property (nonatomic, strong) NSString * type;
+@property (nonatomic, strong) NSDate * updateAt;
 
 @end

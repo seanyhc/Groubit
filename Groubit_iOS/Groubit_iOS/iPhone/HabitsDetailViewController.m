@@ -89,13 +89,10 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
-    [nameLabel release];
     nameLabel = nil;
     
-    [descLabel release];
     descLabel = nil;
     
-    [freqLabel release];
     freqLabel = nil;
 }
 
@@ -118,17 +115,6 @@
     //[currentHabit setHabitDescription:xxxField.text];
 }
 
-- (void)dealloc
-{
-    [nameLabel release];
-    
-    [descLabel release];
-    
-    [freqLabel release];
-    
-    [super dealloc];
-
-}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
@@ -146,7 +132,7 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
     
     // Set up the cell...

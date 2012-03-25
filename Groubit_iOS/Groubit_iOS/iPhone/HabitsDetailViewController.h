@@ -17,10 +17,10 @@
     IBOutlet UILabel *freqLabel;
     IBOutlet UITableView *taskTable;
     
-    GBHabit *currentHabit;
+    GBHabit *__unsafe_unretained currentHabit;
     NSMutableArray *tasksList;
 
 }
-@property (nonatomic, assign) GBHabit *currentHabit;
-@property (nonatomic, retain) IBOutlet UITableView *taskTable;
+@property (nonatomic, unsafe_unretained) GBHabit *currentHabit;
+@property (nonatomic, strong) IBOutlet UITableView *taskTable;
 @end

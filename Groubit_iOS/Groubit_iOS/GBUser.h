@@ -14,14 +14,14 @@
 @interface GBUser : NSManagedObject {
 @private
 }
-@property (nonatomic, retain) NSDate * createAt;
-@property (nonatomic, retain) NSDate * updateAt;
-@property (nonatomic, retain) NSString * UserID;
-@property (nonatomic, retain) NSString * UserName;
-@property (nonatomic, retain) NSString * UserPass;
-@property (nonatomic, retain) NSSet *habits;
-@property (nonatomic, retain) NSSet *hasRelation;
-@property (nonatomic, retain) NSSet *referencedByRelation;
+@property (nonatomic, strong) NSDate * createAt;
+@property (nonatomic, strong) NSDate * updateAt;
+@property (nonatomic, strong) NSString * UserID;
+@property (nonatomic, strong) NSString * UserName;
+@property (nonatomic, strong) NSString * UserPass;
+@property (nonatomic, strong) NSSet *habits;
+@property (nonatomic, strong) NSSet *hasRelation;
+@property (nonatomic, strong) NSSet *referencedByRelation;
 @end
 
 @interface GBUser (CoreDataGeneratedAccessors)

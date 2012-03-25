@@ -15,7 +15,7 @@
 
 
 
-@property (nonatomic, retain) UITextField *localUserName;
+@property (nonatomic, strong) UITextField *localUserName;
 
 - (IBAction)changeUserName:(id)sender;
 

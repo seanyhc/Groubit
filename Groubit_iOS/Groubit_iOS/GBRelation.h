@@ -13,15 +13,15 @@
 
 @interface GBRelation : NSManagedObject
 
-@property (nonatomic, retain) NSDate * createAt;
-@property (nonatomic, retain) NSString * RelationID;
-@property (nonatomic, retain) NSString * RelationStatus;
-@property (nonatomic, retain) NSString * RelationType;
-@property (nonatomic, retain) NSDate * updateAt;
-@property (nonatomic, retain) NSString * relationToUser;
-@property (nonatomic, retain) NSString * relationFromUser;
-@property (nonatomic, retain) GBUser *fromUser;
-@property (nonatomic, retain) GBHabit *hasHabit;
-@property (nonatomic, retain) GBUser *toUser;
+@property (nonatomic, strong) NSDate * createAt;
+@property (nonatomic, strong) NSString * RelationID;
+@property (nonatomic, strong) NSString * RelationStatus;
+@property (nonatomic, strong) NSString * RelationType;
+@property (nonatomic, strong) NSDate * updateAt;
+@property (nonatomic, strong) NSString * relationToUser;
+@property (nonatomic, strong) NSString * relationFromUser;
+@property (nonatomic, strong) GBUser *fromUser;
+@property (nonatomic, strong) GBHabit *hasHabit;
+@property (nonatomic, strong) GBUser *toUser;
 
 @end

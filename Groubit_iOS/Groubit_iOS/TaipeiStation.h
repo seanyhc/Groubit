@@ -13,12 +13,12 @@
 {
     GBDataModelManager *dataModel;
     NSDate *lastSyncDate;
-    NSTimer *syncTimer;
+    NSTimer *__unsafe_unretained syncTimer;
 
 }
 
-@property (nonatomic, retain) NSDate *lastSyncDate;
-@property (nonatomic, assign) NSTimer *syncTimer;
+@property (nonatomic, strong) NSDate *lastSyncDate;
+@property (nonatomic, unsafe_unretained) NSTimer *syncTimer;
 
 - (bool)syncAll;
 - (bool)syncUserData;

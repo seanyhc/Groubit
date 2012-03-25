@@ -20,9 +20,9 @@
        
 }
 
-@property (nonatomic, retain) NSManagedObjectContext *objectContext;
-@property (nonatomic, retain) NSString *localUserName;
-@property (nonatomic, retain) NSStream *localUserID;
+@property (nonatomic, strong) NSManagedObjectContext *objectContext;
+@property (nonatomic, strong) NSString *localUserName;
+@property (nonatomic, strong) NSStream *localUserID;
 
 typedef enum {
     kHabitStatusInit,

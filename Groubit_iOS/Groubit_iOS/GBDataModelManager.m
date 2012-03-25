@@ -35,7 +35,7 @@ static NSArray *sNotificationStatusStr;
 
 -(id) init{
     
-    [super init];
+    self = [super init];
     
     sHabitStatusStr = [[NSArray alloc] initWithObjects:@"init",
                                                        @"inProgress",
@@ -341,7 +341,6 @@ static NSArray *sNotificationStatusStr;
   
     NSArray *objects = [self queryManagedObject:kHabit withPredicate:orPredicate];
     
-    [predicates release];
     
     NSLog(@"Retrieved %d Habits", [objects count]);
     
@@ -413,7 +412,6 @@ static NSArray *sNotificationStatusStr;
         }
     }
     
-    [request release];
     
     
 }
@@ -445,7 +443,6 @@ static NSArray *sNotificationStatusStr;
         
     }
     
-    [request release];
     
     
 }
@@ -565,7 +562,6 @@ static NSArray *sNotificationStatusStr;
         }
     }
     
-    [request release];
 }
 
 // j2do
@@ -1205,7 +1201,7 @@ static NSArray *sNotificationStatusStr;
         
     }else if ([frequency caseInsensitiveCompare:@"monthly"] == 0){
         
-        NSDateComponents *comps = [[[NSDateComponents alloc] init] autorelease];
+        NSDateComponents *comps = [[NSDateComponents alloc] init];
         NSCalendar *cal = [NSCalendar currentCalendar];
         
         
@@ -1252,7 +1248,7 @@ static NSArray *sNotificationStatusStr;
     
     // create a new CFStringRef (toll-free bridged to NSString)
     // that you own
-    return (NSString*)CFUUIDCreateString(kCFAllocatorDefault, uuid);
+    return (__bridge_transfer NSString*)CFUUIDCreateString(kCFAllocatorDefault, uuid);
    }
 
 - (void)SyncData
@@ -1334,7 +1330,7 @@ static NSArray *sNotificationStatusStr;
    
     NSTimeInterval floorInterval = interval - overshotByHours - overshotByMinutes - overshotBySeconds;
     
-    NSDate *floorDate = [[[NSDate alloc] initWithTimeIntervalSinceReferenceDate:floorInterval] autorelease];
+    NSDate *floorDate = [[NSDate alloc] initWithTimeIntervalSinceReferenceDate:floorInterval];
     
     
     return floorDate;

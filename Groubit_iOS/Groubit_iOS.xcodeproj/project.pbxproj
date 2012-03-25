@@ -39,6 +39,10 @@
 		2B09D8CE14DD155B00A76133 /* DebugViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B09D8CC14DD155B00A76133 /* DebugViewController.m */; };
 		2B09D8CF14DD155B00A76133 /* DebugViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B09D8CD14DD155B00A76133 /* DebugViewController.xib */; };
 		2B09D8D314DD1B4000A76133 /* DashboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B09D8D214DD1B4000A76133 /* DashboardViewController.m */; };
+		2B177E3E151EBA6A00F04C51 /* DDLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B177E37151EBA6A00F04C51 /* DDLog.m */; };
+		2B177E3F151EBA6A00F04C51 /* DDASLLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B177E39151EBA6A00F04C51 /* DDASLLogger.m */; };
+		2B177E40151EBA6A00F04C51 /* DDTTYLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B177E3B151EBA6A00F04C51 /* DDTTYLogger.m */; };
+		2B177E41151EBA6A00F04C51 /* DDFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B177E3D151EBA6A00F04C51 /* DDFileLogger.m */; };
 		2B2B1CC014C969100068B36E /* TaipeiStation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B2B1CBF14C9690F0068B36E /* TaipeiStation.m */; };
 		2B32504D1515E5E600A65810 /* NotificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B32504C1515E5E600A65810 /* NotificationViewController.m */; };
 		2B7B6A79150BA04C00CAECDD /* GBTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B7B6A78150BA04C00CAECDD /* GBTask.m */; };
@@ -111,6 +115,14 @@
 		2B09D8CD14DD155B00A76133 /* DebugViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DebugViewController.xib; sourceTree = "<group>"; };
 		2B09D8D114DD1B4000A76133 /* DashboardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DashboardViewController.h; sourceTree = "<group>"; };
 		2B09D8D214DD1B4000A76133 /* DashboardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DashboardViewController.m; sourceTree = "<group>"; };
+		2B177E36151EBA6A00F04C51 /* DDLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDLog.h; sourceTree = "<group>"; };
+		2B177E37151EBA6A00F04C51 /* DDLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDLog.m; sourceTree = "<group>"; };
+		2B177E38151EBA6A00F04C51 /* DDASLLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDASLLogger.h; sourceTree = "<group>"; };
+		2B177E39151EBA6A00F04C51 /* DDASLLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDASLLogger.m; sourceTree = "<group>"; };
+		2B177E3A151EBA6A00F04C51 /* DDTTYLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDTTYLogger.h; sourceTree = "<group>"; };
+		2B177E3B151EBA6A00F04C51 /* DDTTYLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDTTYLogger.m; sourceTree = "<group>"; };
+		2B177E3C151EBA6A00F04C51 /* DDFileLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDFileLogger.h; sourceTree = "<group>"; };
+		2B177E3D151EBA6A00F04C51 /* DDFileLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDFileLogger.m; sourceTree = "<group>"; };
 		2B2B1CBE14C9690F0068B36E /* TaipeiStation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaipeiStation.h; sourceTree = "<group>"; };
 		2B2B1CBF14C9690F0068B36E /* TaipeiStation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaipeiStation.m; sourceTree = "<group>"; };
 		2B32504B1515E5E600A65810 /* NotificationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationViewController.h; sourceTree = "<group>"; };
@@ -250,6 +262,7 @@
 		14EA76AF14AAEC63009FF411 /* iPhone */ = {
 			isa = PBXGroup;
 			children = (
+				2B177E43151EBA7400F04C51 /* Logging */,
 				2B09D8D114DD1B4000A76133 /* DashboardViewController.h */,
 				2B09D8D214DD1B4000A76133 /* DashboardViewController.m */,
 				2B926AFE14B93E4F002E03F7 /* DataModel */,
@@ -309,6 +322,21 @@
 				14EA76CE14AAEC63009FF411 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		2B177E43151EBA7400F04C51 /* Logging */ = {
+			isa = PBXGroup;
+			children = (
+				2B177E36151EBA6A00F04C51 /* DDLog.h */,
+				2B177E37151EBA6A00F04C51 /* DDLog.m */,
+				2B177E38151EBA6A00F04C51 /* DDASLLogger.h */,
+				2B177E39151EBA6A00F04C51 /* DDASLLogger.m */,
+				2B177E3A151EBA6A00F04C51 /* DDTTYLogger.h */,
+				2B177E3B151EBA6A00F04C51 /* DDTTYLogger.m */,
+				2B177E3C151EBA6A00F04C51 /* DDFileLogger.h */,
+				2B177E3D151EBA6A00F04C51 /* DDFileLogger.m */,
+			);
+			name = Logging;
 			sourceTree = "<group>";
 		};
 		2B926AFE14B93E4F002E03F7 /* DataModel */ = {
@@ -471,6 +499,10 @@
 				2B7B6A80150BA3DF00CAECDD /* GBRelation.m in Sources */,
 				2BA968931512334E00FBA256 /* GBNotification.m in Sources */,
 				2B32504D1515E5E600A65810 /* NotificationViewController.m in Sources */,
+				2B177E3E151EBA6A00F04C51 /* DDLog.m in Sources */,
+				2B177E3F151EBA6A00F04C51 /* DDASLLogger.m in Sources */,
+				2B177E40151EBA6A00F04C51 /* DDTTYLogger.m in Sources */,
+				2B177E41151EBA6A00F04C51 /* DDFileLogger.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -576,6 +608,7 @@
 		14EA76D814AAEC63009FF411 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -594,6 +627,7 @@
 		14EA76D914AAEC63009FF411 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",

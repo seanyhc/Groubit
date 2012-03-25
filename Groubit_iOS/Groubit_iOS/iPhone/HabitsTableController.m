@@ -126,7 +126,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSLog(@"start: cellForRowAtIndexPath");
-    UITableViewCell *cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"UITableViewCell"] autorelease];
+    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"UITableViewCell"];
     GBHabit *habit = [habitsList objectAtIndex:[indexPath row]];
     [cell.textLabel setText:habit.HabitName];
     [cell.detailTextLabel setText:habit.HabitDescription];

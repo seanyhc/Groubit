@@ -44,8 +44,6 @@ static TaipeiStation* syncEngine = nil;
 - (void)dealloc{
     
     NSLog(@"release sync engine");
-    [lastSyncDate release];
-    lastSyncDate = nil;
 }
 
 +(TaipeiStation*) getSyncEngine

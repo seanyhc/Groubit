@@ -12,4 +12,18 @@
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
     #import <CoreData/CoreData.h>
+
+    // GB Core Data Types
+    #import "GBHabit.h"
+    #import "GBTask.h"
+    #import "GBUser.h"
+    #import "GBNotification.h"
+    #import "GBRelation.h"
+
+    // Logging facility
+    #import "DDLog.h"
+    #import "DDASLLogger.h"
+    #import "DDTTYLogger.h"
+
+
 #endif

@@ -13,12 +13,12 @@
 
 @interface GBTask : NSManagedObject
 
-@property (nonatomic, retain) NSDate * createAt;
-@property (nonatomic, retain) NSString * TaskID;
-@property (nonatomic, retain) NSString * TaskName;
-@property (nonatomic, retain) NSString * TaskStatus;
-@property (nonatomic, retain) NSDate * TaskTargetDate;
-@property (nonatomic, retain) NSDate * updateAt;
-@property (nonatomic, retain) GBHabit *belongsToHabit;
+@property (nonatomic, strong) NSDate * createAt;
+@property (nonatomic, strong) NSString * TaskID;
+@property (nonatomic, strong) NSString * TaskName;
+@property (nonatomic, strong) NSString * TaskStatus;
+@property (nonatomic, strong) NSDate * TaskTargetDate;
+@property (nonatomic, strong) NSDate * updateAt;
+@property (nonatomic, strong) GBHabit *belongsToHabit;
 
 @end

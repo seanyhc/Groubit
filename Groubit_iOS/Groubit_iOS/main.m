@@ -15,9 +15,9 @@ int main(int argc, char *argv[])
     [Parse setApplicationId:@"wfZ5wJOQM1ILr4wAgxt8MA5egLOCqGd7yOSQc4Uz" 
                   clientKey:@"6iJsrI2eWRNd5yzLX4anTo2UBOvulkB7n1XmNieI"];
 
-    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-    int retVal = UIApplicationMain(argc, argv, nil, nil);
-    [pool release];
+    @autoreleasepool {
+        int retVal = UIApplicationMain(argc, argv, nil, nil);
 
-    return retVal;
+        return retVal;
+    }
 }

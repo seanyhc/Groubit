@@ -14,19 +14,19 @@
 @interface GBHabit : NSManagedObject {
 @private
 }
-@property (nonatomic, retain) NSDate * createAt;
-@property (nonatomic, retain) NSNumber * HabitAttempts;
-@property (nonatomic, retain) NSString * HabitDescription;
-@property (nonatomic, retain) NSString * HabitFrequency;
-@property (nonatomic, retain) NSString * HabitID;
-@property (nonatomic, retain) NSString * HabitName;
-@property (nonatomic, retain) NSString * HabitOwner;
-@property (nonatomic, retain) NSDate * HabitStartDate;
-@property (nonatomic, retain) NSString * HabitStatus;
-@property (nonatomic, retain) NSDate * updateAt;
-@property (nonatomic, retain) GBUser *belongsToUser;
-@property (nonatomic, retain) GBRelation *referencedByRelation;
-@property (nonatomic, retain) NSSet *tasks;
+@property (nonatomic, strong) NSDate * createAt;
+@property (nonatomic, strong) NSNumber * HabitAttempts;
+@property (nonatomic, strong) NSString * HabitDescription;
+@property (nonatomic, strong) NSString * HabitFrequency;
+@property (nonatomic, strong) NSString * HabitID;
+@property (nonatomic, strong) NSString * HabitName;
+@property (nonatomic, strong) NSString * HabitOwner;
+@property (nonatomic, strong) NSDate * HabitStartDate;
+@property (nonatomic, strong) NSString * HabitStatus;
+@property (nonatomic, strong) NSDate * updateAt;
+@property (nonatomic, strong) GBUser *belongsToUser;
+@property (nonatomic, strong) GBRelation *referencedByRelation;
+@property (nonatomic, strong) NSSet *tasks;
 @end
 
 @interface GBHabit (CoreDataGeneratedAccessors)

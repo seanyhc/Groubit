@@ -8,13 +8,14 @@
 
 #import "DebugViewController.h"
 #import "GBDataModelManager.h"
-#import "GBHabit.h"
-#import "GBTask.h"
-#import "GBUser.h"
-#import "GBNotification.h"
+
 #import "Groubit_iOSAppDelegate.h"
 #import "TaipeiStation.h"
 #import "Parse/Parse.h"
+
+
+// Debug levels: off, fatal, error, warn, notice, info, debug
+static const int ddLogLevel = LOG_LEVEL_INFO;
 
 @implementation DebugViewController
 
@@ -567,6 +568,12 @@
         
         NSLog(@"Upcoming Task:%@", task);
     }
+	
+	DDLogError(@"Error");
+	DDLogWarn(@"Warn");
+	DDLogInfo(@"Info");
+    DDLogVerbose(@"Debug");
+    
 }
 
 

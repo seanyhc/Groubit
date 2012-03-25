@@ -31,8 +31,17 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
-
+    
+    
+    // Setup Logging Facility - using lumberjack logging framework
+    
+    
+    [DDLog addLogger:[DDASLLogger sharedInstance]];
+	[DDLog addLogger:[DDTTYLogger sharedInstance]];
+    
+    
+    // Setup tab controllers
+    
     tabController = [[UITabBarController alloc] init];
 
     UIViewController *dbc = [[DashboardViewController alloc] init];
@@ -47,23 +56,18 @@
     UIViewController *vc3 = [[FriendsViewController alloc] init];
     UIViewController *vc4 = [[DebugViewController alloc] init];
 
-
     NSArray *viewControllers = [ NSArray arrayWithObjects:vc1, vc2, vc3, vc4, nil];
 
     
-    [dbc release];
-    [hbc release];
 
-    [vc1 release];
-    [vc2 release];
-    [vc3 release];
-    [vc4 release];
 
 
     [tabController setViewControllers:viewControllers];
     //[self.window addSubview:tabController.view];
     [self.window setRootViewController:tabController];
 
+   
+    
     // Show the window
     [self.window makeKeyAndVisible];
 
@@ -83,6 +87,8 @@
 
 		[tabController presentModalViewController:loginViewController animated:false];
 	}
+    
+    
 
     return YES;
 }
@@ -123,14 +129,6 @@
     [self saveContext];
 }
 
-- (void)dealloc
-{
-    [_window release];
-    [__managedObjectContext release];
-    [__managedObjectModel release];
-    [__persistentStoreCoordinator release];
-    [super dealloc];
-}
 
 - (void)awakeFromNib
 {
