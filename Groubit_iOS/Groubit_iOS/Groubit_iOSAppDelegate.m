@@ -16,6 +16,8 @@
 #import "HabitsTableController.h"
 #import "FriendsViewController.h"
 #import "DebugViewController.h"
+#import "Parse/Parse.h"
+
 
 
 @implementation Groubit_iOSAppDelegate
@@ -30,17 +32,6 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
-
-    /*
-    // Create RegisterLoginViewController
-    RegisterLoginViewController *loginViewController = [[RegisterLoginViewController alloc] init];
-
-    // Set loginViewController as rootViewController of window
-    [self.window setRootViewController:loginViewController];
-
-    // The window retains loginViewController, so we can release our reference
-    [loginViewController release];
-    */
 
     tabController = [[UITabBarController alloc] init];
 
@@ -75,6 +66,23 @@
 
     // Show the window
     [self.window makeKeyAndVisible];
+
+    // Check if the user is logged in or not
+	PFUser *currentPFUser = [PFUser currentUser];
+    NSLog(@"Current user name is %@", currentPFUser.username);
+    
+	if (!currentPFUser) { // If not, direct users to login view
+	    // Create RegisterLoginViewController
+		RegisterLoginViewController *loginViewController = [[RegisterLoginViewController alloc] init];
+
+	    // Set loginViewController as rootViewController of window
+	    //[self.window setRootViewController:loginViewController];
+
+	    // The window retains loginViewController, so we can release our reference
+		//[loginViewController release];
+
+		[tabController presentModalViewController:loginViewController animated:false];
+	}
 
     return YES;
 }

@@ -12,10 +12,12 @@
 {
     IBOutlet UITextField *userName;
     IBOutlet UITextField *passWord;
+    IBOutlet UITextView *loginWarn;
 }
 
 @property (nonatomic, retain) UITextField *userName;
 @property (nonatomic, retain) UITextField *passWord;
+@property (nonatomic, retain) UITextView *loginWarn;
 
 - (IBAction)register:(id)sender;
 - (IBAction)login:(id)sender;

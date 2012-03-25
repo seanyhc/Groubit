@@ -7,6 +7,7 @@
 //
 
 #import "RegisterLoginViewController.h"
+#import "Groubit_iOSAppDelegate.h"
 #import "GBDataModelManager.h"
 #import "GBHabit.h"
 #import "GBTask.h"
@@ -17,6 +18,7 @@
 
 @synthesize userName;
 @synthesize passWord;
+@synthesize loginWarn;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -59,6 +61,8 @@
 #pragma mark - GUI Triggered Actions
 
 - (IBAction)register:(id)sender{
+    loginWarn.text = @"";
+
     PFUser *pfUser = [PFUser user];
     
     pfUser.username = [userName text];
@@ -86,23 +90,47 @@
             NSString *errorString = [[error userInfo] objectForKey:@"error"];
             // Show the errorString somewhere and let the user try again.
             NSLog(@"Signup error: %@", errorString);
+            
+            loginWarn.text = errorString;
         }
     }];
     
 }
 
 - (IBAction)login:(id)sender{
+    
+    loginWarn.text = @"";
+    
     [PFUser logInWithUsernameInBackground:[userName text] password:[passWord text] 
             block:^(PFUser *user, NSError *error) {
         if (user) {
             PFUser *currentPFUser = [PFUser currentUser];
             NSLog(@"Current logged in user is %@", currentPFUser.username);
+            
             // first, check if local GB user exists
-                                            
+            GBDataModelManager* dataModel = [GBDataModelManager getDataModelManager];
+            GBUser *localGBUser = [dataModel getUserByName:currentPFUser.username];
+            
+            if (!localGBUser) {
+                // create GB user
+                [dataModel createUser:currentPFUser.username withPassword:@""]; //FIXME: use real encrypted pw
+                localGBUser = [dataModel getUserByName:currentPFUser.username];
+            }
+            
+            // set local GB user
+            [dataModel setLocalUserName:localGBUser.UserName]; 
+              
+            // go to Dashboard view
+            Groubit_iOSAppDelegate* appDelegate = [[UIApplication sharedApplication] delegate];
+            [appDelegate.window setRootViewController:appDelegate.tabController];
+            [appDelegate.window makeKeyAndVisible];
+                
         } else {
             NSString *errorString = [[error userInfo] objectForKey:@"error"];
             // the username or password is invalid.
             NSLog(@"Login error: %@", errorString);
+            
+            loginWarn.text = errorString;
         }
     }];
 }
