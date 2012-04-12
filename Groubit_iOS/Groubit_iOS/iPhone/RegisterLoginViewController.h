@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface RegisterLoginViewController : UIViewController
+@interface RegisterLoginViewController : UIViewController <UITextFieldDelegate>
 {
     IBOutlet UITextField *userName;
     IBOutlet UITextField *passWord;

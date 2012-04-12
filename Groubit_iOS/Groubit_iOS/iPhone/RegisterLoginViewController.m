@@ -145,4 +145,11 @@
     }
 }
 
+// Hide the keyboard after Return is pressed
+- (BOOL)textFieldShouldReturn:(UITextField *)theTextField{
+    [theTextField resignFirstResponder];
+    
+    return YES;
+}
+
 @end
