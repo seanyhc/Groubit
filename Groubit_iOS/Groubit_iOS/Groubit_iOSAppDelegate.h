@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RegisterLoginViewController.h"
 
 @interface Groubit_iOSAppDelegate : NSObject <UIApplicationDelegate> {
     UITabBarController *tabController;
+    RegisterLoginViewController *loginViewController;
     
     NSString *localUserName;
 }
@@ -17,6 +19,7 @@
 @property (nonatomic, strong) NSString *localUserName;
 @property (nonatomic, strong) IBOutlet UIWindow *window;
 @property (nonatomic, strong) IBOutlet UITabBarController *tabController;
+@property (nonatomic, strong) IBOutlet RegisterLoginViewController *loginViewController;
 
 @property (nonatomic, strong, readonly) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, strong, readonly) NSManagedObjectModel *managedObjectModel;

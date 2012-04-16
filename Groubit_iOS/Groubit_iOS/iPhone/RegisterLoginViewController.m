@@ -122,8 +122,9 @@
               
             // go to Dashboard view
             Groubit_iOSAppDelegate* appDelegate = [[UIApplication sharedApplication] delegate];
-            [appDelegate.window setRootViewController:appDelegate.tabController];
-            [appDelegate.window makeKeyAndVisible];
+            [appDelegate.tabController dismissModalViewControllerAnimated:false];
+            //[appDelegate.window setRootViewController:appDelegate.tabController];
+            //[appDelegate.window makeKeyAndVisible];
                 
         } else {
             NSString *errorString = [[error userInfo] objectForKey:@"error"];

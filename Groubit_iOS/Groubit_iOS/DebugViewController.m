@@ -576,6 +576,14 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     
 }
 
+- (IBAction)goToLoginPage:(id)sender
+{
+    NSLog(@"Entering goToLoginPage()");
+    Groubit_iOSAppDelegate* appDelegate = [[UIApplication sharedApplication] delegate];
+    [appDelegate.tabController presentModalViewController:appDelegate.loginViewController animated:false];
+    //[appDelegate.window setRootViewController:appDelegate.loginViewController];
+    //[appDelegate.window makeKeyAndVisible];
 
+}
 
 @end

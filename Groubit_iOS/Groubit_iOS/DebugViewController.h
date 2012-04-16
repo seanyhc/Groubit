@@ -43,6 +43,7 @@
 - (IBAction)userDefinedAction1:(id)sender;
 - (IBAction)userDefinedAction2:(id)sender;
 - (IBAction)userDefinedAction3:(id)sender;
+- (IBAction)goToLoginPage:(id)sender;    
 
 
 

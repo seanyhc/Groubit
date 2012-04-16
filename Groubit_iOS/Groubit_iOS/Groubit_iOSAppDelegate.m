@@ -11,7 +11,6 @@
 #import "HabitsTableController.h"
 #import "FriendsViewController.h"
 #import "DebugViewController.h"
-#import "RegisterLoginViewController.h"
 #import "DashBoardViewController.h"
 #import "HabitsTableController.h"
 #import "FriendsViewController.h"
@@ -24,6 +23,7 @@
 
 @synthesize window = _window;
 @synthesize tabController;
+@synthesize loginViewController;
 @synthesize managedObjectContext = __managedObjectContext;
 @synthesize managedObjectModel = __managedObjectModel;
 @synthesize persistentStoreCoordinator = __persistentStoreCoordinator;
@@ -40,9 +40,9 @@
 	[DDLog addLogger:[DDTTYLogger sharedInstance]];
     
     
-    // Setup tab controllers
-    
+    // Setup controllers
     tabController = [[UITabBarController alloc] init];
+    loginViewController = [[RegisterLoginViewController alloc] init];
 
     UIViewController *dbc = [[DashboardViewController alloc] init];
     UINavigationController *vc1 = [[UINavigationController alloc] initWithRootViewController:dbc];
@@ -76,15 +76,6 @@
     NSLog(@"Current user name is %@", currentPFUser.username);
     
 	if (!currentPFUser) { // If not, direct users to login view
-	    // Create RegisterLoginViewController
-		RegisterLoginViewController *loginViewController = [[RegisterLoginViewController alloc] init];
-
-	    // Set loginViewController as rootViewController of window
-	    //[self.window setRootViewController:loginViewController];
-
-	    // The window retains loginViewController, so we can release our reference
-		//[loginViewController release];
-
 		[tabController presentModalViewController:loginViewController animated:false];
 	}
     
