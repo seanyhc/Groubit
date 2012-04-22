@@ -24,6 +24,7 @@
         // Custom initialization
         tasksList = [[NSMutableArray alloc] init];
     }
+    
     return self;
 }
 
@@ -41,7 +42,9 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    [[self view] setBackgroundColor:[UIColor groupTableViewBackgroundColor]];
+    
+    //Sean change background back to white to apply theme
+    //[[self view] setBackgroundColor:[UIColor groupTableViewBackgroundColor]];
     
 }
 

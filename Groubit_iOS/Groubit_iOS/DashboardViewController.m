@@ -50,8 +50,9 @@
     [[self navigationItem] setTitle:@"Dashboard"];
 
     
-    
-    UITableView* tableview = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
+    //Sean commented below line to apply new theme
+    //UITableView* tableview = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
+    UITableView* tableview = [[UITableView alloc] initWithFrame:CGRectZero];
     self.tableView = tableview;
     
     

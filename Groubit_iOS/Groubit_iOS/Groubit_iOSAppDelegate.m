@@ -29,6 +29,50 @@
 @synthesize persistentStoreCoordinator = __persistentStoreCoordinator;
 @synthesize localUserName;
 
+//Sean: cutomize UI theme
+- (void)customizeAppearance
+{
+    // Create resizable images
+    UIImage *topBarImage = [[UIImage imageNamed:@"top_bar"] 
+                                resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
+    
+    // Set the background image for *all* UINavigationBars
+    [[UINavigationBar appearance] setBackgroundImage:topBarImage 
+                                       forBarMetrics:UIBarMetricsDefault];
+    
+    // Customize UIBarButtonItems 
+    UIImage *button30 = [[UIImage imageNamed:@"btn_top_bar"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 5, 0, 5)];
+    [[UIBarButtonItem appearance] setBackgroundImage:button30 forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    
+    [[UIBarButtonItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+      //[UIColor colorWithRed:0.373 green:0.376 blue:0.396 alpha:1] /*#5f6065*/, UITextAttributeTextColor, 
+      [UIColor colorWithRed:1 green:1 blue:1 alpha:1] /*#5f6065*/, UITextAttributeTextColor, 
+      //[UIColor colorWithRed:1 green:1 blue:1 alpha:0.8], UITextAttributeTextShadowColor, 
+      [NSValue valueWithUIOffset:UIOffsetMake(0, 1)], UITextAttributeTextShadowOffset, 
+      [UIFont fontWithName:@"Helvetica-Neue" size:0.0], UITextAttributeFont, nil] forState:UIControlStateNormal];
+    
+    // Customize back button items differently   
+    UIImage *buttonBack30 = [[UIImage imageNamed:@"btn_back"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 13, 0, 5)];
+    [[UIBarButtonItem appearance] setBackButtonBackgroundImage:buttonBack30 forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+//    [[[UINavigationBar appearance] backBarButtonItem ] setTitle:@"Back"];
+
+    // Customize the title text for *all* UINavigationBars
+    [[UINavigationBar appearance] setTitleTextAttributes:
+     [NSDictionary dictionaryWithObjectsAndKeys:
+      //[UIColor colorWithRed:0.204 green:0.212 blue:0.239 alpha:1] /*#34363d*/, 
+      [UIColor colorWithRed:76/255.0 green:108/255.0 blue:22/255.0 alpha:1] /*#34363d*/, 
+      UITextAttributeTextColor, 
+      [UIColor colorWithRed:1 green:1 blue:1 alpha:0.8], 
+      UITextAttributeTextShadowColor, 
+      [NSValue valueWithUIOffset:UIOffsetMake(0, 1)], 
+      UITextAttributeTextShadowOffset, 
+      [UIFont fontWithName:@"Helvetica-Neue" size:0.0], 
+      UITextAttributeFont, 
+      nil]];
+    
+
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     
@@ -80,7 +124,10 @@
 	}
     
     
-
+    //Sean: customize UI theme
+    [self customizeAppearance];
+    [application setStatusBarStyle:UIStatusBarStyleBlackOpaque];
+    
     return YES;
 }
 

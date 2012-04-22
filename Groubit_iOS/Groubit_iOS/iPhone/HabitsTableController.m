@@ -65,10 +65,13 @@
     [super viewDidLoad];
     NSLog(@"start: HabitsTableController: viewDidLoad");
     
-
+    //Sean change back button to apply new theme: use no words but needs at least a space
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"\0" style:UIBarButtonItemStylePlain target:nil action:nil];
     
     // * the arrayWithArray method that failed
     //habitsList = [NSMutableArray arrayWithArray:tempArray];
+    
+
 
     NSLog(@"end: HabitsTableController: viewDidLoad");
 
