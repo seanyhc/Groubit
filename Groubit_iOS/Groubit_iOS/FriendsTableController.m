@@ -1,14 +1,14 @@
 //
-//  FriendsViewController.m
+//  FriendsTableController.m
 //  Groubit_iOS
 //
 //  Created by Sean Chen on 12/28/11.
 //  Copyright 2011 UCB MIMS. All rights reserved.
 //
 
-#import "FriendsViewController.h"
+#import "FriendsTableController.h"
 
-@implementation FriendsViewController
+@implementation FriendsTableController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {

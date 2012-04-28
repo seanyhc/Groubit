@@ -9,11 +9,9 @@
 #import "Groubit_iOSAppDelegate.h"
 #import "DashBoardViewController.h"
 #import "HabitsTableController.h"
-#import "FriendsViewController.h"
+#import "FriendsTableController.h"
 #import "DebugViewController.h"
 #import "DashBoardViewController.h"
-#import "HabitsTableController.h"
-#import "FriendsViewController.h"
 #import "DebugViewController.h"
 #import "Parse/Parse.h"
 
@@ -53,7 +51,7 @@
     //have to set the title for nav controller since it doesn't have its own init method
     [[vc2 tabBarItem] setTitle:@"Habits"];
     
-    UIViewController *vc3 = [[FriendsViewController alloc] init];
+    UIViewController *vc3 = [[FriendsTableController alloc] init];
     UIViewController *vc4 = [[DebugViewController alloc] init];
 
     NSArray *viewControllers = [ NSArray arrayWithObjects:vc1, vc2, vc3, vc4, nil];

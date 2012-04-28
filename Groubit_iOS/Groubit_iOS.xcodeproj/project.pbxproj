@@ -12,8 +12,8 @@
 		147C92DE151BDACF00EA1E75 /* checkbox_unchecked.png in Resources */ = {isa = PBXBuildFile; fileRef = 147C92DC151BDACF00EA1E75 /* checkbox_unchecked.png */; };
 		14B6D51E14E5E6C7009B95A0 /* HabitsAddController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B6D51C14E5E6C7009B95A0 /* HabitsAddController.m */; };
 		14B6D51F14E5E6C7009B95A0 /* HabitsAddController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14B6D51D14E5E6C7009B95A0 /* HabitsAddController.xib */; };
-		14E365BB14AB2D7B0064CA5B /* FriendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14E365B914AB2D7B0064CA5B /* FriendsViewController.m */; };
-		14E365BC14AB2D7B0064CA5B /* FriendsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14E365BA14AB2D7B0064CA5B /* FriendsViewController.xib */; };
+		14E365BB14AB2D7B0064CA5B /* FriendsTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14E365B914AB2D7B0064CA5B /* FriendsTableController.m */; };
+		14E365BC14AB2D7B0064CA5B /* FriendsTableController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14E365BA14AB2D7B0064CA5B /* FriendsTableController.xib */; };
 		14EA769914AAEC63009FF411 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14EA769814AAEC63009FF411 /* UIKit.framework */; };
 		14EA769B14AAEC63009FF411 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14EA769A14AAEC63009FF411 /* Foundation.framework */; };
 		14EA769D14AAEC63009FF411 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14EA769C14AAEC63009FF411 /* CoreGraphics.framework */; };
@@ -58,6 +58,10 @@
 		2BD0D88514AB4361004E1E49 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BD0D88414AB4361004E1E49 /* MobileCoreServices.framework */; };
 		2BD0D88814AB4380004E1E49 /* libz.1.1.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BD0D88714AB4380004E1E49 /* libz.1.1.3.dylib */; };
 		2BD0D88A14AB438A004E1E49 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BD0D88914AB438A004E1E49 /* Security.framework */; };
+		C62DD4BE15440ED700410934 /* FriendsAddController.m in Sources */ = {isa = PBXBuildFile; fileRef = C62DD4B915440ED700410934 /* FriendsAddController.m */; };
+		C62DD4BF15440ED700410934 /* FriendsAddController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C62DD4BA15440ED700410934 /* FriendsAddController.xib */; };
+		C62DD4C015440ED700410934 /* FriendsDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = C62DD4BC15440ED700410934 /* FriendsDetailController.m */; };
+		C62DD4C115440ED700410934 /* FriendsDetailController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C62DD4BD15440ED700410934 /* FriendsDetailController.xib */; };
 		C63E0DB214E61D350070E902 /* RegisterLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C63E0DB014E61D350070E902 /* RegisterLoginViewController.m */; };
 		C63E0DB314E61D350070E902 /* RegisterLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C63E0DB114E61D350070E902 /* RegisterLoginViewController.xib */; };
 /* End PBXBuildFile section */
@@ -80,9 +84,9 @@
 		14B6D51B14E5E6C7009B95A0 /* HabitsAddController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HabitsAddController.h; path = iPhone/HabitsAddController.h; sourceTree = "<group>"; };
 		14B6D51C14E5E6C7009B95A0 /* HabitsAddController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HabitsAddController.m; path = iPhone/HabitsAddController.m; sourceTree = "<group>"; };
 		14B6D51D14E5E6C7009B95A0 /* HabitsAddController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HabitsAddController.xib; path = iPhone/HabitsAddController.xib; sourceTree = "<group>"; };
-		14E365B814AB2D7B0064CA5B /* FriendsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendsViewController.h; sourceTree = "<group>"; };
-		14E365B914AB2D7B0064CA5B /* FriendsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendsViewController.m; sourceTree = "<group>"; };
-		14E365BA14AB2D7B0064CA5B /* FriendsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FriendsViewController.xib; sourceTree = "<group>"; };
+		14E365B814AB2D7B0064CA5B /* FriendsTableController.h */ = {isa = PBXFileReference; fileEncoding = 4; path = FriendsTableController.h; sourceTree = "<group>"; };
+		14E365B914AB2D7B0064CA5B /* FriendsTableController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendsTableController.m; sourceTree = "<group>"; };
+		14E365BA14AB2D7B0064CA5B /* FriendsTableController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FriendsTableController.xib; sourceTree = "<group>"; };
 		14EA769414AAEC63009FF411 /* Groubit_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Groubit_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		14EA769814AAEC63009FF411 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		14EA769A14AAEC63009FF411 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -151,6 +155,12 @@
 		2BD0D88614AB436E004E1E49 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		2BD0D88714AB4380004E1E49 /* libz.1.1.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.1.3.dylib; path = usr/lib/libz.1.1.3.dylib; sourceTree = SDKROOT; };
 		2BD0D88914AB438A004E1E49 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		C62DD4B815440ED700410934 /* FriendsAddController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendsAddController.h; sourceTree = "<group>"; };
+		C62DD4B915440ED700410934 /* FriendsAddController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendsAddController.m; sourceTree = "<group>"; };
+		C62DD4BA15440ED700410934 /* FriendsAddController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FriendsAddController.xib; sourceTree = "<group>"; };
+		C62DD4BB15440ED700410934 /* FriendsDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendsDetailController.h; sourceTree = "<group>"; };
+		C62DD4BC15440ED700410934 /* FriendsDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendsDetailController.m; sourceTree = "<group>"; };
+		C62DD4BD15440ED700410934 /* FriendsDetailController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FriendsDetailController.xib; sourceTree = "<group>"; };
 		C63E0DAF14E61D350070E902 /* RegisterLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RegisterLoginViewController.h; path = iPhone/RegisterLoginViewController.h; sourceTree = "<group>"; };
 		C63E0DB014E61D350070E902 /* RegisterLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RegisterLoginViewController.m; path = iPhone/RegisterLoginViewController.m; sourceTree = "<group>"; };
 		C63E0DB114E61D350070E902 /* RegisterLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RegisterLoginViewController.xib; path = iPhone/RegisterLoginViewController.xib; sourceTree = "<group>"; };
@@ -262,6 +272,12 @@
 		14EA76AF14AAEC63009FF411 /* iPhone */ = {
 			isa = PBXGroup;
 			children = (
+				C62DD4B815440ED700410934 /* FriendsAddController.h */,
+				C62DD4B915440ED700410934 /* FriendsAddController.m */,
+				C62DD4BA15440ED700410934 /* FriendsAddController.xib */,
+				C62DD4BB15440ED700410934 /* FriendsDetailController.h */,
+				C62DD4BC15440ED700410934 /* FriendsDetailController.m */,
+				C62DD4BD15440ED700410934 /* FriendsDetailController.xib */,
 				2B177E43151EBA7400F04C51 /* Logging */,
 				2B09D8D114DD1B4000A76133 /* DashboardViewController.h */,
 				2B09D8D214DD1B4000A76133 /* DashboardViewController.m */,
@@ -269,9 +285,9 @@
 				14EA76EE14AB201F009FF411 /* HabitsDetailViewController.h */,
 				14EA76EF14AB201F009FF411 /* HabitsDetailViewController.m */,
 				14EA76F014AB201F009FF411 /* HabitsDetailViewController.xib */,
-				14E365B814AB2D7B0064CA5B /* FriendsViewController.h */,
-				14E365B914AB2D7B0064CA5B /* FriendsViewController.m */,
-				14E365BA14AB2D7B0064CA5B /* FriendsViewController.xib */,
+				14E365B814AB2D7B0064CA5B /* FriendsTableController.h */,
+				14E365B914AB2D7B0064CA5B /* FriendsTableController.m */,
+				14E365BA14AB2D7B0064CA5B /* FriendsTableController.xib */,
 				14EA76B014AAEC63009FF411 /* Groubit_iOSAppDelegate_iPhone.h */,
 				14EA76B114AAEC63009FF411 /* Groubit_iOSAppDelegate_iPhone.m */,
 				14EA76B314AAEC63009FF411 /* MainWindow_iPhone.xib */,
@@ -437,13 +453,15 @@
 				14EA76B514AAEC63009FF411 /* MainWindow_iPhone.xib in Resources */,
 				14EA76BC14AAEC63009FF411 /* MainWindow_iPad.xib in Resources */,
 				14EA76F214AB201F009FF411 /* HabitsDetailViewController.xib in Resources */,
-				14E365BC14AB2D7B0064CA5B /* FriendsViewController.xib in Resources */,
+				14E365BC14AB2D7B0064CA5B /* FriendsTableController.xib in Resources */,
 				2B09D8CF14DD155B00A76133 /* DebugViewController.xib in Resources */,
 				14B6D51F14E5E6C7009B95A0 /* HabitsAddController.xib in Resources */,
 				C63E0DB314E61D350070E902 /* RegisterLoginViewController.xib in Resources */,
 				14B6D51F14E5E6C7009B95A0 /* HabitsAddController.xib in Resources */,
 				147C92DD151BDACF00EA1E75 /* checkbox_checked.png in Resources */,
 				147C92DE151BDACF00EA1E75 /* checkbox_unchecked.png in Resources */,
+				C62DD4BF15440ED700410934 /* FriendsAddController.xib in Resources */,
+				C62DD4C115440ED700410934 /* FriendsDetailController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -486,7 +504,7 @@
 				14EA76B914AAEC63009FF411 /* Groubit_iOSAppDelegate_iPad.m in Sources */,
 				2BD0D85B14AB260D004E1E49 /* GBDataModelManager.m in Sources */,
 				14EA76F114AB201F009FF411 /* HabitsDetailViewController.m in Sources */,
-				14E365BB14AB2D7B0064CA5B /* FriendsViewController.m in Sources */,
+				14E365BB14AB2D7B0064CA5B /* FriendsTableController.m in Sources */,
 				2B2B1CC014C969100068B36E /* TaipeiStation.m in Sources */,
 				2BCBEAAE14C9BA99003359AF /* GBHabit.m in Sources */,
 				2BCBEAB814C9BA9A003359AF /* GBUser.m in Sources */,
@@ -503,6 +521,8 @@
 				2B177E3F151EBA6A00F04C51 /* DDASLLogger.m in Sources */,
 				2B177E40151EBA6A00F04C51 /* DDTTYLogger.m in Sources */,
 				2B177E41151EBA6A00F04C51 /* DDFileLogger.m in Sources */,
+				C62DD4BE15440ED700410934 /* FriendsAddController.m in Sources */,
+				C62DD4C015440ED700410934 /* FriendsDetailController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
