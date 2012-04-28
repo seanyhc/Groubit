@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		14378D481543A8C300C5E7E9 /* top_bar.png in Resources */ = {isa = PBXBuildFile; fileRef = 14378D461543A8C300C5E7E9 /* top_bar.png */; };
+		14378D491543A8C300C5E7E9 /* top_bar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 14378D471543A8C300C5E7E9 /* top_bar@2x.png */; };
+		14378D4C1543C75B00C5E7E9 /* btn_top_bar.png in Resources */ = {isa = PBXBuildFile; fileRef = 14378D4A1543C75B00C5E7E9 /* btn_top_bar.png */; };
+		14378D4D1543C75B00C5E7E9 /* btn_top_bar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 14378D4B1543C75B00C5E7E9 /* btn_top_bar@2x.png */; };
+		14378D551544127900C5E7E9 /* btn_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 14378D531544127900C5E7E9 /* btn_back@2x.png */; };
+		14378D571544163900C5E7E9 /* btn_back.png in Resources */ = {isa = PBXBuildFile; fileRef = 14378D561544163900C5E7E9 /* btn_back.png */; };
 		14688F7214D7A96A006DAEBA /* HabitsTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14688F7114D7A96A006DAEBA /* HabitsTableController.m */; };
 		147C92DD151BDACF00EA1E75 /* checkbox_checked.png in Resources */ = {isa = PBXBuildFile; fileRef = 147C92DB151BDACF00EA1E75 /* checkbox_checked.png */; };
 		147C92DE151BDACF00EA1E75 /* checkbox_unchecked.png in Resources */ = {isa = PBXBuildFile; fileRef = 147C92DC151BDACF00EA1E75 /* checkbox_unchecked.png */; };
@@ -77,6 +83,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		14378D461543A8C300C5E7E9 /* top_bar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = top_bar.png; sourceTree = "<group>"; };
+		14378D471543A8C300C5E7E9 /* top_bar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "top_bar@2x.png"; sourceTree = "<group>"; };
+		14378D4A1543C75B00C5E7E9 /* btn_top_bar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_top_bar.png; sourceTree = "<group>"; };
+		14378D4B1543C75B00C5E7E9 /* btn_top_bar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_top_bar@2x.png"; sourceTree = "<group>"; };
+		14378D531544127900C5E7E9 /* btn_back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_back@2x.png"; sourceTree = "<group>"; };
+		14378D561544163900C5E7E9 /* btn_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_back.png; sourceTree = "<group>"; };
 		14688F7014D7A96A006DAEBA /* HabitsTableController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HabitsTableController.h; path = iPhone/HabitsTableController.h; sourceTree = "<group>"; };
 		14688F7114D7A96A006DAEBA /* HabitsTableController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HabitsTableController.m; path = iPhone/HabitsTableController.m; sourceTree = "<group>"; };
 		147C92DB151BDACF00EA1E75 /* checkbox_checked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkbox_checked.png; sourceTree = "<group>"; };
@@ -200,6 +212,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		14378D3C1543980800C5E7E9 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				14378D561544163900C5E7E9 /* btn_back.png */,
+				14378D531544127900C5E7E9 /* btn_back@2x.png */,
+				14378D4A1543C75B00C5E7E9 /* btn_top_bar.png */,
+				14378D4B1543C75B00C5E7E9 /* btn_top_bar@2x.png */,
+				14378D461543A8C300C5E7E9 /* top_bar.png */,
+				14378D471543A8C300C5E7E9 /* top_bar@2x.png */,
+				147C92DB151BDACF00EA1E75 /* checkbox_checked.png */,
+				147C92DC151BDACF00EA1E75 /* checkbox_unchecked.png */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
 		14EA768914AAEC63009FF411 = {
 			isa = PBXGroup;
 			children = (
@@ -251,6 +278,7 @@
 				14EA76AC14AAEC63009FF411 /* Groubit_iOS.xcdatamodeld */,
 				14EA76AF14AAEC63009FF411 /* iPhone */,
 				14EA76B614AAEC63009FF411 /* iPad */,
+				14378D3C1543980800C5E7E9 /* Images */,
 				14EA76A114AAEC63009FF411 /* Supporting Files */,
 			);
 			path = Groubit_iOS;
@@ -259,8 +287,6 @@
 		14EA76A114AAEC63009FF411 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				147C92DB151BDACF00EA1E75 /* checkbox_checked.png */,
-				147C92DC151BDACF00EA1E75 /* checkbox_unchecked.png */,
 				14EA76A214AAEC63009FF411 /* Groubit_iOS-Info.plist */,
 				14EA76A314AAEC63009FF411 /* InfoPlist.strings */,
 				14EA76A614AAEC63009FF411 /* main.m */,
@@ -279,9 +305,9 @@
 				C62DD4BC15440ED700410934 /* FriendsDetailController.m */,
 				C62DD4BD15440ED700410934 /* FriendsDetailController.xib */,
 				2B177E43151EBA7400F04C51 /* Logging */,
+				2B926AFE14B93E4F002E03F7 /* DataModel */,
 				2B09D8D114DD1B4000A76133 /* DashboardViewController.h */,
 				2B09D8D214DD1B4000A76133 /* DashboardViewController.m */,
-				2B926AFE14B93E4F002E03F7 /* DataModel */,
 				14EA76EE14AB201F009FF411 /* HabitsDetailViewController.h */,
 				14EA76EF14AB201F009FF411 /* HabitsDetailViewController.m */,
 				14EA76F014AB201F009FF411 /* HabitsDetailViewController.xib */,
@@ -462,6 +488,12 @@
 				147C92DE151BDACF00EA1E75 /* checkbox_unchecked.png in Resources */,
 				C62DD4BF15440ED700410934 /* FriendsAddController.xib in Resources */,
 				C62DD4C115440ED700410934 /* FriendsDetailController.xib in Resources */,
+				14378D481543A8C300C5E7E9 /* top_bar.png in Resources */,
+				14378D491543A8C300C5E7E9 /* top_bar@2x.png in Resources */,
+				14378D4C1543C75B00C5E7E9 /* btn_top_bar.png in Resources */,
+				14378D4D1543C75B00C5E7E9 /* btn_top_bar@2x.png in Resources */,
+				14378D551544127900C5E7E9 /* btn_back@2x.png in Resources */,
+				14378D571544163900C5E7E9 /* btn_back.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
