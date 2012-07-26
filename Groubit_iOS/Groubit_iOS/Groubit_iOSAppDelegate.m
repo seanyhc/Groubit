@@ -95,7 +95,10 @@
     //have to set the title for nav controller since it doesn't have its own init method
     [[vc2 tabBarItem] setTitle:@"Habits"];
     
-    UIViewController *vc3 = [[FriendsTableController alloc] init];
+    UIViewController *fbc = [[FriendsTableController alloc] init];
+    UINavigationController *vc3 = [[UINavigationController alloc] initWithRootViewController:fbc];
+    [vc3.tabBarItem setTitle:@"Friends"];
+    
     UIViewController *vc4 = [[DebugViewController alloc] init];
 
     NSArray *viewControllers = [ NSArray arrayWithObjects:vc1, vc2, vc3, vc4, nil];

@@ -15,8 +15,8 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        UITabBarItem *tbi = [self tabBarItem];
-        [tbi setTitle:@"Friends"];
+        //UITabBarItem *tbi = [self tabBarItem];
+        //[tbi setTitle:@"Friends"];
     }
     return self;
 }

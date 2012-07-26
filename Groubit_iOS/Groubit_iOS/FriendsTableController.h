@@ -13,9 +13,9 @@
 
 @interface FriendsTableController : UITableViewController
 {
-    NSMutableArray *FriendsList;
-    FriendsDetailController *FriendsDetailController;
-    FriendsAddController *FriendsAddController;
+    NSMutableArray *friendsList;
+    FriendsDetailController *friendsDetailController;
+    FriendsAddController *friendsAddController;
 }
 
 @end
