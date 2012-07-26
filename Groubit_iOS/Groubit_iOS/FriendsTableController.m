@@ -17,6 +17,12 @@
         // Custom initialization
         //UITabBarItem *tbi = [self tabBarItem];
         //[tbi setTitle:@"Friends"];
+        
+        friendsList = [[NSMutableArray alloc] init];
+        UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addButtonPressed)];
+        [[self navigationItem] setRightBarButtonItem:addButton];
+        [[self navigationItem] setTitle:@"Friends"];
+        
     }
     return self;
 }
@@ -50,4 +56,13 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+-(void)addButtonPressed{
+    NSLog(@"addButton pressed");
+    
+    if(!friendsAddController){
+        friendsAddController = [[FriendsAddController alloc] init];
+    }
+    
+    [self.navigationController pushViewController:friendsAddController animated:YES];
+}
 @end
