@@ -9,5 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface FriendsAddController : UIViewController
+{
+    IBOutlet UITextField *newFriendName;
+}
 
 @end

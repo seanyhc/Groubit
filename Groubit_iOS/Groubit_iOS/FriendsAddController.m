@@ -7,6 +7,7 @@
 //
 
 #import "FriendsAddController.h"
+#import "GBDataModelManager.h"
 
 @implementation FriendsAddController
 
@@ -46,6 +47,7 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
+    newFriendName = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -56,7 +58,20 @@
 
 - (void)saveButtonPressed
 {
-    NSLog(@"Save New Friend button pressed...");
+    GBDataModelManager *dataModel = [GBDataModelManager getDataModelManager];
+    NSLog(@"Saving New Friend with name: %@", newFriendName.text);
+    
+    [dataModel createFriend: newFriendName.text];
+    
+    // temp code
+    NSArray *friendList = [dataModel getFriendList];
+    NSUInteger i = 0;
+    for (i = 0; i < [friendList count]; i ++)
+    {
+        NSLog(@"%@", [friendList objectAtIndex: i]);
+    }
+    
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)cancelButtonPressed
