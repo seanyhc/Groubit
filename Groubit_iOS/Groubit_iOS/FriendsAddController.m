@@ -15,6 +15,12 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithTitle:@"Save" style:UIBarButtonItemStyleDone target:self action:@selector(saveButtonPressed)];
+        UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStyleBordered target:self action:@selector(cancelButtonPressed)];
+        
+        [self.navigationItem setRightBarButtonItem:saveButton];
+        [self.navigationItem setLeftBarButtonItem:cancelButton];
+        [self.navigationItem setTitle:@"New Friend"];
     }
     return self;
 }
@@ -48,4 +54,13 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+- (void)saveButtonPressed
+{
+    NSLog(@"Save New Friend button pressed...");
+}
+
+- (void)cancelButtonPressed
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
 @end
