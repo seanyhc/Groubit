@@ -392,6 +392,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     
     NSArray *users  = [dataModel getUserByType:kUserTypeALL];
     
+    NSLog(@" ==================");
     NSLog(@" Retrieved %d users", users.count);
     
     for(GBUser *user in users){
@@ -401,6 +402,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     
     NSArray *habits = [dataModel getAllHabitsByType:kUserTypeALL];
     
+    NSLog(@" ==================");
     NSLog(@" Retrieved %d habits", habits.count);
     
     for(GBHabit *habit in habits){
@@ -411,6 +413,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     
     NSArray *tasks = [dataModel getAllTasks:kUserTypeALL];
     
+    NSLog(@" ==================");
     NSLog(@" Retrieved %d tasks", tasks.count);
     
     for(GBTask *task in tasks){
@@ -418,8 +421,11 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         NSLog(@"Local Task:%@", task);
     }
     
+    
+    
     NSArray *notifications = [dataModel getAllNotifications];
     
+    NSLog(@" ==================");
     NSLog(@"Retrieved %d notifications", notifications.count);
     
     for(GBNotification *notification in notifications){
@@ -539,7 +545,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 {
 
     
-    
+    /*
     NSLog(@"Create new Notification on remote." );
     PFObject *pfNotification = [PFObject objectWithClassName:@"GBNotification"];
     [pfNotification setObject:@"12345" forKey:@"notificationID"];
@@ -550,7 +556,15 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     [pfNotification setObject:@"Jeffrey" forKey:@"toUser"];
     
     [pfNotification saveInBackground];
-
+     */
+    
+    
+    NSLog(@"Create new friend on local." );
+      
+    GBDataModelManager* dataModel = [GBDataModelManager getDataModelManager];
+    
+    [dataModel createFriend:@"Joey"];
+    [dataModel SyncData];
     
 }
 

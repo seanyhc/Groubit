@@ -775,50 +775,31 @@ static NSArray *sNotificationStatusStr;
 - (bool) createFriend: (NSString*) username
 {
     NSLog(@"Enter HabitDataModel::createFriend. username:%@",username);
-    
-    
-    GBUser *from;
-    // get Current User
-    
-    from = [dataModel getUserByName:self.localUserName];
-    
-    if(!from){
-        return false;
-    }
-    
-    /*
-    // get target User
-    
-    to = [dataModel getUserByName:username];
-    
-    if(!to){
-        return false;
-    }
-    */
-    
+       
     GBRelation* newRelation = nil;
     newRelation = [NSEntityDescription insertNewObjectForEntityForName:@"GBRelation" inManagedObjectContext:objectContext];
-    
-    
     
     newRelation.RelationID = [[NSString alloc] initWithFormat:@"RELATION_%@",[GBDataModelManager createLocalUUID]];
     newRelation.RelationType = (NSString*)[sRelationStr objectAtIndex:kFriend];
     newRelation.RelationStatus = (NSString*)[sRelationStatusStr objectAtIndex:kRelationStatusPending];
     newRelation.relationToUser = [NSString stringWithString:username];
     newRelation.relationFromUser = [NSString stringWithString:localUserName];
-    newRelation.fromUser = from;
-   // newRelation.toUser = to;
+    
+    
+    //newRelation.fromUser = from;
+    //newRelation.toUser = to;
+    
+    
     newRelation.createAt = newRelation.updateAt = [NSDate date];
     
-    NSError *error;
+    NSError *error = nil;
     [objectContext save:&error];
     
     if(error){
+        NSLog(@"DataModel Operation Error :%@", error);
         return false;
     }
-    
-
-    
+        
     return true;
 }
 
@@ -868,24 +849,27 @@ static NSArray *sNotificationStatusStr;
     newRelation = [NSEntityDescription insertNewObjectForEntityForName:@"GBRelation" inManagedObjectContext:objectContext];
     
     
-    
+    // Setting up data properties
     newRelation.RelationID = [[NSString alloc] initWithFormat:@"RELATION_%@",[GBDataModelManager createLocalUUID]];
     newRelation.RelationType = (NSString*)[sRelationStr objectAtIndex:kNanny];
     newRelation.relationToUser = [NSString stringWithString:username];
     newRelation.relationFromUser = [NSString stringWithString:localUserName];
+    newRelation.RelationStatus = (NSString*)[sRelationStatusStr objectAtIndex:kRelationStatusPending];
+
+    // Setting up object properties
     newRelation.fromUser = from;
     newRelation.toUser = to;
     newRelation.hasHabit = habit;
-    newRelation.RelationStatus = (NSString*)[sRelationStatusStr objectAtIndex:kRelationStatusPending];
+    
     newRelation.createAt = newRelation.updateAt = [NSDate date];
     
     NSError *error;
     [objectContext save:&error];
     
     if(error){
+        NSLog(@"DataModel Operation Error :%@", error);
         return false;
     }
-    
     
     
     return true;
@@ -901,7 +885,7 @@ static NSArray *sNotificationStatusStr;
     NSPredicate *predicate;
     
     
-    predicate = [NSPredicate predicateWithFormat:@"(RelationType = %@ AND fromUser.UserName = %@)", [sRelationStr objectAtIndex:kFriend], self.localUserName];
+    predicate = [NSPredicate predicateWithFormat:@"(RelationType = %@ AND relationFromUser = %@)", [sRelationStr objectAtIndex:kFriend], self.localUserName];
     
     NSArray *objects = [self queryManagedObject:kRelation withPredicate:predicate];
     
