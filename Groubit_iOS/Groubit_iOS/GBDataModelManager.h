@@ -10,19 +10,20 @@
 #import "GBHabit.h"
 #import "Parse/Parse.h"
 
-
 @interface GBDataModelManager : NSObject {
  
     NSManagedObjectContext *obectContext;
+
     NSString *localUserName;
-    NSStream *localUserID;
+    NSString *localUserID;
     
        
 }
 
 @property (nonatomic, strong) NSManagedObjectContext *objectContext;
 @property (nonatomic, strong) NSString *localUserName;
-@property (nonatomic, strong) NSStream *localUserID;
+@property (nonatomic, strong) NSString *localUserID;
+
 
 typedef enum {
     kHabitStatusInit,
@@ -85,9 +86,12 @@ typedef enum{
 
 typedef enum{
     kFriendRequest,
-    kTaskCompleted,
-    kHabitCompleted
+    kFreienConfirmation,
+    kNannyRequest,
+    kNannyConfirmation,
+    kReminder
 } GBNotificationType;
+
 
 + (GBDataModelManager*) getDataModelManager;
 
@@ -98,66 +102,28 @@ typedef enum{
 
 
 /**
-   
-   Create a new habit for current user.
- 
-   @param habitName        the name of the habiit
-   @param habitStartDate   the date when the habit will start
-   @param habitFrequency   the frequency the habit should be exerciesed. 
-   @param attempts         the number of tasks to be created
-   @return success or fail
- */
-
-- (bool) createHabit:(NSString*) habitName
-                      withStartDate:(NSDate*) habitStartDate
-                      withFrequency: (HabitFrequency)habitFrequency
-                      withAttempts: (int) attempts
-                      withDescription: (NSString*) desc;   
-
-
-
-/**
  
  Create a new habit for a specific user.
  
- @param userName         the name of the owner
+ @param userID           the ID of the owner
  @param habitName        the name of the habiit
- @param nannyName        the user name of the nanny
+ @param nannyID          the ID of the nanny
  @param habitStartDate   the date when the habit will start
  @param habitFrequency   the frequency the habit should be exerciesed. 
  @param attempts         the number of tasks to be created
  @return success or fail
  */
 
-- (bool) createHabitForUserWithNanny:(NSString*) userName
+- (bool) createHabitForUserWithNanny:(NSString*) userID
                        withName:(NSString*) habitName
-                       withNannyName: (NSString*) nannyName
+                       withNannyID: (NSString*) nannyID
                        withStartDate:(NSDate*) habitStartDate
                        withFrequency: (HabitFrequency)habitFrequency
                        withAttempts: (int) attempts
                        withDescription: (NSString*) desc;
 
-/**
- 
- Create a new habit for a specific user.
- 
- @param userName         the name of the owner
- @param habitName        the name of the habiit
- @param habitStartDate   the date when the habit will start
- @param habitFrequency   the frequency the habit should be exerciesed. 
- @param attempts         the number of tasks to be created
- @return success or fail
- */
-
-- (bool) createHabitForUser:(NSString*) userName
-                   withName:(NSString*) habitName
-                   withStartDate:(NSDate*) habitStartDate
-                   withFrequency: (HabitFrequency)habitFrequency
-                   withAttempts: (int) attempts
-                   withDescription: (NSString*) desc;
-
-
 - (bool) createHabitWithRemoteHabit: (PFObject*) remoteHabit;
+
 
 /**
  
@@ -174,21 +140,21 @@ typedef enum{
  
  Retrieve all habits that associate with a particular user. 
  
- @param ownerName  the name of the user
+ @param userID  the ID of the user
  @return a list of habits with type "GBHabit"
  */
 
-- (NSArray *) getAllHabitsByOwnerName:(NSString*) ownerName;
+- (NSArray *) getAllHabitsByUserID:(NSString*) userID;
 
 
 /**
  
  Retrieve all habits that associate with a list of users. 
  
- @param ownerName  the name of the users
+ @param userIDs  the name of the users
  @return a list of habits with type "GBHabit"
  */
-- (NSArray *) getAllHabitsByOwnerNames:(NSArray*) ownerNames;
+- (NSArray *) getAllHabitsByUserIDs:(NSArray*) userIDs;
 
 
 
@@ -259,7 +225,7 @@ typedef enum{
  @return a list of task with type "TaskTypeObject"
  */
 
-- (NSArray *) getAllTasks:(GBUserType) userType;
+- (NSArray *) getAllTasksByUserType:(GBUserType) userType;
 
 
 /**
@@ -273,7 +239,7 @@ typedef enum{
 
 
 
-- (NSArray *) getRecentTask: (GBUserType) userType withPeriod:(int)days;
+- (NSArray *) getRecentTaskByUserType: (GBUserType) userType withPeriod:(int)days;
 
 
 - (NSArray *) getTasksWithPeriod: (NSString*) userID withStartDateIndex: (int) startDate withEndDateIndex: (int) endDate;
@@ -293,7 +259,7 @@ typedef enum{
  @return success or failure
  */
 
-- (bool) createUser: (NSString *) ownerName
+- (bool) createUser: (NSString *) ownerName withUserName: (NSString*) userName
             withPassword: (NSString*) password;
 
 
@@ -306,7 +272,7 @@ typedef enum{
  @return user object
  */
 
-- (GBUser*) getUserByName : (NSString*) username;
+- (GBUser*) getUserByID : (NSString*) username;
 
 /**
 
@@ -335,7 +301,7 @@ typedef enum{
  @param UserID  the user name of the friend
  @param HabitID the ID of the habit 
  */
-- (bool) createNanny: (NSString*) username withHabitID:(NSString*) HabitID;
+- (bool) createNanny: (NSString*) userID withHabitID:(NSString*) HabitID;
 
 /**
  
@@ -367,7 +333,7 @@ typedef enum{
 
 - (NSArray *) getAllNotifications;
 - (bool) createNotificationWithRemoteNotification : (PFObject*) remoteNotification;
-- (bool) createNotification:(NSString*)text fromUser:(NSString*)fromUserName toUser:(NSString*)toUserName status:(int)status type:(int)type;
+- (bool) createNotification:(NSString*)message fromUser:(NSString*)fromUserID toUser:(NSString*)toUserID status:(int)status type:(int)type;
 
 
 /*  

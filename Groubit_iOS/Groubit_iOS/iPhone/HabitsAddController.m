@@ -66,7 +66,7 @@
     GBDataModelManager* dataModel = [GBDataModelManager getDataModelManager];
     NSLog(@"Saving new habit with name:%@", habitName.text);
     //todo: need to get local user name
-    [dataModel createHabitForUser:@"Jeffrey" withName:habitName.text withStartDate:[NSDate date] withFrequency:kDaily withAttempts:7 withDescription:@"New habit for Jeffrey"];  
+    [dataModel createHabitForUserWithNanny:@"jeffffrey@gmail.com" withName:habitName.text withNannyID:nil withStartDate:[NSDate date] withFrequency:kDaily withAttempts:7 withDescription:@"New habit for Jeffrey"];  
     [self.navigationController popViewControllerAnimated:YES];   
 }
 

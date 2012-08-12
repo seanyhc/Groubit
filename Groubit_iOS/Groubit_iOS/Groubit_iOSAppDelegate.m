@@ -13,7 +13,9 @@
 #import "DebugViewController.h"
 #import "DashBoardViewController.h"
 #import "DebugViewController.h"
+#import "GBDataModelManager.h"
 #import "Parse/Parse.h"
+#import "DDLog.h"
 
 
 
@@ -26,6 +28,8 @@
 @synthesize managedObjectModel = __managedObjectModel;
 @synthesize persistentStoreCoordinator = __persistentStoreCoordinator;
 @synthesize localUserName;
+
+static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 
 //Sean: cutomize UI theme
 - (void)customizeAppearance
@@ -82,6 +86,14 @@
 	[DDLog addLogger:[DDTTYLogger sharedInstance]];
     
     
+    
+    // J2DO : Handle the situation where the app was launched by remote notification
+    /*
+    if (launchOptions != nil){
+    
+    }
+    */
+    
     // Setup controllers
     tabController = [[UITabBarController alloc] init];
     loginViewController = [[RegisterLoginViewController alloc] init];
@@ -118,18 +130,80 @@
 
     // Check if the user is logged in or not
 	PFUser *currentPFUser = [PFUser currentUser];
-    NSLog(@"Current user name is %@", currentPFUser.username);
+    DDLogInfo(@"Current user name is %@", currentPFUser.username);
+    
     
 	if (!currentPFUser) { // If not, direct users to login view
 		[tabController presentModalViewController:loginViewController animated:false];
-	}
+	
+    }else{
+        GBDataModelManager* dataModel = [GBDataModelManager getDataModelManager];
+        dataModel.localUserName = [NSString stringWithString:currentPFUser.username];
+    }
     
     
     //Sean: customize UI theme
     [self customizeAppearance];
     [application setStatusBarStyle:UIStatusBarStyleBlackOpaque];
     
+    
+    // Register for push notification
+    [application registerForRemoteNotificationTypes: 
+     UIRemoteNotificationTypeBadge |
+     UIRemoteNotificationTypeAlert |             
+     UIRemoteNotificationTypeSound];
+    
     return YES;
+}
+
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)newDeviceToken
+{
+    [PFPush storeDeviceToken:newDeviceToken]; // Send parse the device token
+    
+    // Subscribe Public Channel
+    
+    [PFPush subscribeToChannelInBackground:@"GROUBIT_PUB_CHANNEL" block:^(BOOL succeeded, NSError *error) {
+        if (succeeded) {
+            NSLog(@"Successfully subscribed to the broadcast channel.");
+            
+        } else {
+            NSLog(@"Failed to subscribe to the broadcast channel. error: %@", error);
+        }
+    }];
+    
+    
+    // Subscribe Personal Channel
+    
+    GBDataModelManager* dataModel = [GBDataModelManager getDataModelManager];
+    
+    NSString* channelID = [NSString stringWithFormat:@"GROUBIT_PRI_CHANNEL_%@",dataModel.localUserName];
+    
+    // J2DO : FIXME
+    [PFPush subscribeToChannelInBackground:channelID block:^(BOOL succeeded, NSError *error) {
+        if (succeeded) {
+            NSLog(@"Successfully subscribed to the personal channel.");
+            
+        } else {
+            NSLog(@"Failed to subscribe to the broadcast channel. error: %@", error);
+        }
+    }];
+    
+
+}
+
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
+{
+    DDLogError(@"Remote notification error:%@", [error localizedDescription]);
+}
+
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    
+    DDLogVerbose(@"Groubit_iOSAppDelegate::didReceiveRemoteNotification: userInfo:%@", userInfo);
+    
+    [PFPush handlePush:userInfo];
+    
+    
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

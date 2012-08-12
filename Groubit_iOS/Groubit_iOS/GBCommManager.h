@@ -17,11 +17,32 @@ typedef enum{
 } GBChannelType;
 
 
+
 + (GBCommManager*) getCommManager;
 
 
-- (void) sendNotification: (NSString*) userID withChannelType: (GBChannelType) channelType withMessage :(NSString*) message ;
-
+/*
+- (void) sendNotification: (NSString*) channelID withChannelType: (GBChannelType) channelType withMessage :(NSString*) message ;
+*/
+ 
 - (void) onReceiveNotification;
+
+- (void) sendParseNotification: (NSString*) channelID withData : (NSDictionary*) data;
+
+
+// Interfaces for UI layer
+
+- (void) sendFriendRequestNotification: (NSString*) username withMessage : (NSString*) message;
+
+- (void) sendFriendConfirmationNotification: (NSString*) userID withMessage : (NSString*) message;
+
+- (void) sendNannyRequestNotification : (NSString*) username withMessage : (NSString*) message withHabitID : (NSString*) habitID;
+
+- (void) sendNannyConfirmNotification : (NSString*) username withMessage : (NSString*) message;
+
+- (void) sendReminderNotification : (NSString*) userID withMessage : (NSString*) message;
+
+
+
 
 @end

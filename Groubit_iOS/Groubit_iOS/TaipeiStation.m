@@ -61,7 +61,7 @@ static TaipeiStation* syncEngine = nil;
 {
     NSLog(@"TaipeiStation::syncUserData");
     
-    GBUser *gbLocalUser = [dataModel getUserByName:dataModel.localUserName];
+    GBUser *gbLocalUser = [dataModel getUserByID:dataModel.localUserName];
     
     if( !gbLocalUser){
         

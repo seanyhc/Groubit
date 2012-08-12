@@ -12,10 +12,12 @@
 #import "Groubit_iOSAppDelegate.h"
 #import "TaipeiStation.h"
 #import "Parse/Parse.h"
+#import "GBCommManager.h"
+#import "DDLog.h"
 
 
 // Debug levels: off, fatal, error, warn, notice, info, debug
-static const int ddLogLevel = LOG_LEVEL_INFO;
+static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 
 @implementation DebugViewController
 
@@ -50,7 +52,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     //[self initTestData];
     GBDataModelManager* dataModel = [GBDataModelManager getDataModelManager];
     
-    NSLog(@" view did load. Local user : %@", dataModel.localUserName);
+    DDLogVerbose(@" view did load. Local user : %@", dataModel.localUserName);
     
     [localUserName setText:dataModel.localUserName];
 }
@@ -88,33 +90,35 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     
     // set local user
     [dataModel setLocalUserName:@"Jeffrey"];
+    [dataModel setLocalUserID:@"jeffffrey@gmail"];
     
     // create users
-    [dataModel createUser:@"Jeffrey" withPassword:@"1234"];
-    [dataModel createUser:@"Joey" withPassword:@"1234"];
-    [dataModel createUser:@"Sean" withPassword:@"1234"];
+    [dataModel createUser:@"jeffffrey@gmail.com" withUserName:@"Jeffrey" withPassword:@"12345"];
+    [dataModel createUser:@"Joey@gmail.com" withUserName:@"Joey" withPassword:@"1234"];
+    [dataModel createUser:@"Sean@gmail.com" withUserName:@"Sean" withPassword:@"1234"];
     
     // create habits
-    [dataModel createHabitForUser:@"Jeffrey" withName:@"Jeffrey_Habit1" withStartDate:[NSDate date] withFrequency:kDaily withAttempts:7 withDescription:@"Habit1 for Jeffrey"];
+    [dataModel createHabitForUserWithNanny:@"jeffffrey@gmail.com" withName:@"Jeffrey_Habit1" withNannyID:nil withStartDate:[NSDate date] withFrequency:kDaily withAttempts:7 withDescription:@"Habit1 for Jeffrey"];
     
-    [dataModel createHabitForUser:@"Jeffrey" withName:@"Jeffrey_Habit2" withStartDate:[NSDate date] withFrequency:kWeekly withAttempts:7 withDescription:@"Habit2 for Jeffrey"];
+    [dataModel createHabitForUserWithNanny:@"jeffffrey@gmail.com" withName:@"Jeffrey_Habit2" withNannyID:nil withStartDate:[NSDate date] withFrequency:kWeekly withAttempts:7 withDescription:@"Habit2 for Jeffrey"];
     
-    [dataModel createHabitForUserWithNanny:@"Jeffrey" withName:@"Jeffrey_Habit3" withNannyName:@"Joey" withStartDate:[NSDate date] withFrequency:kWeekly withAttempts:7 withDescription:@"Habit3 for Jeffrey"];
+   
+    [dataModel createHabitForUserWithNanny:@"jeffffrey@gmail.com" withName:@"Jeffrey_Habit3" withNannyID:@"Joey@gmail.com" withStartDate:[NSDate date] withFrequency:kWeekly withAttempts:7 withDescription:@"Habit3 for Jeffrey"];
     
     
-    [dataModel createHabitForUser:@"Joey" withName:@"Joey_Habit1" withStartDate:[NSDate date] withFrequency:kDaily withAttempts:7 withDescription:@"Habit1 for Joey"];
+    [dataModel createHabitForUserWithNanny:@"Joey@gmail.com" withName:@"Joey_Habit1" withNannyID:nil withStartDate:[NSDate date] withFrequency:kDaily withAttempts:7 withDescription:@"Habit1 for Joey"];
     
-    [dataModel createHabitForUser:@"Joey" withName:@"Joey_Habit2" withStartDate:[NSDate date] withFrequency:kWeekly withAttempts:7 withDescription:@"Habit2 for Joey"];
+    [dataModel createHabitForUserWithNanny:@"Joey@gmail.com" withName:@"Joey_Habit2" withNannyID:nil withStartDate:[NSDate date] withFrequency:kWeekly withAttempts:7 withDescription:@"Habit2 for Joey"];
     
-    [dataModel createHabitForUser:@"Sean" withName:@"Sean_Habit1" withStartDate:[NSDate date] withFrequency:kDaily withAttempts:7 withDescription:@"Habit1 for Sean"];
+    [dataModel createHabitForUserWithNanny:@"Sean@gmail.com" withName:@"Sean_Habit1" withNannyID:nil withStartDate:[NSDate date] withFrequency:kDaily withAttempts:7 withDescription:@"Habit1 for Sean"];
     
-    [dataModel createHabitForUser:@"Sean" withName:@"Sean_Habit2" withStartDate:[NSDate date] withFrequency:kWeekly withAttempts:7 withDescription:@"Habit2 for Sean"];
+    [dataModel createHabitForUserWithNanny:@"Sean@gmail.com" withName:@"Sean_Habit2" withNannyID:nil withStartDate:[NSDate date] withFrequency:kWeekly withAttempts:7 withDescription:@"Habit2 for Sean"];
     
     
     
     // setup relationship
-    [dataModel createFriend:@"Sean"];
-    [dataModel createFriend:@"Joey"];    
+    [dataModel createFriend:@"Sean@gmail.com"];
+    [dataModel createFriend:@"Joey@gmail.com"];    
     //[dataModel createNanny:@"Sean" withHabitID:<#(NSString *)#>]
     
     
@@ -232,7 +236,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     
     GBDataModelManager* dataModel = [GBDataModelManager getDataModelManager];
     
-    NSArray* tasks = [dataModel getAllTasks:kUserTypeInternal];
+    NSArray* tasks = [dataModel getAllTasksByUserType:kUserTypeInternal];
     
     for(int i=0; i < [tasks count]; i++){
         GBTask* task = (GBTask*)[tasks objectAtIndex:i];
@@ -271,7 +275,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     NSLog(@"Test 1: get all habits by current user");
     
     
-    NSArray* tasks = [dataModel getAllTasks:kUserTypeInternal];
+    NSArray* tasks = [dataModel getAllTasksByUserType:kUserTypeInternal];
     
     for(int i=0; i < [tasks count]; i++){
         GBTask* task = (GBTask*)[tasks objectAtIndex:i];
@@ -411,7 +415,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     }
    
     
-    NSArray *tasks = [dataModel getAllTasks:kUserTypeALL];
+    NSArray *tasks = [dataModel getAllTasksByUserType:kUserTypeALL];
     
     NSLog(@" ==================");
     NSLog(@" Retrieved %d tasks", tasks.count);
@@ -439,7 +443,8 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 - (IBAction)createHabit:(id)sender
 {
     GBDataModelManager* dataModel = [GBDataModelManager getDataModelManager];
-    [dataModel createHabitForUser:@"Jeffrey" withName:@"Jeffrey_Habit4" withStartDate:[NSDate date] withFrequency:kDaily withAttempts:7 withDescription:@"Habit4 for Jeffrey"];
+    [dataModel createHabitForUserWithNanny:@"jeffffrey@gmail.com" withName:@"Jeffrey_Habit4" withNannyID:nil withStartDate:[NSDate date] withFrequency:kDaily withAttempts:7 withDescription:@"Habit4 for Jeffrey"];
+
 }
 
 - (IBAction)createRemoteHabit:(id)sender
@@ -476,7 +481,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 {
     
     PFQuery *newHabitQuery = [PFQuery queryWithClassName:@"GBHabit"];
-    [newHabitQuery whereKey:@"HabitOwner" equalTo:@"Jeffrey"];
+    [newHabitQuery whereKey:@"HabitOwner" equalTo:@"jeffffrey@gmail.com"];
     [newHabitQuery whereKey:@"HabitID" equalTo:@"12345"];
     
     NSArray *newPFHabits = [newHabitQuery findObjects];
@@ -488,7 +493,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     [habit saveInBackground];
     
     newHabitQuery = [PFQuery queryWithClassName:@"GBHabit"];
-    [newHabitQuery whereKey:@"HabitOwner" equalTo:@"Joey"];
+    [newHabitQuery whereKey:@"HabitOwner" equalTo:@"Joey@gmail.com"];
     [newHabitQuery whereKey:@"HabitID" equalTo:@"6789"];
     
     newPFHabits = [newHabitQuery findObjects];
@@ -507,7 +512,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     GBDataModelManager* dataModel = [GBDataModelManager getDataModelManager];
     GBHabit *habit = (GBHabit*)[dataModel getLocalObjectByAttribute:@"HabitName" withAttributeValue:@"Jeffrey_Habit4" withObjectType:kHabit];
     
-    NSArray *habits = [dataModel getAllHabitsByOwnerName:@"Jeffrey"];
+    NSArray *habits = [dataModel getAllHabitsByUserID:@"jeffffrey@gmail.com"];
     
     
     if(!habit || habits.count == 0 )
@@ -535,9 +540,15 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 - (IBAction)userDefinedAction1:(id)sender
 {
     GBDataModelManager* dataModel = [GBDataModelManager getDataModelManager];
-    
+ 
+    /*
     [dataModel createNotification:@"New Friend Request From Joey" fromUser:@"Joey" toUser:@"Jeffrey" status:kNotificationStatusNew type:kFriendRequest];
     [dataModel SyncData];
+    */
+    
+    GBCommManager *commMgr = [GBCommManager getCommManager ];
+    [commMgr sendReminderNotification:@"Joey" withMessage:@"Hello" ];
+    
     
 }
 
@@ -577,7 +588,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     NSLog(@"Today : %@", today);
     
     
-    NSArray * tasks = [dataModel getTasksWithPeriod:@"Jeffrey" withStartDateIndex:-2 withEndDateIndex:3];
+    NSArray * tasks = [dataModel getTasksWithPeriod:@"jeffffrey@gmail.com" withStartDateIndex:-2 withEndDateIndex:3];
     for(GBTask *task in tasks){
         
         NSLog(@"Upcoming Task:%@", task);

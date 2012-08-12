@@ -81,10 +81,11 @@
                 GBDataModelManager* dataModel = [GBDataModelManager getDataModelManager];
                 
                 // create GB user
-                [dataModel createUser:pfUser.username withPassword:pfUser.password];
+                [dataModel createUser:pfUser.username withUserName:pfUser.username withPassword:pfUser.password];
                 
                 // set local GB user
                 [dataModel setLocalUserName:pfUser.username];
+                [dataModel setLocalUserID:pfUser.username];
             } 
         } else {
             NSString *errorString = [[error userInfo] objectForKey:@"error"];
@@ -109,17 +110,19 @@
             
             // first, check if local GB user exists
             GBDataModelManager* dataModel = [GBDataModelManager getDataModelManager];
-            GBUser *localGBUser = [dataModel getUserByName:currentPFUser.username];
+            GBUser *localGBUser = [dataModel getUserByID:currentPFUser.username];
             
             if (!localGBUser) {
                 // create GB user
-                [dataModel createUser:currentPFUser.username withPassword:@""]; //FIXME: use real encrypted pw
-                localGBUser = [dataModel getUserByName:currentPFUser.username];
+                [dataModel createUser:currentPFUser.username withUserName:currentPFUser.username withPassword:@""]; //FIXME: use real encrypted pw
+                localGBUser = [dataModel getUserByID:currentPFUser.username];
             }
             
             // set local GB user
             [dataModel setLocalUserName:localGBUser.UserName]; 
-              
+            [dataModel setLocalUserID:localGBUser.UserName]; 
+            
+            
             // go to Dashboard view
             Groubit_iOSAppDelegate* appDelegate = [[UIApplication sharedApplication] delegate];
             [appDelegate.tabController dismissModalViewControllerAnimated:false];

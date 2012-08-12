@@ -14,7 +14,9 @@
 #import "GBNotification.h"
 #import "Parse/Parse.h"
 #import "Groubit_iOSAppDelegate.h"
+#import "DDLog.h"
 
+static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 
 @implementation GBDataModelManager
 
@@ -31,6 +33,7 @@ static NSArray *sRelationStr;
 static NSArray *sRelationStatusStr;
 static NSArray *sNotificationTypeStr;
 static NSArray *sNotificationStatusStr;
+
 
 
 -(id) init{
@@ -62,8 +65,11 @@ static NSArray *sNotificationStatusStr;
     
     
     sNotificationTypeStr = [[NSArray alloc] initWithObjects:@"friendRequest",
-                                                            @"taskCompleted",
-                                                            @"habitCompleted",nil];
+                                                            @"friendConfirmation",
+                                                            @"nannyRequest",
+                                                            @"nannyConfirmation",
+                                                            @"reminder",
+                                                            nil];
     
     sNotificationStatusStr = [[NSArray alloc] initWithObjects:@"new",
                                                               @"viewed",
@@ -73,9 +79,6 @@ static NSArray *sNotificationStatusStr;
     Groubit_iOSAppDelegate* appDelegate = [[UIApplication sharedApplication] delegate];
     
     self.objectContext = appDelegate.managedObjectContext;
-    
-    NSLog(@"Set local username : %@", localUserName);
-    self.localUserName = [[NSString alloc ]initWithString:@"Jeffrey"];
 
     return self;
 }
@@ -90,6 +93,7 @@ static NSArray *sNotificationStatusStr;
     return dataModel;
 }
 
+
 - (void) SycnData
 {
     
@@ -100,9 +104,9 @@ static NSArray *sNotificationStatusStr;
     
     if(error){
     
-        NSLog(@"Sync Context Error: %@", error);
+        DDLogError(@"Sync Context Error: %@", error); 
+        
     }
-    
     
 }
 
@@ -113,17 +117,18 @@ static NSArray *sNotificationStatusStr;
 #pragma mark HABIT RELATED FUNCTION
 #pragma mark - 
 
+
+// SYNC FUNCTION
 - (bool) createHabitWithRemoteHabit: (PFObject*) remoteHabit
 {
-    NSLog(@"Enter HabitDataModel::createHabitWithRemoteHabit. remoteHabit:%@", remoteHabit);
+    DDLogVerbose (@"Enter HabitDataModel::createHabitWithRemoteHabit. remoteHabit:%@", remoteHabit);
 
-    
     GBHabit* newHabit;
     GBUser *habitOwner;
     
-    habitOwner= [self getUserByName:[remoteHabit objectForKey:@"HabitOwner"]];    
+    habitOwner= [self getUserByID:[remoteHabit objectForKey:@"HabitOwner"]];    
     if(!habitOwner){
-        NSLog(@"Cannot retrieve habit owner");
+        DDLogError(@"Cannot retrieve habit owner");
         return false;
     }
     
@@ -149,24 +154,24 @@ static NSArray *sNotificationStatusStr;
     
     
     
-    NSLog(@"New Habit[%@] Created", newHabit.HabitName);
+    DDLogInfo(@"New Habit[%@] Created", newHabit.HabitName);
     
 
     return true;
 }
 
-- (bool) createHabitForUserWithNanny:(NSString*) userName
+- (bool) createHabitForUserWithNanny:(NSString*) userID
                             withName:(NSString*) habitName
-                            withNannyName: (NSString*) nannyName
+                            withNannyID: (NSString*) nannyID
                             withStartDate:(NSDate*) habitStartDate
                             withFrequency: (HabitFrequency)habitFrequency
                             withAttempts: (int) attempts
                             withDescription:(NSString*) desc{
 
-    NSLog(@"Enter HabitDataModel::createHabitForUserWithNanny. userName:%@, habitName:%@, nannyName:%@,habitStartDate:%@, habitFrequency:%d, habitAttempts:%d, habitDesc:%@",
-          userName,
-          nannyName,
+    DDLogVerbose (@"Enter HabitDataModel::createHabitForUserWithNanny. userID:%@, habitName:%@, nannyID:%@,habitStartDate:%@, habitFrequency:%d, habitAttempts:%d, habitDesc:%@",
+          userID,
           habitName,
+          nannyID,
           habitStartDate,
           habitFrequency,
           attempts,
@@ -174,9 +179,9 @@ static NSArray *sNotificationStatusStr;
 
     GBUser *habitOwner;
 
-    habitOwner= [self getUserByName:userName];    
+    habitOwner= [self getUserByID:userID];    
     if(!habitOwner){
-        NSLog(@"Cannot retrieve habit owner");
+        DDLogError (@"Cannot retrieve habit owner");
         return false;
     }
     
@@ -188,8 +193,8 @@ static NSArray *sNotificationStatusStr;
     NSString* habitStatusStr = [NSString stringWithString:[sHabitStatusStr objectAtIndex:kHabitStatusInit]];
     NSString* habitFrequencyStr = [[NSString alloc]initWithString:[sHabitFrequencyStr objectAtIndex:habitFrequency]];
     
-    newHabit.HabitID = [[NSString alloc] initWithFormat:@"HABIT_%@",[GBDataModelManager createLocalUUID]];
-    newHabit.HabitOwner = userName;
+    newHabit.HabitID = [NSString stringWithFormat:@"HABIT_%@",[GBDataModelManager createLocalUUID]];
+    newHabit.HabitOwner = userID;
     newHabit.HabitName = habitName;
     newHabit.HabitFrequency = habitFrequencyStr;
     newHabit.HabitStatus = habitStatusStr;
@@ -200,13 +205,15 @@ static NSArray *sNotificationStatusStr;
     newHabit.updateAt = newHabit.createAt = [NSDate date];
 
     NSError *error;
-    [objectContext save:&error];
+    if(![objectContext save:&error]){
     
-    // j2do : Error Handling Here
+        DDLogError(@"Failed to save create habit, %@, %@", error, [error userInfo]);
+        return false;
+    }
     
     
     
-    NSLog(@"New Habit[%@] Created", habitName);
+    DDLogInfo (@"New Habit[%@] Created", habitName);
     
     
     // Automatically create tasks
@@ -224,67 +231,29 @@ static NSArray *sNotificationStatusStr;
         
     }
     
-    // Automatically setup relationship
-    if(nannyName){
-        [self createNanny:nannyName withHabitID:newHabit.HabitID];
+    // etup relationship with Nanny
+    if(nannyID){
+        if(![self createNanny:nannyID withHabitID:newHabit.HabitID]){
+            return false;
+        }
+        
     }
     
     return true;
-
-    
-    
-}
-
-
-- (bool) createHabitForUser:(NSString*) userName
-                   withName:(NSString*) habitName
-                   withStartDate:(NSDate*) habitStartDate
-                   withFrequency: (HabitFrequency)habitFrequency
-                   withAttempts: (int) attempts
-                   withDescription:(NSString *)desc{
-
-
-    NSLog(@"Enter HabitDataModel::createHabitForUser. userName:%@, habitName:%@, habitStartDate:%@, habitFrequency:%d, habitAttempts:%d, habitDesc:%@",
-          userName,
-          habitName,
-          habitStartDate,
-          habitFrequency,
-          attempts,
-          desc);
-    
-    return [self createHabitForUserWithNanny:userName withName:habitName withNannyName:nil withStartDate:habitStartDate withFrequency:habitFrequency withAttempts:attempts withDescription:desc];
-    
-      
-}
-
-
-- (bool) createHabit:(NSString*) habitName
-       withStartDate:(NSDate*) habitStartDate
-       withFrequency: (HabitFrequency)habitFrequency
-       withAttempts: (int) attempts
-       withDescription:(NSString*) desc
-{
-    NSLog(@"Enter HabitDataModel::createHabitForUser. habitName:%@, habitStartDate:%@, habitFrequency:%d, habitAttempts:%d",
-          habitName,
-          habitStartDate,
-          habitFrequency,
-          attempts);
-    
-    return [self createHabitForUser:self.localUserName withName:habitName
-                      withStartDate:habitStartDate withFrequency:habitFrequency withAttempts:attempts withDescription:desc];
-   
+  
 }
 
 
 
 - (NSArray *) getAllHabitsByType:(GBUserType) userType
 {
-    NSLog(@"Enter HabitDataModel::getAllHabits. userType:%d",userType);
+    DDLogVerbose (@"Enter HabitDataModel::getAllHabits. userType:%d",userType);
     
     NSArray *userNames = nil;
+    
     if(userType == kUserTypeInternal){    
 
-        userNames = [NSArray arrayWithObject:self.localUserName];
+        userNames = [NSArray arrayWithObject:self.localUserID];
     
     }
     else if (userType == kUserTypeFriend){
@@ -294,42 +263,43 @@ static NSArray *sNotificationStatusStr;
     }else if (userType == kUserTypeALL){
     
         NSMutableArray *allUserName = [NSMutableArray arrayWithArray:[self getFriendList]];
-        [allUserName addObject:self.localUserName];
+        [allUserName addObject:self.localUserID];
         userNames = allUserName;        
     }
     
-    NSArray *objects = [self getAllHabitsByOwnerNames:userNames];
+    NSArray *objects = [self getAllHabitsByUserIDs:userNames];
     
     
     
-    NSLog(@"Retrieved %d Habits", [objects count]);
+    DDLogVerbose (@"Retrieved %d Habits", [objects count]);
     
               
     return objects;
 }
 
-- (NSArray *) getAllHabitsByOwnerName:(NSString*) ownerName
+
+- (NSArray *) getAllHabitsByUserID:(NSString*) userID
 {
     
-    NSLog(@"Enter HabitDataModel::getAllHabitsByOwnerName. ownerName:%@", ownerName);
+    DDLogVerbose(@"Enter HabitDataModel::getAllHabitsByUserID. userID :%@", userID);
     
-    NSArray *nameArray = [NSArray arrayWithObject:ownerName];
-    
-  
-    NSArray *objects = [self getAllHabitsByOwnerNames:nameArray];  
-    NSLog(@"Retrieved %d Habits", [objects count]);
+    NSArray *nameArray = [NSArray arrayWithObject:userID];
+      
+    NSArray *objects = [self getAllHabitsByUserIDs:nameArray];  
+    DDLogVerbose(@"Retrieved %d Habits", [objects count]);
     
     return objects;    
 }
 
-- (NSArray *) getAllHabitsByOwnerNames:(NSArray*) ownerNames
+
+- (NSArray *) getAllHabitsByUserIDs:(NSArray*) userIDs
 {
     
-    NSLog(@"Enter HabitDataModel::getAllHabitsByOwnerNames. ownerName Count:%d", ownerNames.count);
+    DDLogVerbose (@"Enter HabitDataModel::getAllHabitsByUserIDs. userID Count:%d", userIDs.count);
     
-    NSMutableArray *predicates = [[NSMutableArray alloc] initWithCapacity:ownerNames.count];
+    NSMutableArray *predicates = [[NSMutableArray alloc] initWithCapacity:userIDs.count];
     
-    for(NSString* name in ownerNames){
+    for(NSString* name in userIDs){
     
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(HabitOwner = %@)", name];
         [predicates addObject:predicate];
@@ -342,38 +312,36 @@ static NSArray *sNotificationStatusStr;
     NSArray *objects = [self queryManagedObject:kHabit withPredicate:orPredicate];
     
     
-    NSLog(@"Retrieved %d Habits", [objects count]);
+    DDLogVerbose (@"Retrieved %d Habits", [objects count]);
     
     return objects;    
 }
 
+
 - (GBHabit*) getHabitByID : (NSString*) habitID{
     
-    NSLog(@"Enter HabitDataModel::getHabitByID. haibtID:%@",habitID);
+    DDLogVerbose (@"Enter HabitDataModel::getHabitByID. haibtID:%@",habitID);
     
     
     NSPredicate *predicate;
-    
     
     predicate = [NSPredicate predicateWithFormat:@"(HabitID = %@)", habitID];
     
     NSArray *objects = [self queryManagedObject:kHabit withPredicate:predicate];
     
-    NSLog(@"Retrieved %d habits", [objects count]);
+    DDLogVerbose (@"Retrieved %d habits", [objects count]);
     
     if( objects.count == 0){
         
-        NSLog(@"No user habit retrieved");
+        DDLogInfo (@"No user habit retrieved");
         return nil;
         
     }else if (objects.count > 1){
         
-        NSLog(@"More than 1 habit object retrieved");
-        return nil;
-        
+        DDLogWarn (@"More than 1 habit object retrieved. Return the first one");
     } 
     
-    return [objects lastObject];
+    return [objects objectAtIndex:0];
     
 }
 
@@ -382,7 +350,7 @@ static NSArray *sNotificationStatusStr;
 - (void) setHabitStatus: (NSString*) habitID 
              withStatus:(HabitStatus) habitStatus
 {
-    NSLog(@"Enter HabitDataModel::setHabitStatus. habitID: %@, habitStatus:%d", habitID, habitStatus);
+    DDLogVerbose (@"Enter HabitDataModel::setHabitStatus. habitID: %@, habitStatus:%d", habitID, habitStatus);
         
     NSEntityDescription *desc = [NSEntityDescription entityForName:@"GBHabit" inManagedObjectContext:objectContext];
     
@@ -397,30 +365,35 @@ static NSArray *sNotificationStatusStr;
     
     NSArray *objects = [objectContext executeFetchRequest:request error:&error];
 
+    
+    
     if(!objects || objects.count == 0){
     
+        DDLogWarn(@" No Habit with habit id %@ retrieved", habitID);
         
     }else if (objects.count > 1){
     
+        DDLogWarn(@" Can't uniquely identify a habit. Habit id %@ ", habitID);
+        
     }else{
+        
         GBHabit *habit = (GBHabit*) [objects lastObject];
         habit.HabitStatus = [NSString stringWithString:[sHabitStatusStr objectAtIndex:kHabitStatusInProgress]];
-        [objectContext save:&error];
-        
-        if(!error){
-            NSLog(@"Habit update successfully");
+        if(![objectContext save:&error]){
+            
+            DDLogError(@" Failed to update habit status %@, %@", error, [error userInfo]);
         }
     }
-    
     
     
 }
 
 
-// j2do
 - (void) deleteHabitByID:(NSString*)habitID
 {
-
+    
+    DDLogVerbose (@"Enter HabitDataModel::deleteHabitByID. habitID: %@", habitID);
+    
     NSEntityDescription* desc = [NSEntityDescription entityForName:@"GBHabit" inManagedObjectContext:objectContext];
     
     NSFetchRequest* request = [[NSFetchRequest alloc] init];
@@ -438,12 +411,9 @@ static NSArray *sNotificationStatusStr;
     for (int i=0; i< [objects count]; i++) {
         GBHabit* habit = (GBHabit*)[objects objectAtIndex:i];
         
-        NSLog(@"Deleting Habit [%@]", habit.HabitName);
+        DDLogInfo (@"Deleting Habit [%@]", habit.HabitName);
         [objectContext deleteObject:habit];   
-        
     }
-    
-    
     
 }
 
@@ -458,13 +428,13 @@ static NSArray *sNotificationStatusStr;
              withTargetDate:(NSDate*) taskTargetDate
 {
 
-    NSLog(@"Enter HabitDataModel::createTaskForHabit. habitID: %@, target date:%@", newHabit.HabitID, taskTargetDate);
+    DDLogVerbose (@"Enter HabitDataModel::createTaskForHabit. habitID: %@, target date:%@", newHabit.HabitID, taskTargetDate);
     
        
     GBTask* newTask = nil;
     newTask = [NSEntityDescription insertNewObjectForEntityForName:@"GBTask" inManagedObjectContext:objectContext];
     
-    newTask.TaskID = [[NSString alloc] initWithFormat:@"TASK_%@",[GBDataModelManager createLocalUUID]];
+    newTask.TaskID = [NSString stringWithFormat:@"TASK_%@",[GBDataModelManager createLocalUUID]];
     newTask.TaskStatus = [NSString stringWithString:[sTaskStatusStr objectAtIndex:kTaskStatusInit]];
     newTask.TaskTargetDate = taskTargetDate;
     newTask.TaskName = [NSString stringWithFormat:@"TASK_%@",newTask.TaskID];
@@ -472,16 +442,20 @@ static NSArray *sNotificationStatusStr;
     newTask.createAt = newTask.updateAt = [NSDate date];
     
     NSError *error;
-    [objectContext save:&error];
+    if(![objectContext save:&error]){
+        DDLogError(@" Failed to create task for Haibt. %@, %@", error, [error userInfo]);
+        return false;
+    }
     
-    NSLog(@"New Task[%@] Created. Target Date: %@", newTask.TaskName, taskTargetDate);
+    DDLogInfo (@"New Task[%@] Created. Target Date: %@", newTask.TaskName, taskTargetDate);
     
     return true;
 }
 
+
 - (NSArray *) getTasksWithHabitID:(NSString*) habitID{
 
-    NSLog(@"Enter HabitDataModel::getTasksWithHabitID. habitID:%@",habitID);
+    DDLogVerbose (@"Enter HabitDataModel::getTasksWithHabitID. habitID:%@",habitID);
     
     NSPredicate *predicate;
     
@@ -489,20 +463,21 @@ static NSArray *sNotificationStatusStr;
     
     NSArray *objects = [self queryManagedObject:kTask withPredicate:predicate];
     
-    NSLog(@"Retrieved %d Tasks", [objects count]);
+    DDLogVerbose (@"Retrieved %d Tasks", [objects count]);
     
     return objects;
 }
 
+
 - (bool) createTaskWithRemoteTask: (PFObject*) remoteTask
 {
 
-    NSLog(@"Enter HabitDataModel::createTaskWithRemoteTask. remote task: %@", remoteTask);
+    DDLogVerbose (@"Enter HabitDataModel::createTaskWithRemoteTask. remote task: %@", remoteTask);
     
     GBHabit *newHabit = [dataModel getHabitByID:[remoteTask objectForKey:@"HabitID"]];
     
     if(!newHabit){
-        NSLog(@"Can not retrive associated habit");
+        DDLogError (@"Can not retrive associated habit");
         return false;
     }
                       
@@ -520,19 +495,22 @@ static NSArray *sNotificationStatusStr;
     newTask.updateAt = remoteTask.updatedAt;
     
     NSError *error;
-    [objectContext save:&error];
+    if(![objectContext save:&error]){
+        DDLogError(@"Failed to create local object with remote object. %@,%@", error, [error userInfo]);
+        return false;
+    }
     
-    NSLog(@"New Task[%@] Created. Target Date: %@", newTask.TaskName, newTask.TaskTargetDate);
+    DDLogInfo(@"New Task[%@] Created. Target Date: %@", newTask.TaskName, newTask.TaskTargetDate);
     
     return true;
 }
 
 
-// j2do
+
 - (void) setTaskStatus:(NSString*) taskID taskStatus:(TaskStatus) status{
     
     
-    NSLog(@"Enter HabitDataModel::setHabitStatus. habitID: %@, habitStatus:%d", taskID, status);
+    DDLogVerbose (@"Enter HabitDataModel::setHabitStatus. habitID: %@, habitStatus:%d", taskID, status);
     
     NSEntityDescription *desc = [NSEntityDescription entityForName:@"GBTask" inManagedObjectContext:objectContext];
     
@@ -550,26 +528,31 @@ static NSArray *sNotificationStatusStr;
     if(!objects || objects.count == 0){
         
         
+        DDLogWarn(@" No Task with task id %@ retrieved", taskID);
+        
     }else if (objects.count > 1){
+        
+        
+        DDLogWarn(@" Can't uniquely identify a Task with task id : %@", taskID);
         
     }else{
         GBTask *task = (GBTask*) [objects lastObject];
         task.TaskStatus = [NSString stringWithString:[sTaskStatusStr objectAtIndex:status]];
-        [objectContext save:&error];
+        if(![objectContext save:&error]){
         
-        if(!error){
-            NSLog(@"Task update successfully");
+            DDLogError(@" Failed to set task status. Task ID : %@", taskID);
         }
+            
     }
     
 }
 
-// j2do
-- (NSArray *) getAllTasks:(GBUserType) userType
+
+- (NSArray *) getAllTasksByUserType:(GBUserType)userType
 {
  
     
-    NSLog(@"Enter HabitDataModel::getAllTasks. userType:%d",userType);
+    DDLogVerbose (@"Enter HabitDataModel::getAllTasksByUserType. userType:%d",userType);
     
     NSMutableArray *allTasks = [NSMutableArray array];
     
@@ -587,7 +570,7 @@ static NSArray *sNotificationStatusStr;
     
     
     
-    NSLog(@"Retrieved %d Tasks", [allTasks count]);
+    DDLogVerbose(@"Retrieved %d Tasks", [allTasks count]);
     
     
     return allTasks;
@@ -596,7 +579,7 @@ static NSArray *sNotificationStatusStr;
 
 - (NSArray *) getTasksWithPeriod: (NSString*) userID withStartDateIndex: (int) startDate withEndDateIndex: (int) endDate
 {
-    NSLog(@"Enter HabitDataModel::getTasksWithPeriod. userID:%@, withStartDateIndex:%d, withEndDateIndex:%d",userID, startDate, endDate);
+    DDLogVerbose(@"Enter HabitDataModel::getTasksWithPeriod. userID:%@, withStartDateIndex:%d, withEndDateIndex:%d",userID, startDate, endDate);
     
     // calculate start date and end date. 
   
@@ -605,32 +588,37 @@ static NSArray *sNotificationStatusStr;
     NSDate *end   = [self getDateCeil:[self getDateWithIndex:endDate]];
    
     
-    NSLog(@" Start Date : %@, End Date : %@", start, end);
+    DDLogVerbose(@" Start Date : %@, End Date : %@", start, end);
     
-    NSPredicate *timePredicate = [NSPredicate predicateWithFormat:@"(TaskTargetDate >= %@ AND TaskTargetDate <= %@ AND belongsToHabit.HabitOwner = %@)", start, end, localUserName];
+    NSPredicate *timePredicate = [NSPredicate predicateWithFormat:@"(TaskTargetDate >= %@ AND TaskTargetDate <= %@ AND belongsToHabit.HabitOwner = %@)", start, end, localUserID];
     
     
     NSArray *objects = [self queryManagedObject:kTask withPredicate:timePredicate];
     
-    NSLog(@"Retrieved %d Tasks", [objects count]);
+    DDLogVerbose(@"Retrieved %d Tasks", [objects count]);
     
     return objects;
     
 }
 
-- (NSArray *) getRecentTask: (GBUserType) userType withPeriod:(int)days
+- (NSArray *) getRecentTaskByUserType: (GBUserType) userType withPeriod:(int)days
 {
-    NSLog(@"Enter HabitDataModel::getRecentTasks. userType:%d, withPeriod:%d",userType, days);
+    DDLogVerbose(@"Enter HabitDataModel::getRecentTaskByUserType. userType:%d, withPeriod:%d",userType, days);
     
     NSArray* userNameList = nil;
     
     if( userType == kUserTypeInternal ){
     
-        userNameList = [NSArray arrayWithObject:localUserName];
+        userNameList = [NSArray arrayWithObject:localUserID];
         
     }else if (userType == kUserTypeBaby){
     
         userNameList = [self getNannyList];
+    
+    }else{
+    
+        // J2DO : we might support get task by type for friends (and all)
+        return nil;
     }
     
     
@@ -656,11 +644,11 @@ static NSArray *sNotificationStatusStr;
     
     NSPredicate *andPredicate = [NSCompoundPredicate andPredicateWithSubpredicates:[NSArray arrayWithObjects:orPredicate, timePredicate, nil]];
     
-    NSLog(@"Query Predicate : %@", andPredicate);
+    DDLogVerbose(@"Query Predicate : %@", andPredicate);
     
     NSArray *objects = [self queryManagedObject:kTask withPredicate:andPredicate];
     
-    NSLog(@"Retrieved %d Tasks", [objects count]);
+    DDLogVerbose(@"Retrieved %d Tasks", [objects count]);
     
     return objects;
 }
@@ -671,57 +659,59 @@ static NSArray *sNotificationStatusStr;
 #pragma mark - 
 
 
-- (bool) createUser: (NSString *) username
+- (bool) createUser: (NSString *) userID withUserName: (NSString*) userName
             withPassword: (NSString*) password
 {
 
-    NSLog(@"Enter HabitDataModel::createHabitForUser. userName:%@, password:%@",
-          username,
+    DDLogVerbose(@"Enter HabitDataModel::createHabitForUser. userName:%@, password:%@",
+          userID,
           password);
     
     
+    // J2DO : Check the uniqueness of the username
+    
     GBUser* newUser = nil;
     newUser = [NSEntityDescription insertNewObjectForEntityForName:@"GBUser" inManagedObjectContext:objectContext];
+        
     
-    
-    
-    newUser.UserID = [[NSString alloc] initWithFormat:@"USER_%@",[GBDataModelManager createLocalUUID]];
+    newUser.UserID = [NSString stringWithString:userID];
     newUser.UserPass = [NSString stringWithString:password];
-    newUser.UserName = [NSString stringWithString:username];
+    newUser.UserName = [NSString stringWithString:userName];
     newUser.createAt = newUser.updateAt = [NSDate date];
     
     NSError *error;
-    [objectContext save:&error];
-    
-    if(error){
+    if (![objectContext save:&error]){
+        
+        DDLogError(@" Fail to create user. UserID : %@, Username : %@", userID, userName);
         return false;
     }
-    
+
     return true;
 }
 
-- (GBUser*) getUserByName : (NSString*) username{
 
-    NSLog(@"Enter HabitDataModel::getUserByName. username:%@",username);
+- (GBUser*) getUserByID : (NSString*) userID{
+
+    DDLogVerbose(@"Enter HabitDataModel::getUserByName. username:%@",userID);
     
     
     NSPredicate *predicate;
     
  
-    predicate = [NSPredicate predicateWithFormat:@"(UserName = %@)", username];
+    predicate = [NSPredicate predicateWithFormat:@"(UserID = %@)", userID];
        
     NSArray *objects = [self queryManagedObject:kUser withPredicate:predicate];
     
-    NSLog(@"Retrieved %d Users", [objects count]);
+    DDLogVerbose(@"Retrieved %d Users", [objects count]);
     
     if( objects.count == 0){
   
-        NSLog(@"No user object retrieved");
+        DDLogWarn(@"No user object retrieved");
         return nil;
     
     }else if (objects.count > 1){
         
-        NSLog(@"More than 1 user object retrieved");
+        DDLogWarn(@"More than 1 user object retrieved");
         return nil;
     
     } 
@@ -734,20 +724,22 @@ static NSArray *sNotificationStatusStr;
 - (NSArray*) getUserByType : (GBUserType) userType
 {
 
-    NSLog(@"Enter HabitDataModel::getUserByType. user type:%d",userType);
+    DDLogVerbose(@"Enter HabitDataModel::getUserByType. user type:%d",userType);
     
     NSMutableArray *userNameList = nil;
+    
     if(userType == kUserTypeALL){
     
         userNameList = [NSMutableArray arrayWithArray:[self getFriendList]];
-        [userNameList addObject:localUserName];
+        [userNameList addObject:localUserID];
         
     }else if (userType == kUserTypeFriend){
     
-        userNameList = [NSMutableArray arrayWithArray:[self getFriendList]];        
+        userNameList = [NSMutableArray arrayWithArray:[self getFriendList]];
+        
     }else if (userType == kUserTypeInternal){
         
-        userNameList = [NSMutableArray arrayWithObject:localUserName];
+        userNameList = [NSMutableArray arrayWithObject:localUserID];
     }
     
     
@@ -756,7 +748,7 @@ static NSArray *sNotificationStatusStr;
     
     for(NSString *name in userNameList){
     
-        GBUser *user= [self getUserByName:name];
+        GBUser *user= [self getUserByID:name];
         
         if(user) 
             [userList addObject:user];
@@ -772,20 +764,21 @@ static NSArray *sNotificationStatusStr;
 #pragma mark RELATION RELATED FUNCTION
 #pragma mark - 
 
-- (bool) createFriend: (NSString*) username
+- (bool) createFriend: (NSString*) userID
 {
-    NSLog(@"Enter HabitDataModel::createFriend. username:%@",username);
+    DDLogVerbose(@"Enter HabitDataModel::createFriend. userID:%@",userID);
        
     GBRelation* newRelation = nil;
     newRelation = [NSEntityDescription insertNewObjectForEntityForName:@"GBRelation" inManagedObjectContext:objectContext];
     
-    newRelation.RelationID = [[NSString alloc] initWithFormat:@"RELATION_%@",[GBDataModelManager createLocalUUID]];
-    newRelation.RelationType = (NSString*)[sRelationStr objectAtIndex:kFriend];
-    newRelation.RelationStatus = (NSString*)[sRelationStatusStr objectAtIndex:kRelationStatusPending];
-    newRelation.relationToUser = [NSString stringWithString:username];
-    newRelation.relationFromUser = [NSString stringWithString:localUserName];
+    newRelation.RelationID = [NSString stringWithFormat:@"RELATION_%@",[GBDataModelManager createLocalUUID]];
+    newRelation.RelationType = [NSString stringWithString:[sRelationStr objectAtIndex:kFriend]];
+    newRelation.RelationStatus = [NSString stringWithString:[sRelationStatusStr objectAtIndex:kRelationStatusPending]];
+    newRelation.relationToUser = [NSString stringWithString:userID];
+    newRelation.relationFromUser = [NSString stringWithString:localUserID];
     
     
+    // J2DO : We might associate the object properties here. No such requirement for now. 
     //newRelation.fromUser = from;
     //newRelation.toUser = to;
     
@@ -793,20 +786,21 @@ static NSArray *sNotificationStatusStr;
     newRelation.createAt = newRelation.updateAt = [NSDate date];
     
     NSError *error = nil;
-    [objectContext save:&error];
+    if(![objectContext save:&error]){
     
-    if(error){
-        NSLog(@"DataModel Operation Error :%@", error);
+        DDLogError(@" Failed to create friend :%@, %@", error, [error userInfo]);
         return false;
     }
         
     return true;
 }
 
-- (bool) createNanny: (NSString*) username withHabitID:(NSString*) HabitID
+
+
+- (bool) createNanny: (NSString*) userID withHabitID:(NSString*) HabitID
 {
 
-    NSLog(@"Enter HabitDataModel::createNanny. username:%@, habit:%@",username, HabitID);
+    DDLogVerbose(@"Enter HabitDataModel::createNanny. userID:%@, habit:%@",userID, HabitID);
     
     
     GBUser *from, *to;
@@ -814,19 +808,19 @@ static NSArray *sNotificationStatusStr;
     
     // get Current User
     
-    from = [dataModel getUserByName:self.localUserName];
+    from = [dataModel getUserByID:self.localUserID];
     
     if(!from){
-        NSLog(@" Can not retrieve local user");
+        DDLogWarn(@" Can not retrieve local user");
         return false;
     }
     
     // get target User
     
-    to = [dataModel getUserByName:username];
+    to = [dataModel getUserByID:userID];
     
     if(!to){
-        NSLog(@" Can not retrieve target user");
+        DDLogError(@" Can not retrieve target user, user ID : %@", userID);
         return false;
     }
     
@@ -836,12 +830,9 @@ static NSArray *sNotificationStatusStr;
     habit = [dataModel getHabitByID:HabitID];
     
     if(!habit){
-        NSLog(@" Can not retrieve the habit ");
+        DDLogError(@" Can not retrieve the habit. Habit ID: %@ ", HabitID);
         return false;
     
-    }else{
-        
-        
     }
     
     
@@ -850,11 +841,11 @@ static NSArray *sNotificationStatusStr;
     
     
     // Setting up data properties
-    newRelation.RelationID = [[NSString alloc] initWithFormat:@"RELATION_%@",[GBDataModelManager createLocalUUID]];
-    newRelation.RelationType = (NSString*)[sRelationStr objectAtIndex:kNanny];
-    newRelation.relationToUser = [NSString stringWithString:username];
-    newRelation.relationFromUser = [NSString stringWithString:localUserName];
-    newRelation.RelationStatus = (NSString*)[sRelationStatusStr objectAtIndex:kRelationStatusPending];
+    newRelation.RelationID       = [NSString stringWithFormat:@"RELATION_%@",[GBDataModelManager createLocalUUID]];
+    newRelation.RelationType     = [NSString stringWithString:[sRelationStr objectAtIndex:kNanny]];
+    newRelation.relationToUser   = [NSString stringWithString:userID];
+    newRelation.relationFromUser = [NSString stringWithString:localUserID];
+    newRelation.RelationStatus   = [NSString stringWithString:[sRelationStatusStr objectAtIndex:kRelationStatusPending]];
 
     // Setting up object properties
     newRelation.fromUser = from;
@@ -864,13 +855,11 @@ static NSArray *sNotificationStatusStr;
     newRelation.createAt = newRelation.updateAt = [NSDate date];
     
     NSError *error;
-    [objectContext save:&error];
-    
-    if(error){
-        NSLog(@"DataModel Operation Error :%@", error);
+    if(![objectContext save:&error]){
+        DDLogError(@"Failed to create Nanny. Error :%@ , %@", error, [error userInfo]);
         return false;
+        
     }
-    
     
     return true;
 
@@ -879,21 +868,21 @@ static NSArray *sNotificationStatusStr;
 
 - (NSArray *) getFriendList
 {
-    NSLog(@"Enter HabitDataModel::getFriendList.");
+    DDLogVerbose(@"Enter HabitDataModel::getFriendList.");
     
     
     NSPredicate *predicate;
     
     
-    predicate = [NSPredicate predicateWithFormat:@"(RelationType = %@ AND relationFromUser = %@)", [sRelationStr objectAtIndex:kFriend], self.localUserName];
+    predicate = [NSPredicate predicateWithFormat:@"(RelationType = %@ AND relationFromUser = %@)", [sRelationStr objectAtIndex:kFriend], self.localUserID];
     
     NSArray *objects = [self queryManagedObject:kRelation withPredicate:predicate];
     
-    NSLog(@"Retrieved %d relation", [objects count]);
+    DDLogVerbose(@"Retrieved %d relation", [objects count]);
     
     if( objects.count == 0){
         
-        NSLog(@"No friend retrieved");
+        DDLogWarn(@"No friend retrieved");
         return nil;
         
     }
@@ -909,23 +898,25 @@ static NSArray *sNotificationStatusStr;
     
 }
 
+
+// J2DO : Combine getNannyList with getFriendList
 - (NSArray *) getNannyList
 {
-    NSLog(@"Enter HabitDataModel::getNannyList.");
+    DDLogVerbose(@"Enter HabitDataModel::getNannyList.");
     
     
     NSPredicate *predicate;
     
     
-    predicate = [NSPredicate predicateWithFormat:@"(RelationType = %@ AND fromUser.UserName = %@)", [sRelationStr objectAtIndex:kNanny], self.localUserName];
+    predicate = [NSPredicate predicateWithFormat:@"(RelationType = %@ AND relationFromUser = %@)", [sRelationStr objectAtIndex:kNanny], self.localUserID];
         
     NSArray *objects = [self queryManagedObject:kRelation withPredicate:predicate];
     
-    NSLog(@"Retrieved %d relation", [objects count]);
+    DDLogVerbose(@"Retrieved %d relation", [objects count]);
     
     if( objects.count == 0){
         
-        NSLog(@"No Nanny retrieved");
+        DDLogVerbose(@"No Nanny retrieved");
         return nil;
         
     }
@@ -934,15 +925,10 @@ static NSArray *sNotificationStatusStr;
     
     for(GBRelation *relation in objects ){
         
-        [nannyNameList addObject:relation.toUser.UserName];
+        [nannyNameList addObject:relation.relationToUser];
         
-        NSLog(@"Found Nanny:%@", relation.toUser.UserName);
-        // for test
-        GBHabit *habit = relation.hasHabit;
-        
-        NSLog(@"Nannied Habit Name:%@", habit.HabitName);
-        
-        
+        DDLogVerbose(@"Found Nanny:%@", relation.toUser.UserName);
+
     }
     
     return nannyNameList;
@@ -953,9 +939,9 @@ static NSArray *sNotificationStatusStr;
 #pragma mark - 
 
 
-- (bool) createNotification:(NSString*)text fromUser:(NSString*)fromUserName toUser:(NSString*)toUserName status:(int)status type:(int)type
+- (bool) createNotification:(NSString*)message fromUser:(NSString*)fromUserID toUser:(NSString*)toUserID status:(int)status type:(int)type
 {
-    NSLog(@"Enter HabitDataModel::createNotification. fromUser:%@, toUser:%@, text:%@, status:%d, type:%d", fromUserName, toUserName, text, status, type);
+    DDLogVerbose(@"Enter HabitDataModel::createNotification. fromUser:%@, toUser:%@, message:%@, status:%d, type:%d", fromUserID, toUserID, message, status, type);
 
     GBNotification* newNotification;
     
@@ -963,19 +949,22 @@ static NSArray *sNotificationStatusStr;
     newNotification = [NSEntityDescription insertNewObjectForEntityForName:@"GBNotification" inManagedObjectContext:objectContext];
     
     
-    newNotification.notificationID  = [[NSString alloc] initWithFormat:@"NOTIFICATION_%@",[GBDataModelManager createLocalUUID]];
+    newNotification.notificationID  = [NSString stringWithFormat:@"NOTIFICATION_%@",[GBDataModelManager createLocalUUID]];
     
-    newNotification.toUser          = toUserName;
-    newNotification.fromUser        = fromUserName;
-    newNotification.text            = text;
-    newNotification.status          = [sNotificationStatusStr objectAtIndex:status];
-    newNotification.type            = [sNotificationTypeStr objectAtIndex:type];
+    newNotification.toUser          = [NSString stringWithString:toUserID];
+    newNotification.fromUser        = [NSString stringWithString:fromUserID];
+    newNotification.text            = [NSString stringWithString:message];
+    newNotification.status          = [NSString stringWithString:[sNotificationStatusStr objectAtIndex:status]];
+    newNotification.type            = [NSString stringWithString:[sNotificationTypeStr objectAtIndex:type]];
     
     newNotification.createAt = newNotification.updateAt  = [NSDate date];
     
     NSError *error;
-    [objectContext save:&error];
-
+    if(![objectContext save:&error]){
+        
+        DDLogError(@" Failed to create notification. Error : %@, %@", error, [error userInfo]);
+        return false;
+    }
     
     return true;
 }
@@ -984,16 +973,15 @@ static NSArray *sNotificationStatusStr;
 - (NSArray *) getAllNotifications
 {
 
-    NSLog(@"Enter HabitDataModel::getAllNotification.");
+    DDLogVerbose(@"Enter HabitDataModel::getAllNotification.");
     
     NSPredicate *predicate;
     
-    predicate = [NSPredicate predicateWithFormat:@"(toUser = %@)", localUserName];
+    predicate = [NSPredicate predicateWithFormat:@"(toUser = %@)", localUserID];
     
     NSArray *objects = [self queryManagedObject:kNotification withPredicate:predicate];
     
-    NSLog(@"Retrieved %d Notifications", [objects count]);
-    
+    DDLogVerbose(@"Retrieved %d Notifications", [objects count]);
     
     return objects;
     
@@ -1002,15 +990,15 @@ static NSArray *sNotificationStatusStr;
 - (bool) createNotificationWithRemoteNotification : (PFObject*) remoteNotification
 {
 
-    NSLog(@"Enter HabitDataModel::createNotificationWithRemoteNotification. remoteNotification:%@", remoteNotification);
+    DDLogVerbose(@"Enter HabitDataModel::createNotificationWithRemoteNotification. remoteNotification:%@", remoteNotification);
     
     
     GBNotification* newNotification;
     GBUser *notificationOwner;
     
-    notificationOwner= [self getUserByName:[remoteNotification objectForKey:@"toUser"]];    
+    notificationOwner= [self getUserByID:[remoteNotification objectForKey:@"toUser"]];    
     if(!notificationOwner){
-        NSLog(@"Cannot retrieve notification owner");
+        DDLogError(@"Cannot retrieve notification owner");
         return false;
     }
     
@@ -1030,13 +1018,15 @@ static NSArray *sNotificationStatusStr;
     
     
     NSError *error;
-    [objectContext save:&error];
+    if(![objectContext save:&error]){
+        
+        DDLogError(@" Failed to create local notification based on remote notification. Error : %@, %@", error, [error userInfo]);
+        return false;
+    }
     
-    // j2do : Error Handling Here
     
     
-    
-    NSLog(@"New Habit[%@] Created. Type : %@, Status, %@", newNotification.notificationID, newNotification.type, newNotification.status);
+    DDLogInfo(@"New Habit[%@] Created. Type : %@, Status, %@", newNotification.notificationID, newNotification.type, newNotification.status);
     
     
     return true;
@@ -1052,7 +1042,7 @@ static NSArray *sNotificationStatusStr;
 - (NSArray *) getLocalObjects: (NSDate *) date withObjectType: (GBObjectType) objType withAttr: (GBSyncAttr) attr
 {
 
-    NSLog(@"Enter HabitDataModel::getLocalObjects. date:%@, object type: %d, attr : %d", date, objType, attr);
+    DDLogVerbose(@"Enter HabitDataModel::getLocalObjects. date:%@, object type: %d, attr : %d", date, objType, attr);
     
     
     NSPredicate *predicate;
@@ -1068,18 +1058,15 @@ static NSArray *sNotificationStatusStr;
         dateColumeName = [NSString stringWithString:@"updateAt"];
     }
     
-    
-  //  predicate = [NSPredicate predicateWithFormat:@"(%@ >= %@ AND %@ <= %@)", dateColumeName, date, dateColumeName, [NSDate date]];
     predicate = [NSPredicate predicateWithFormat:@"(%K >= %@)", dateColumeName, date];
     NSArray *objects = [self queryManagedObject:objType withPredicate:predicate];
     
-    NSLog(@"Retrieved %d objects", [objects count]);
+    DDLogVerbose(@"Retrieved %d objects", [objects count]);
     
     if( objects.count == 0){
         
-        NSLog(@"No object retrieved");
+        DDLogWarn(@"No object retrieved");
         return nil;
-        
     }
     
     return objects;
@@ -1089,7 +1076,7 @@ static NSArray *sNotificationStatusStr;
 - (NSManagedObject *) getLocalObjectByAttribute: (NSString*) attributeName withAttributeValue: (NSString*) attributeValue withObjectType: (GBObjectType) objType
 {
 
-    NSLog(@"Enter HabitDataModel::getLocalObjectByAttribute. attributeName: %@, attributeValue: %@, objType : %d", attributeName, attributeValue, objType);
+    DDLogVerbose(@"Enter HabitDataModel::getLocalObjectByAttribute. attributeName: %@, attributeValue: %@, objType : %d", attributeName, attributeValue, objType);
     
     NSManagedObject *result = nil;
     NSPredicate *predicate;
@@ -1100,11 +1087,11 @@ static NSArray *sNotificationStatusStr;
     
     if( !objects || objects.count == 0 ){
     
-        NSLog(@" No object retrieved");
+        DDLogWarn(@" No object retrieved");
         
     }else if (objects.count > 1){
     
-        NSLog(@" More than one object retrieved");
+        DDLogWarn(@" More than one object retrieved");
     
     }else{
     
@@ -1118,7 +1105,7 @@ static NSArray *sNotificationStatusStr;
 - (NSArray*)queryManagedObject: (GBObjectType)type withPredicate:(NSPredicate *)predicate
 {
     
-    NSLog(@"Enter HabitDataModel::queryManagedObject. type:%d, predicate:%@", type, predicate);
+    DDLogVerbose(@"Enter HabitDataModel::queryManagedObject. type:%d, predicate:%@", type, predicate);
     
     
     // j2do : map different object type string    
@@ -1148,7 +1135,7 @@ static NSArray *sNotificationStatusStr;
     
     if(!objects){
         
-        NSLog(@"Error Querying Objects, Error:%@", [error localizedDescription]);
+        DDLogError(@"Error Querying Objects, Error:%@, %@", error, [error userInfo]);
     }
     
     return objects;
@@ -1161,7 +1148,10 @@ static NSArray *sNotificationStatusStr;
 
 - (NSArray *) getTaskSchedule: (NSDate*) startDate withFrequency: (NSString*) frequency withAttempts: (int) attempts
 {
-    NSMutableArray *array = [[NSMutableArray alloc] init ];
+    
+    DDLogVerbose(@"Enter HabitDataModel::getTaskSchedule. startDate : %@, Frequency: %@, Attempts : %d", startDate, frequency, attempts);
+    
+    NSMutableArray *array = [NSMutableArray array] ;
     
     NSTimeInterval dailyInterval = 60 * 60 * 24; // 86400
     NSTimeInterval weeklyInterval = dailyInterval * 7;  
@@ -1201,31 +1191,16 @@ static NSArray *sNotificationStatusStr;
     for (int i=0;i<attempts;i++){
         
         NSDate* date = (NSDate*)[array objectAtIndex:i];
-        NSLog(@"new date %@",[date descriptionWithLocale:@"yy-mm-dd"]);
+        DDLogInfo(@"new date %@",[date descriptionWithLocale:@"yy-mm-dd"]);
     }
     
     return array;
 }
 
-- (NSArray*) getNannyNameList{
-    
-    // j2do : return the name of Nannies. 
-    NSArray *result = [NSArray arrayWithObjects:@"Nanny1",@"Nanny2",@"Nanny3", nil];
-    return result;
-}
-
-- (NSArray*) getBabyNameList{
-    
-    // j2do : return the name of Nannies. 
-    NSArray *result = [NSArray arrayWithObjects:@"Baby1",@"Baby2",@"Baby3", nil];
-    return result;
-}
-
-
 
 
 + (NSString *)createLocalUUID {
-    
+        
     
     // create a new UUID which you own
     CFUUIDRef uuid = CFUUIDCreate(kCFAllocatorDefault);
@@ -1239,17 +1214,16 @@ static NSArray *sNotificationStatusStr;
 {
 
     NSError *error = NULL;
-    [objectContext save:&error];
-    
-    if(error){
-        NSLog(@" Save Context Error");
+    if(![objectContext save:&error]){
+        DDLogError(@" Save Context Error");
+        
     }
     
 }
 
 - (NSDate*) getDateWithIndex : (int) offset
 {
-    NSLog(@"Enter HabitDataModel::getDateWithIndex. index:%d", offset);
+    DDLogVerbose(@"Enter HabitDataModel::getDateWithIndex. index:%d", offset);
     
     NSDate *result;
     
@@ -1280,7 +1254,7 @@ static NSArray *sNotificationStatusStr;
 
 - (NSDate*) getDateCeil : (NSDate*) date 
 {
-    NSLog(@"Enter HabitDataModel::getDateCeil. date:%@", date);
+    DDLogVerbose(@"Enter HabitDataModel::getDateCeil. date:%@", date);
     
     NSDate *floorDate = [self getDateFloor:date];
     
@@ -1296,7 +1270,7 @@ static NSArray *sNotificationStatusStr;
 - (NSDate*) getDateFloor: (NSDate*) date
 {
         
-    NSLog(@"Enter HabitDataModel::getDateFloor. date:%@", date);
+    DDLogVerbose(@"Enter HabitDataModel::getDateFloor. date:%@", date);
     
     NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
     

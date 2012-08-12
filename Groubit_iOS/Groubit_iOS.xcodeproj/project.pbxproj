@@ -17,7 +17,6 @@
 		147C92DD151BDACF00EA1E75 /* checkbox_checked.png in Resources */ = {isa = PBXBuildFile; fileRef = 147C92DB151BDACF00EA1E75 /* checkbox_checked.png */; };
 		147C92DE151BDACF00EA1E75 /* checkbox_unchecked.png in Resources */ = {isa = PBXBuildFile; fileRef = 147C92DC151BDACF00EA1E75 /* checkbox_unchecked.png */; };
 		14B6D51E14E5E6C7009B95A0 /* HabitsAddController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B6D51C14E5E6C7009B95A0 /* HabitsAddController.m */; };
-		14B6D51F14E5E6C7009B95A0 /* HabitsAddController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14B6D51D14E5E6C7009B95A0 /* HabitsAddController.xib */; };
 		14E365BB14AB2D7B0064CA5B /* FriendsTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14E365B914AB2D7B0064CA5B /* FriendsTableController.m */; };
 		14E365BC14AB2D7B0064CA5B /* FriendsTableController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14E365BA14AB2D7B0064CA5B /* FriendsTableController.xib */; };
 		14EA769914AAEC63009FF411 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14EA769814AAEC63009FF411 /* UIKit.framework */; };
@@ -51,13 +50,16 @@
 		2B177E41151EBA6A00F04C51 /* DDFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B177E3D151EBA6A00F04C51 /* DDFileLogger.m */; };
 		2B2B1CC014C969100068B36E /* TaipeiStation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B2B1CBF14C9690F0068B36E /* TaipeiStation.m */; };
 		2B32504D1515E5E600A65810 /* NotificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B32504C1515E5E600A65810 /* NotificationViewController.m */; };
+		2B33A3EA15CEA0D50075AA2E /* HabitsAddController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14B6D51D14E5E6C7009B95A0 /* HabitsAddController.xib */; };
+		2B708C5D15CCD4DA0014EEAA /* GBCommManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B708C5C15CCD4DA0014EEAA /* GBCommManager.m */; };
+		2B708C5E15CCD4DA0014EEAA /* GBCommManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B708C5C15CCD4DA0014EEAA /* GBCommManager.m */; };
+		2B708C6415CE1A4A0014EEAA /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B708C6215CE19A00014EEAA /* Parse.framework */; };
 		2B7B6A79150BA04C00CAECDD /* GBTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B7B6A78150BA04C00CAECDD /* GBTask.m */; };
 		2B7B6A80150BA3DF00CAECDD /* GBRelation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B7B6A7F150BA3DF00CAECDD /* GBRelation.m */; };
 		2BA968931512334E00FBA256 /* GBNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BA968921512334E00FBA256 /* GBNotification.m */; };
 		2BCBEAAE14C9BA99003359AF /* GBHabit.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BCBEAAD14C9BA99003359AF /* GBHabit.m */; };
 		2BCBEAB814C9BA9A003359AF /* GBUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BCBEAB714C9BA9A003359AF /* GBUser.m */; };
 		2BD0D85B14AB260D004E1E49 /* GBDataModelManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD0D85614AB260D004E1E49 /* GBDataModelManager.m */; };
-		2BD0D87C14AB4255004E1E49 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BD0D87B14AB4255004E1E49 /* Parse.framework */; };
 		2BD0D87F14AB4333004E1E49 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BD0D87E14AB4333004E1E49 /* AudioToolbox.framework */; };
 		2BD0D88114AB4343004E1E49 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BD0D88014AB4343004E1E49 /* CFNetwork.framework */; };
 		2BD0D88314AB4351004E1E49 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BD0D88214AB4351004E1E49 /* SystemConfiguration.framework */; };
@@ -96,7 +98,7 @@
 		14B6D51B14E5E6C7009B95A0 /* HabitsAddController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HabitsAddController.h; path = iPhone/HabitsAddController.h; sourceTree = "<group>"; };
 		14B6D51C14E5E6C7009B95A0 /* HabitsAddController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HabitsAddController.m; path = iPhone/HabitsAddController.m; sourceTree = "<group>"; };
 		14B6D51D14E5E6C7009B95A0 /* HabitsAddController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HabitsAddController.xib; path = iPhone/HabitsAddController.xib; sourceTree = "<group>"; };
-		14E365B814AB2D7B0064CA5B /* FriendsTableController.h */ = {isa = PBXFileReference; fileEncoding = 4; path = FriendsTableController.h; sourceTree = "<group>"; };
+		14E365B814AB2D7B0064CA5B /* FriendsTableController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendsTableController.h; sourceTree = "<group>"; };
 		14E365B914AB2D7B0064CA5B /* FriendsTableController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendsTableController.m; sourceTree = "<group>"; };
 		14E365BA14AB2D7B0064CA5B /* FriendsTableController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FriendsTableController.xib; sourceTree = "<group>"; };
 		14EA769414AAEC63009FF411 /* Groubit_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Groubit_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -143,6 +145,9 @@
 		2B2B1CBF14C9690F0068B36E /* TaipeiStation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaipeiStation.m; sourceTree = "<group>"; };
 		2B32504B1515E5E600A65810 /* NotificationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationViewController.h; sourceTree = "<group>"; };
 		2B32504C1515E5E600A65810 /* NotificationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationViewController.m; sourceTree = "<group>"; };
+		2B708C5B15CCD4DA0014EEAA /* GBCommManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GBCommManager.h; sourceTree = "<group>"; };
+		2B708C5C15CCD4DA0014EEAA /* GBCommManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GBCommManager.m; sourceTree = "<group>"; };
+		2B708C6215CE19A00014EEAA /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		2B7B6A77150BA04C00CAECDD /* GBTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GBTask.h; sourceTree = "<group>"; };
 		2B7B6A78150BA04C00CAECDD /* GBTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GBTask.m; sourceTree = "<group>"; };
 		2B7B6A7E150BA3DF00CAECDD /* GBRelation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GBRelation.h; sourceTree = "<group>"; };
@@ -159,7 +164,6 @@
 		2BD0D85814AB260D004E1E49 /* HabitTypeObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HabitTypeObject.m; path = /Volumes/Broadway/Dev/Github/Groubit/Groubit_iOS/Groubit_iOS/HabitTypeObject.m; sourceTree = "<absolute>"; };
 		2BD0D85914AB260D004E1E49 /* TaskTypeObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TaskTypeObject.h; path = /Volumes/Broadway/Dev/Github/Groubit/Groubit_iOS/Groubit_iOS/TaskTypeObject.h; sourceTree = "<absolute>"; };
 		2BD0D85A14AB260D004E1E49 /* TaskTypeObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TaskTypeObject.m; path = /Volumes/Broadway/Dev/Github/Groubit/Groubit_iOS/Groubit_iOS/TaskTypeObject.m; sourceTree = "<absolute>"; };
-		2BD0D87B14AB4255004E1E49 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		2BD0D87E14AB4333004E1E49 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		2BD0D88014AB4343004E1E49 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		2BD0D88214AB4351004E1E49 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -183,6 +187,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2B708C6415CE1A4A0014EEAA /* Parse.framework in Frameworks */,
 				2BD0D88A14AB438A004E1E49 /* Security.framework in Frameworks */,
 				2BD0D88814AB4380004E1E49 /* libz.1.1.3.dylib in Frameworks */,
 				14EA769D14AAEC63009FF411 /* CoreGraphics.framework in Frameworks */,
@@ -193,7 +198,6 @@
 				14EA769914AAEC63009FF411 /* UIKit.framework in Frameworks */,
 				14EA769B14AAEC63009FF411 /* Foundation.framework in Frameworks */,
 				14EA769F14AAEC63009FF411 /* CoreData.framework in Frameworks */,
-				2BD0D87C14AB4255004E1E49 /* Parse.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -256,7 +260,7 @@
 		14EA769714AAEC63009FF411 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				2BD0D87B14AB4255004E1E49 /* Parse.framework */,
+				2B708C6215CE19A00014EEAA /* Parse.framework */,
 				14EA769814AAEC63009FF411 /* UIKit.framework */,
 				14EA769A14AAEC63009FF411 /* Foundation.framework */,
 				14EA769C14AAEC63009FF411 /* CoreGraphics.framework */,
@@ -269,6 +273,8 @@
 		14EA76A014AAEC63009FF411 /* Groubit_iOS */ = {
 			isa = PBXGroup;
 			children = (
+				2B708C5B15CCD4DA0014EEAA /* GBCommManager.h */,
+				2B708C5C15CCD4DA0014EEAA /* GBCommManager.m */,
 				2B32504B1515E5E600A65810 /* NotificationViewController.h */,
 				2B32504C1515E5E600A65810 /* NotificationViewController.m */,
 				2BD0D85514AB260D004E1E49 /* GBDataModelManager.h */,
@@ -449,7 +455,7 @@
 		14EA768B14AAEC63009FF411 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0420;
+				LastUpgradeCheck = 0430;
 				ORGANIZATIONNAME = "UCB MIMS";
 			};
 			buildConfigurationList = 14EA768E14AAEC63009FF411 /* Build configuration list for PBXProject "Groubit_iOS" */;
@@ -481,9 +487,8 @@
 				14EA76F214AB201F009FF411 /* HabitsDetailViewController.xib in Resources */,
 				14E365BC14AB2D7B0064CA5B /* FriendsTableController.xib in Resources */,
 				2B09D8CF14DD155B00A76133 /* DebugViewController.xib in Resources */,
-				14B6D51F14E5E6C7009B95A0 /* HabitsAddController.xib in Resources */,
+				2B33A3EA15CEA0D50075AA2E /* HabitsAddController.xib in Resources */,
 				C63E0DB314E61D350070E902 /* RegisterLoginViewController.xib in Resources */,
-				14B6D51F14E5E6C7009B95A0 /* HabitsAddController.xib in Resources */,
 				147C92DD151BDACF00EA1E75 /* checkbox_checked.png in Resources */,
 				147C92DE151BDACF00EA1E75 /* checkbox_unchecked.png in Resources */,
 				C62DD4BF15440ED700410934 /* FriendsAddController.xib in Resources */,
@@ -555,6 +560,7 @@
 				2B177E41151EBA6A00F04C51 /* DDFileLogger.m in Sources */,
 				C62DD4BE15440ED700410934 /* FriendsAddController.m in Sources */,
 				C62DD4C015440ED700410934 /* FriendsDetailController.m in Sources */,
+				2B708C5D15CCD4DA0014EEAA /* GBCommManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -563,6 +569,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				14EA76D414AAEC63009FF411 /* Groubit_iOSTests.m in Sources */,
+				2B708C5E15CCD4DA0014EEAA /* GBCommManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -664,12 +671,13 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
+					/Users/liuch/Downloads,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Groubit_iOS/Groubit_iOS-Prefix.pch";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "Groubit_iOS/Groubit_iOS-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
@@ -683,12 +691,13 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
+					/Users/liuch/Downloads,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Groubit_iOS/Groubit_iOS-Prefix.pch";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "Groubit_iOS/Groubit_iOS-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
