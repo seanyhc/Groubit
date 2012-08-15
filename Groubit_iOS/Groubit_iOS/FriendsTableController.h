@@ -7,15 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "FriendsDetailController.h"
-#import "FriendsAddController.h"
+#import "FriendsDetailViewController.h"
+#import "FriendsAddViewController.h"
 
 
 @interface FriendsTableController : UITableViewController
 {
     NSMutableArray *friendsList;
-    FriendsDetailController *friendsDetailController;
-    FriendsAddController *friendsAddController;
+    FriendsDetailViewController *friendsDetailController;
+    FriendsAddViewController *friendsAddController;
 }
 
 @end
