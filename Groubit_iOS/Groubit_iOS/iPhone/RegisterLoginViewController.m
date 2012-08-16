@@ -14,6 +14,11 @@
 #import "GBUser.h"
 #import "Parse/Parse.h"
 
+#import "DDLog.h"
+
+// Debug levels: off, fatal, error, warn, notice, info, debug
+static const int ddLogLevel = LOG_LEVEL_VERBOSE;
+
 @implementation RegisterLoginViewController
 
 @synthesize userName;
@@ -76,7 +81,7 @@
             
             if (currentPFUser) {
                 // create a GB user based returned PF user
-                NSLog(@"Current user name is %@", currentPFUser.username);
+                DDLogVerbose(@"Current user name is %@", currentPFUser.username);
                 // after (PF) user is successfully created on server, create local GB user
                 GBDataModelManager* dataModel = [GBDataModelManager getDataModelManager];
                 
@@ -86,11 +91,12 @@
                 // set local GB user
                 [dataModel setLocalUserName:pfUser.username];
                 [dataModel setLocalUserID:pfUser.username];
+                DDLogVerbose(@"Current user id is %s",[dataModel localUserID]);
             } 
         } else {
             NSString *errorString = [[error userInfo] objectForKey:@"error"];
             // Show the errorString somewhere and let the user try again.
-            NSLog(@"Signup error: %@", errorString);
+            DDLogError(@"Signup error: %@", errorString);
             
             loginWarn.text = errorString;
         }
@@ -106,7 +112,7 @@
             block:^(PFUser *user, NSError *error) {
         if (user) {
             PFUser *currentPFUser = [PFUser currentUser];
-            NSLog(@"Current logged in user is %@", currentPFUser.username);
+            DDLogVerbose(@"Current logged in user is %@", currentPFUser.username);
             
             // first, check if local GB user exists
             GBDataModelManager* dataModel = [GBDataModelManager getDataModelManager];
@@ -121,7 +127,7 @@
             // set local GB user
             [dataModel setLocalUserName:localGBUser.UserName]; 
             [dataModel setLocalUserID:localGBUser.UserName]; 
-            
+            DDLogVerbose(@"Current user id is %@",[dataModel localUserID]);
             
             // go to Dashboard view
             Groubit_iOSAppDelegate* appDelegate = [[UIApplication sharedApplication] delegate];
@@ -132,7 +138,7 @@
         } else {
             NSString *errorString = [[error userInfo] objectForKey:@"error"];
             // the username or password is invalid.
-            NSLog(@"Login error: %@", errorString);
+            DDLogError(@"Login error: %@", errorString);
             
             loginWarn.text = errorString;
         }
@@ -143,9 +149,9 @@
     [PFUser logOut];
     PFUser *currentPFUser = [PFUser currentUser]; // this will now be nil
     if (currentPFUser) {
-        NSLog(@"Current user name is %@", currentPFUser.username);
+        DDLogVerbose(@"Current user name is %@", currentPFUser.username);
     } else {
-        NSLog(@"The user is logged out!");
+        DDLogInfo(@"The user is logged out!");
     }
 }
 
