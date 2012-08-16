@@ -151,10 +151,10 @@
 -(void)addButtonPressed{
     NSLog(@"addButton pressed");
     
-    if(!habitsAddController){
-        habitsAddController = [[HabitsAddController alloc] init];
+    if(!habitsAddTableViewController){
+        habitsAddTableViewController = [[HabitsAddTableViewController alloc] init];
     }
     
-    [self.navigationController pushViewController:habitsAddController animated:YES];
+    [self.navigationController pushViewController:habitsAddTableViewController animated:YES];
 }
 @end
