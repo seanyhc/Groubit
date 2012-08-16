@@ -139,6 +139,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     }else{
         GBDataModelManager* dataModel = [GBDataModelManager getDataModelManager];
         dataModel.localUserName = [NSString stringWithString:currentPFUser.username];
+        dataModel.localUserID = [NSString stringWithString:currentPFUser.username];
     }
     
     
