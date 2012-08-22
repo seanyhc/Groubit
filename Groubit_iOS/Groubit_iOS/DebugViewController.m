@@ -519,7 +519,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
         NSLog(@" no habit retrieved");
     
     for( GBHabit *habit in habits){
-        habit.HabitStatus = [NSString stringWithString:@"completed"];
+        habit.HabitStatus = @"completed";
         habit.updateAt = [NSDate date];
         [dataModel SyncData];
         

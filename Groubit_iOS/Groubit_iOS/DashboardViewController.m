@@ -136,15 +136,15 @@
     
     if(section == 0){
           
-        target = [NSString stringWithString:@"Upcoming Tasks"];
+        target = @"Upcoming Tasks";
     
     }else if (section == 1){
     
-        target = [NSString stringWithString:@"Baby Tasks"];
+        target = @"Baby Tasks";
     
     }else{
     
-        target = [NSString stringWithString:@"Rest Tasks"];
+        target = @"Rest Tasks";
     }
     
     

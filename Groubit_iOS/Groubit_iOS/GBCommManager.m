@@ -57,7 +57,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     
     NSString *channelID = [NSString stringWithFormat:@"GB_PRI_CHANNEL_%@", username];
     
-    NSString *notificationType = [NSString stringWithString:@"friendRequest"];
+    NSString *notificationType = @"friendRequest";
     
     NSDictionary *data = [NSDictionary dictionaryWithObjectsAndKeys:
                             notificationType, @"GB_NOTIFICATION_TYPE",
@@ -79,7 +79,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     
     NSString *channelID = [NSString stringWithFormat:@"GB_PRI_CHANNEL_%@", userID];
     
-    NSString *notificationType = [NSString stringWithString:@"friendConfirmation"];
+    NSString *notificationType = @"friendConfirmation";
     
     NSDictionary *data = [NSDictionary dictionaryWithObjectsAndKeys:
                           notificationType, @"GB_NOTIFICATION_TYPE",
@@ -102,7 +102,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     
     NSString *channelID = [NSString stringWithFormat:@"GB_PRI_CHANNEL_%@", username];
     
-    NSString *notificationType = [NSString stringWithString:@"nannyRequest"];
+    NSString *notificationType = @"nannyRequest";
     
     NSDictionary *data = [NSDictionary dictionaryWithObjectsAndKeys:
                           notificationType, @"GB_NOTIFICATION_TYPE",
@@ -126,7 +126,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     
     NSString *channelID = [NSString stringWithFormat:@"GB_PRI_CHANNEL_%@", username];
     
-    NSString *notificationType = [NSString stringWithString:@"nannyConfirmation"];
+    NSString *notificationType = @"nannyConfirmation";
     
     NSDictionary *data = [NSDictionary dictionaryWithObjectsAndKeys:
                           notificationType, @"GB_NOTIFICATION_TYPE",
@@ -147,7 +147,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     
     NSString *channelID = [NSString stringWithFormat:@"GB_PRI_CHANNEL_%@", userID];
     
-    NSString *notificationType = [NSString stringWithString:@"reminder"];
+    NSString *notificationType = @"reminder";
     
     NSDictionary *data = [NSDictionary dictionaryWithObjectsAndKeys:
                           notificationType, @"GB_NOTIFICATION_TYPE",

@@ -1051,11 +1051,11 @@ static NSArray *sNotificationStatusStr;
     
     if (attr == kSyncCreateSince){
         
-        dateColumeName = [NSString stringWithString:@"createAt"];
+        dateColumeName = @"createAt";
     
     }else if (attr == kSyncUpdateSince){
     
-        dateColumeName = [NSString stringWithString:@"updateAt"];
+        dateColumeName = @"updateAt";
     }
     
     predicate = [NSPredicate predicateWithFormat:@"(%K >= %@)", dateColumeName, date];
